@@ -1,3 +1,4 @@
+// PickPrime AI Worker
 export default {
   async fetch(request, env) {
     const cors = {
