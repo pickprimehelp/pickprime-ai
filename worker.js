@@ -7,7 +7,7 @@ export default {
     if (request.method === "OPTIONS") {
       return new Response(null, {
         status: 204,
-        headers: corsHeaders()
+        headers: cors()
       });
     }
 
@@ -15,19 +15,19 @@ export default {
     if (url.pathname === "/api/health") {
       return json({
         success: true,
-        service: "PickPrime AI Video Maker",
         model: MODEL,
         ai_binding: !!env.AI
       });
     }
 
-    // Generate video
+    // Generate
     if (url.pathname === "/api/generate" && request.method === "POST") {
       try {
         if (!env.AI) {
           return json({
             success: false,
-            error: "Cloudflare AI binding is missing."
+            error: "AI binding is missing",
+            help: "Check wrangler.jsonc"
           }, 500);
         }
 
@@ -38,7 +38,7 @@ export default {
         if (!prompt) {
           return json({
             success: false,
-            error: "Please enter a prompt."
+            error: "Prompt is empty"
           }, 400);
         }
 
@@ -57,24 +57,35 @@ export default {
           ? body.ratio
           : "16:9";
 
-        const result = await env.AI.run(MODEL, {
+        const input = {
           prompt: prompt,
           duration: duration,
           ratio: ratio,
           resolution: "720P"
-        });
+        };
+
+        const result = await env.AI.run(
+          MODEL,
+          input
+        );
 
         return json({
           success: true,
-          video: result?.video || null,
-          result: result
+          state: result?.state || "Completed",
+          video:
+            result?.result?.video ||
+            result?.video ||
+            null,
+          cloudflare_response: result
         });
 
       } catch (error) {
         return json({
           success: false,
-          error: "Cloudflare AI generation failed.",
-          message: error?.message || String(error)
+          error: "Cloudflare AI generation failed",
+          message: error?.message || String(error),
+          name: error?.name || "UnknownError",
+          stack: error?.stack || null
         }, 500);
       }
     }
@@ -86,7 +97,7 @@ export default {
   }
 };
 
-function corsHeaders() {
+function cors() {
   return {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
@@ -98,10 +109,10 @@ function json(data, status = 200) {
   return new Response(
     JSON.stringify(data, null, 2),
     {
-      status: status,
+      status,
       headers: {
         "Content-Type": "application/json; charset=UTF-8",
-        ...corsHeaders()
+        ...cors()
       }
     }
   );
