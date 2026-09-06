@@ -7,41 +7,83 @@ export default {
     // CORS
     if (request.method === "OPTIONS") {
       return new Response(null, {
+        status: 204,
         headers: corsHeaders()
       });
     }
 
     try {
-      // Home page
-      if (url.pathname === "/") {
-        return new Response("PickPrime AI Video Maker is online.", {
-          headers: {
-            "content-type": "text/plain",
-            ...corsHeaders()
-          }
+      // Health check
+      if (url.pathname === "/api/health") {
+        return json({
+          success: true,
+          service: "PickPrime AI Video Maker",
+          model: MODEL,
+          fal_key_configured: Boolean(env.FAL_KEY)
         });
       }
 
-      // Generate video
-      if (url.pathname === "/api/generate" && request.method === "POST") {
+      // Homepage
+      if (url.pathname === "/" && request.method === "GET") {
+        return new Response(
+          "✨ PickPrime AI Video Maker is online.",
+          {
+            headers: {
+              "Content-Type": "text/plain; charset=UTF-8",
+              ...corsHeaders()
+            }
+          }
+        );
+      }
+
+      // =========================
+      // GENERATE VIDEO
+      // =========================
+      if (
+        url.pathname === "/api/generate" &&
+        request.method === "POST"
+      ) {
         if (!env.FAL_KEY) {
-          return json({
-            error: "FAL_KEY is not configured in Cloudflare."
-          }, 500);
+          return json(
+            {
+              success: false,
+              error: "FAL_KEY is missing in Cloudflare Worker Secrets."
+            },
+            500
+          );
         }
 
-        const body = await request.json();
+        let body;
+
+        try {
+          body = await request.json();
+        } catch {
+          return json(
+            {
+              success: false,
+              error: "Invalid JSON request."
+            },
+            400
+          );
+        }
 
         const prompt = String(body.prompt || "").trim();
 
         if (!prompt) {
-          return json({
-            error: "Please enter a video prompt."
-          }, 400);
+          return json(
+            {
+              success: false,
+              error: "Please enter a video prompt."
+            },
+            400
+          );
         }
 
-        const duration = Number(body.duration) === 10 ? 10 : 5;
+        // Duration
+        const duration =
+          Number(body.duration) === 10 ? 10 : 5;
 
+        // Aspect ratio
         const allowedRatios = [
           "16:9",
           "9:16",
@@ -56,127 +98,197 @@ export default {
             ? body.aspect_ratio
             : "16:9";
 
+        // H3 Max input
         const payload = {
-          prompt,
-          duration,
+          prompt: prompt,
+          duration: duration,
           resolution: "480P",
           prompt_expansion_mode: "balanced",
-          aspect_ratio,
+          aspect_ratio: aspect_ratio,
           enable_safety_checker: true
         };
 
-        const response = await fetch(
+        const falResponse = await fetch(
           `https://queue.fal.run/${MODEL}`,
           {
             method: "POST",
+
             headers: {
               "Authorization": `Key ${env.FAL_KEY}`,
               "Content-Type": "application/json"
             },
+
             body: JSON.stringify(payload)
           }
         );
 
-        const text = await response.text();
+        const falText = await falResponse.text();
 
-        if (!response.ok) {
-          return json({
-            error: "fal.ai request failed",
-            status: response.status,
-            details: safeParse(text)
-          }, response.status);
+        // IMPORTANT:
+        // Return complete fal.ai error
+        if (!falResponse.ok) {
+          return json(
+            {
+              success: false,
+              error: "fal.ai request failed",
+              fal_status: falResponse.status,
+              fal_response: tryParse(falText)
+            },
+            falResponse.status
+          );
         }
 
-        const data = safeParse(text);
+        const data = tryParse(falText);
 
         return json({
           success: true,
-          request_id: data.request_id,
-          status_url: data.status_url,
-          response_url: data.response_url
+          request_id: data?.request_id || null,
+          status_url: data?.status_url || null,
+          response_url: data?.response_url || null
         });
       }
 
-      // Check status
-      if (url.pathname === "/api/status" && request.method === "GET") {
+      // =========================
+      // CHECK STATUS
+      // =========================
+      if (
+        url.pathname === "/api/status" &&
+        request.method === "GET"
+      ) {
         const id = url.searchParams.get("id");
 
         if (!id) {
-          return json({
-            error: "Missing request id."
-          }, 400);
+          return json(
+            {
+              success: false,
+              error: "Missing request id."
+            },
+            400
+          );
         }
 
-        const response = await fetch(
+        if (!env.FAL_KEY) {
+          return json(
+            {
+              success: false,
+              error: "FAL_KEY is missing."
+            },
+            500
+          );
+        }
+
+        const statusResponse = await fetch(
           `https://queue.fal.run/${MODEL}/requests/${encodeURIComponent(id)}/status`,
           {
+            method: "GET",
             headers: {
               "Authorization": `Key ${env.FAL_KEY}`
             }
           }
         );
 
-        const text = await response.text();
+        const statusText = await statusResponse.text();
 
-        return new Response(text, {
-          status: response.status,
+        return new Response(statusText, {
+          status: statusResponse.status,
           headers: {
-            "content-type": "application/json",
+            "Content-Type": "application/json; charset=UTF-8",
             ...corsHeaders()
           }
         });
       }
 
-      // Get final result
-      if (url.pathname === "/api/result" && request.method === "GET") {
+      // =========================
+      // GET RESULT
+      // =========================
+      if (
+        url.pathname === "/api/result" &&
+        request.method === "GET"
+      ) {
         const id = url.searchParams.get("id");
 
         if (!id) {
-          return json({
-            error: "Missing request id."
-          }, 400);
+          return json(
+            {
+              success: false,
+              error: "Missing request id."
+            },
+            400
+          );
         }
 
-        const response = await fetch(
+        if (!env.FAL_KEY) {
+          return json(
+            {
+              success: false,
+              error: "FAL_KEY is missing."
+            },
+            500
+          );
+        }
+
+        const resultResponse = await fetch(
           `https://queue.fal.run/${MODEL}/requests/${encodeURIComponent(id)}`,
           {
+            method: "GET",
             headers: {
               "Authorization": `Key ${env.FAL_KEY}`
             }
           }
         );
 
-        const text = await response.text();
+        const resultText = await resultResponse.text();
 
-        if (!response.ok) {
-          return json({
-            error: "Could not get video result.",
-            status: response.status,
-            details: safeParse(text)
-          }, response.status);
+        if (!resultResponse.ok) {
+          return json(
+            {
+              success: false,
+              error: "fal.ai result request failed",
+              fal_status: resultResponse.status,
+              fal_response: tryParse(resultText)
+            },
+            resultResponse.status
+          );
         }
 
-        const data = safeParse(text);
+        const resultData = tryParse(resultText);
 
         return json({
           success: true,
-          data
+          data: resultData
         });
       }
 
-      return json({
-        error: "Not found"
-      }, 404);
+      // =========================
+      // 404
+      // =========================
+      return json(
+        {
+          success: false,
+          error: "API endpoint not found."
+        },
+        404
+      );
 
     } catch (error) {
-      return json({
-        error: error?.message || String(error)
-      }, 500);
+      return json(
+        {
+          success: false,
+          error: "Worker internal error",
+          message: error?.message || String(error)
+        },
+        500
+      );
     }
   }
 };
 
-function safeParse(text) {
+
+// =========================
+// HELPERS
+// =========================
+
+function tryParse(text) {
   try {
     return JSON.parse(text);
   } catch {
@@ -184,15 +296,20 @@ function safeParse(text) {
   }
 }
 
+
 function json(data, status = 200) {
-  return new Response(JSON.stringify(data), {
-    status,
-    headers: {
-      "content-type": "application/json; charset=UTF-8",
-      ...corsHeaders()
+  return new Response(
+    JSON.stringify(data, null, 2),
+    {
+      status: status,
+      headers: {
+        "Content-Type": "application/json; charset=UTF-8",
+        ...corsHeaders()
+      }
     }
-  });
+  );
 }
+
 
 function corsHeaders() {
   return {
