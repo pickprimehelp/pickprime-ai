@@ -185,12 +185,30 @@ export default {
       // Example body:
       // { "model":"fal-ai/flux-2/turbo", "input":{"prompt":"..." } }
       if (url.pathname === "/fal/submit") {
-        const model = String(body.model || "").trim();
-        if (!model || !body.input) {
-          return json({ success: false, error: "model and input are required" }, 400);
+        // Friendly API: frontend may send only {prompt}.
+        // The FAL key stays server-side in env.FAL_KEY.
+        const model = String(body.model || "fal-ai/flux-2/turbo").trim();
+        let input = body.input;
+
+        if (!input) {
+          const prompt = String(body.prompt || "").trim();
+          if (!prompt) {
+            return json({ success: false, error: "prompt is required" }, 400);
+          }
+
+          input = {
+            prompt,
+            image_size: body.image_size || "portrait_16_9",
+            num_images: 1
+          };
         }
-        const result = await falSubmit(env, model, body.input);
-        return json(result, result.ok ? 200 : 502);
+
+        const result = await falSubmit(env, model, input);
+        return json({
+          success: result.ok,
+          model,
+          ...result
+        }, result.ok ? 200 : 502);
       }
 
       // Poll a fal.ai queue request.
