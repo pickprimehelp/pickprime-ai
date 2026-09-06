@@ -2,6 +2,9 @@
   "name": "pickprime-ai",
   "main": "worker.js",
   "compatibility_date": "2026-09-06",
+  "ai": {
+    "binding": "AI"
+  },
   "assets": {
     "directory": ".",
     "binding": "ASSETS"
