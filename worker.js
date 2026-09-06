@@ -1,144 +1,214 @@
-// PickPrime AI Worker
-export default {
-  async fetch(request, env) {
-    const cors = {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "POST, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type",
-      "Content-Type": "application/json"
-    };
+const CORS = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization"
+};
 
-    if (request.method === "OPTIONS") {
-      return new Response(null, { headers: cors });
-    }
-
-    if (request.method === "GET") {
-      return new Response(
-        JSON.stringify({
-          success: true,
-          service: "PickPrime AI",
-          status: "online"
-        }),
-        { headers: cors }
-      );
-    }
-
-    if (request.method !== "POST") {
-      return new Response(
-        JSON.stringify({ success: false, error: "POST required" }),
-        { status: 405, headers: cors }
-      );
-    }
-
-    try {
-      const body = await request.json();
-      const script = String(body.script || "").trim();
-
-      if (!script) {
-        return new Response(
-          JSON.stringify({
-            success: false,
-            error: "Please enter a script."
-          }),
-          { status: 400, headers: cors }
-        );
-      }
-
-      const accountId = env.CLOUDFLARE_ACCOUNT_ID;
-      const token = env.CLOUDFLARE_API_TOKEN;
-
-      if (!accountId || !token) {
-        return new Response(
-          JSON.stringify({
-            success: false,
-            error: "Cloudflare credentials are not configured."
-          }),
-          { status: 500, headers: cors }
-        );
-      }
-
-      const prompt = `
-You are PickPrime AI Video Maker.
-
-Convert the following user script into a video production plan.
-
-Return ONLY valid JSON in this exact structure:
-
-{
-  "title": "video title",
-  "scenes": [
-    {
-      "scene": 1,
-      "duration": 5,
-      "narration": "voiceover",
-      "visual_prompt": "detailed visual description",
-      "caption": "short caption"
-    }
-  ]
+function json(data, status = 200) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: { "Content-Type": "application/json; charset=utf-8", ...CORS }
+  });
 }
 
-Create 5 to 10 scenes depending on the script.
-Keep the narration natural.
-Make visual prompts suitable for AI image/video generation.
+async function cloudflareAI(env, prompt) {
+  if (!env.CLOUDFLARE_ACCOUNT_ID || !env.CLOUDFLARE_API_TOKEN) {
+    throw new Error("Cloudflare AI credentials are missing.");
+  }
 
-USER SCRIPT:
-${script}
-`;
+  const models = [
+    "@cf/zai-org/glm-4.7-flash",
+    "@cf/moonshotai/kimi-k2.6"
+  ];
 
-      const aiResponse = await fetch(
-        `https://api.cloudflare.com/client/v4/accounts/${accountId}/ai/run/@cf/moonshotai/kimi-k2.6`,
-        {
-          method: "POST",
-          headers: {
-            "Authorization": `Bearer ${token}`,
-            "Content-Type": "application/json"
+  let lastError = "";
+  for (const model of models) {
+    const url =
+      `https://api.cloudflare.com/client/v4/accounts/${env.CLOUDFLARE_ACCOUNT_ID}` +
+      `/ai/run/${encodeURIComponent(model)}`;
+
+    const r = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${env.CLOUDFLARE_API_TOKEN}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        messages: [
+          {
+            role: "system",
+            content:
+              "You are a professional AI video storyboard generator. " +
+              "Return ONLY valid JSON. Create short cinematic scenes."
           },
-          body: JSON.stringify({
-            messages: [
-              {
-                role: "system",
-                content: "You are a professional AI video production assistant."
-              },
-              {
-                role: "user",
-                content: prompt
-              }
-            ],
-            temperature: 0.7,
-            max_completion_tokens: 3000
-          })
-        }
-      );
+          {
+            role: "user",
+            content:
+              `Create a video plan from this script:\n\n${prompt}\n\n` +
+              `Return JSON exactly like: ` +
+              `{"title":"...","scenes":[{"scene":1,"duration":5,"narration":"...","visual_prompt":"...","caption":"..."}]}` +
+              `. Make 3-8 scenes. Duration should be 3-8 seconds each.`
+          }
+        ],
+        response_format: { type: "json_object" }
+      })
+    });
 
-      const data = await aiResponse.json();
+    if (r.ok) {
+      const data = await r.json();
+      const result = data.result ?? data;
+      const text =
+        result?.response ??
+        result?.output_text ??
+        result?.choices?.[0]?.message?.content ??
+        result?.choices?.[0]?.text;
 
-      if (!aiResponse.ok || data.success === false) {
-        return new Response(
-          JSON.stringify({
-            success: false,
-            error: "Workers AI request failed.",
-            details: data
-          }),
-          { status: 500, headers: cors }
-        );
+      if (typeof text === "string") {
+        try { return JSON.parse(text); } catch {}
+      }
+      if (result?.scenes) return result;
+      if (result?.response && typeof result.response === "object") return result.response;
+    }
+
+    lastError = await r.text();
+  }
+
+  throw new Error(`Cloudflare AI request failed: ${lastError.slice(0, 500)}`);
+}
+
+async function falSubmit(env, model, input) {
+  if (!env.FAL_KEY) {
+    throw new Error("FAL_KEY secret is missing. In Cloudflare, the secret name must be exactly FAL_KEY.");
+  }
+
+  const r = await fetch(`https://queue.fal.run/${model}`, {
+    method: "POST",
+    headers: {
+      "Authorization": `Key ${env.FAL_KEY}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(input)
+  });
+
+  const text = await r.text();
+  let data;
+  try { data = JSON.parse(text); } catch { data = { raw: text }; }
+
+  if (!r.ok) {
+    return { ok: false, status: r.status, error: data };
+  }
+
+  return {
+    ok: true,
+    request_id: data.request_id,
+    status_url: data.status_url,
+    response_url: data.response_url
+  };
+}
+
+async function falStatus(env, statusUrl, responseUrl) {
+  if (!env.FAL_KEY) {
+    throw new Error("FAL_KEY secret is missing.");
+  }
+
+  const headers = { "Authorization": `Key ${env.FAL_KEY}` };
+  const s = await fetch(statusUrl, { headers });
+  const statusText = await s.text();
+  let statusData;
+  try { statusData = JSON.parse(statusText); } catch { statusData = { raw: statusText }; }
+
+  if (!s.ok) return { ok: false, status: s.status, error: statusData };
+
+  const state = statusData.status || statusData.state || "UNKNOWN";
+
+  if (state === "COMPLETED" && responseUrl) {
+    const rr = await fetch(responseUrl, { headers });
+    const responseText = await rr.text();
+    let responseData;
+    try { responseData = JSON.parse(responseText); } catch { responseData = { raw: responseText }; }
+    return { ok: rr.ok, status: state, response: responseData };
+  }
+
+  return { ok: true, status: state, queue: statusData };
+}
+
+function normalizeScenes(plan) {
+  if (!plan || !Array.isArray(plan.scenes)) return [];
+  return plan.scenes.map((s, i) => ({
+    scene: s.scene ?? i + 1,
+    duration: Number(s.duration) || 5,
+    narration: s.narration ?? "",
+    visual_prompt: s.visual_prompt ?? s.visualPrompt ?? "",
+    caption: s.caption ?? ""
+  }));
+}
+
+export default {
+  async fetch(request, env) {
+    if (request.method === "OPTIONS") {
+      return new Response(null, { status: 204, headers: CORS });
+    }
+
+    const url = new URL(request.url);
+
+    try {
+      if (request.method === "GET" && url.pathname === "/") {
+        return json({
+          success: true,
+          service: "PickPrime AI Video Maker",
+          status: "online",
+          endpoints: ["/", "/plan", "/fal/submit", "/fal/status"]
+        });
       }
 
-      return new Response(
-        JSON.stringify({
-          success: true,
-          result: data.result
-        }),
-        { headers: cors }
-      );
+      if (request.method !== "POST") {
+        return json({ success: false, error: "POST required." }, 405);
+      }
 
-    } catch (error) {
-      return new Response(
-        JSON.stringify({
-          success: false,
-          error: error.message
-        }),
-        { status: 500, headers: cors }
-      );
+      const body = await request.json();
+
+      // Script -> AI scenes. This also keeps compatibility with the old frontend
+      // that POSTs {script} to the Worker root.
+      if (url.pathname === "/" || url.pathname === "/plan") {
+        const script = String(body.script || "").trim();
+        if (!script) return json({ success: false, error: "script is required" }, 400);
+
+        const plan = await cloudflareAI(env, script);
+        return json({
+          success: true,
+          title: plan.title || "PickPrime AI Video",
+          scenes: normalizeScenes(plan)
+        });
+      }
+
+      // Server-side fal.ai queue submission.
+      // Example body:
+      // { "model":"fal-ai/flux-2/turbo", "input":{"prompt":"..." } }
+      if (url.pathname === "/fal/submit") {
+        const model = String(body.model || "").trim();
+        if (!model || !body.input) {
+          return json({ success: false, error: "model and input are required" }, 400);
+        }
+        const result = await falSubmit(env, model, body.input);
+        return json(result, result.ok ? 200 : 502);
+      }
+
+      // Poll a fal.ai queue request.
+      if (url.pathname === "/fal/status") {
+        if (!body.status_url) {
+          return json({ success: false, error: "status_url is required" }, 400);
+        }
+        const result = await falStatus(env, body.status_url, body.response_url);
+        return json(result, result.ok ? 200 : 502);
+      }
+
+      return json({ success: false, error: "Unknown endpoint" }, 404);
+
+    } catch (err) {
+      return json({
+        success: false,
+        error: err?.message || String(err)
+      }, 500);
     }
   }
 };
