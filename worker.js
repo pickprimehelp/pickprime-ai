@@ -4,229 +4,512 @@ const CORS = {
   "Access-Control-Allow-Headers": "Content-Type, Authorization"
 };
 
+const DEFAULT_MODEL = "fal-ai/kling-video/v2.6/pro/text-to-video";
+
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), {
     status,
-    headers: { "Content-Type": "application/json; charset=utf-8", ...CORS }
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      ...CORS
+    }
   });
 }
 
-async function cloudflareAI(env, prompt) {
-  if (!env.CLOUDFLARE_ACCOUNT_ID || !env.CLOUDFLARE_API_TOKEN) {
-    throw new Error("Cloudflare AI credentials are missing.");
+async function falRequest(env, url, options = {}) {
+  if (!env.FAL_KEY) {
+    throw new Error(
+      "FAL_KEY is missing. Cloudflare Secret name must be exactly FAL_KEY."
+    );
   }
 
-  const models = [
-    "@cf/zai-org/glm-4.7-flash",
-    "@cf/moonshotai/kimi-k2.6"
-  ];
-
-  let lastError = "";
-  for (const model of models) {
-    const url =
-      `https://api.cloudflare.com/client/v4/accounts/${env.CLOUDFLARE_ACCOUNT_ID}` +
-      `/ai/run/${encodeURIComponent(model)}`;
-
-    const r = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${env.CLOUDFLARE_API_TOKEN}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        messages: [
-          {
-            role: "system",
-            content:
-              "You are a professional AI video storyboard generator. " +
-              "Return ONLY valid JSON. Create short cinematic scenes."
-          },
-          {
-            role: "user",
-            content:
-              `Create a video plan from this script:\n\n${prompt}\n\n` +
-              `Return JSON exactly like: ` +
-              `{"title":"...","scenes":[{"scene":1,"duration":5,"narration":"...","visual_prompt":"...","caption":"..."}]}` +
-              `. Make 3-8 scenes. Duration should be 3-8 seconds each.`
-          }
-        ],
-        response_format: { type: "json_object" }
-      })
-    });
-
-    if (r.ok) {
-      const data = await r.json();
-      const result = data.result ?? data;
-      const text =
-        result?.response ??
-        result?.output_text ??
-        result?.choices?.[0]?.message?.content ??
-        result?.choices?.[0]?.text;
-
-      if (typeof text === "string") {
-        try { return JSON.parse(text); } catch {}
-      }
-      if (result?.scenes) return result;
-      if (result?.response && typeof result.response === "object") return result.response;
+  const response = await fetch(url, {
+    ...options,
+    headers: {
+      "Authorization": `Key ${env.FAL_KEY}`,
+      "Content-Type": "application/json",
+      ...(options.headers || {})
     }
+  });
 
-    lastError = await r.text();
+  const text = await response.text();
+
+  let data;
+  try {
+    data = JSON.parse(text);
+  } catch {
+    data = { raw: text };
   }
 
-  throw new Error(`Cloudflare AI request failed: ${lastError.slice(0, 500)}`);
+  if (!response.ok) {
+    const message =
+      data?.detail ||
+      data?.error ||
+      data?.message ||
+      data?.raw ||
+      `Fal API error (${response.status})`;
+
+    throw new Error(
+      typeof message === "string"
+        ? message
+        : JSON.stringify(message)
+    );
+  }
+
+  return data;
 }
 
 async function falSubmit(env, model, input) {
-  if (!env.FAL_KEY) {
-    throw new Error("FAL_KEY secret is missing. In Cloudflare, the secret name must be exactly FAL_KEY.");
-  }
+  const url = `https://queue.fal.run/${model}`;
 
-  const r = await fetch(`https://queue.fal.run/${model}`, {
+  const data = await falRequest(env, url, {
     method: "POST",
-    headers: {
-      "Authorization": `Key ${env.FAL_KEY}`,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(input)
+    body: JSON.stringify({
+      input
+    })
   });
 
-  const text = await r.text();
-  let data;
-  try { data = JSON.parse(text); } catch { data = { raw: text }; }
-
-  if (!r.ok) {
-    return { ok: false, status: r.status, error: data };
-  }
-
   return {
-    ok: true,
-    request_id: data.request_id,
+    request_id: data.request_id || data.requestId,
     status_url: data.status_url,
     response_url: data.response_url
   };
 }
 
-async function falStatus(env, statusUrl, responseUrl) {
-  if (!env.FAL_KEY) {
-    throw new Error("FAL_KEY secret is missing.");
+async function falStatus(env, model, requestId) {
+  if (!requestId) {
+    throw new Error("request_id is required.");
   }
 
-  const headers = { "Authorization": `Key ${env.FAL_KEY}` };
-  const s = await fetch(statusUrl, { headers });
-  const statusText = await s.text();
-  let statusData;
-  try { statusData = JSON.parse(statusText); } catch { statusData = { raw: statusText }; }
+  const url =
+    `https://queue.fal.run/${model}/requests/${requestId}/status`;
 
-  if (!s.ok) return { ok: false, status: s.status, error: statusData };
+  return await falRequest(env, url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+}
 
-  const state = statusData.status || statusData.state || "UNKNOWN";
-
-  if (state === "COMPLETED" && responseUrl) {
-    const rr = await fetch(responseUrl, { headers });
-    const responseText = await rr.text();
-    let responseData;
-    try { responseData = JSON.parse(responseText); } catch { responseData = { raw: responseText }; }
-    return { ok: rr.ok, status: state, response: responseData };
+async function falResult(env, model, requestId) {
+  if (!requestId) {
+    throw new Error("request_id is required.");
   }
 
-  return { ok: true, status: state, queue: statusData };
+  const url =
+    `https://queue.fal.run/${model}/requests/${requestId}`;
+
+  return await falRequest(env, url, {
+    method: "GET"
+  });
+}
+
+function findVideoUrl(data) {
+  if (!data) return null;
+
+  if (typeof data === "string") {
+    if (
+      data.startsWith("http://") ||
+      data.startsWith("https://")
+    ) {
+      return data;
+    }
+    return null;
+  }
+
+  if (data.video?.url) return data.video.url;
+  if (data.output?.video?.url) return data.output.video.url;
+  if (data.data?.video?.url) return data.data.video.url;
+  if (data.result?.video?.url) return data.result.video.url;
+
+  return null;
+}
+
+async function cloudflareAI(env, prompt) {
+  if (
+    !env.CLOUDFLARE_ACCOUNT_ID ||
+    !env.CLOUDFLARE_API_TOKEN
+  ) {
+    throw new Error(
+      "Cloudflare AI credentials are missing."
+    );
+  }
+
+  const model = "@cf/zai-org/glm-4.7-flash";
+
+  const url =
+    `https://api.cloudflare.com/client/v4/accounts/` +
+    `${env.CLOUDFLARE_ACCOUNT_ID}/ai/run/` +
+    `${encodeURIComponent(model)}`;
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Authorization":
+        `Bearer ${env.CLOUDFLARE_API_TOKEN}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      messages: [
+        {
+          role: "system",
+          content:
+            "You are a professional AI video storyboard generator. " +
+            "Return ONLY valid JSON."
+        },
+        {
+          role: "user",
+          content:
+            `Create a cinematic video plan from this script:\n\n` +
+            `${prompt}\n\n` +
+            `Return exactly this JSON format:` +
+            `{"title":"...","scenes":[` +
+            `{"scene":1,"duration":5,"narration":"...",` +
+            `"visual_prompt":"...","caption":"..."}` +
+            `]}` +
+            `Create 3-8 scenes.`
+        }
+      ],
+      response_format: {
+        type: "json_object"
+      }
+    })
+  });
+
+  const text = await response.text();
+
+  let data;
+
+  try {
+    data = JSON.parse(text);
+  } catch {
+    throw new Error(
+      `Cloudflare AI returned invalid JSON: ${text.slice(0, 500)}`
+    );
+  }
+
+  if (!response.ok) {
+    throw new Error(
+      data?.errors?.[0]?.message ||
+      data?.message ||
+      "Cloudflare AI request failed."
+    );
+  }
+
+  const result = data.result ?? data;
+
+  let output =
+    result?.response ??
+    result?.output_text ??
+    result?.choices?.[0]?.message?.content ??
+    result?.choices?.[0]?.text;
+
+  if (typeof output === "object") {
+    return output;
+  }
+
+  if (typeof output === "string") {
+    try {
+      return JSON.parse(output);
+    } catch {
+      throw new Error(
+        `AI returned invalid storyboard JSON: ${output.slice(0, 500)}`
+      );
+    }
+  }
+
+  if (result?.scenes) {
+    return result;
+  }
+
+  throw new Error(
+    "Cloudflare AI did not return a valid storyboard."
+  );
 }
 
 function normalizeScenes(plan) {
-  if (!plan || !Array.isArray(plan.scenes)) return [];
-  return plan.scenes.map((s, i) => ({
-    scene: s.scene ?? i + 1,
-    duration: Number(s.duration) || 5,
-    narration: s.narration ?? "",
-    visual_prompt: s.visual_prompt ?? s.visualPrompt ?? "",
-    caption: s.caption ?? ""
+  if (!plan || !Array.isArray(plan.scenes)) {
+    return [];
+  }
+
+  return plan.scenes.map((scene, index) => ({
+    scene: scene.scene ?? index + 1,
+    duration: Number(scene.duration) || 5,
+    narration: scene.narration ?? "",
+    visual_prompt:
+      scene.visual_prompt ??
+      scene.visualPrompt ??
+      "",
+    caption: scene.caption ?? ""
   }));
 }
 
 export default {
   async fetch(request, env) {
     if (request.method === "OPTIONS") {
-      return new Response(null, { status: 204, headers: CORS });
+      return new Response(null, {
+        status: 204,
+        headers: CORS
+      });
     }
 
     const url = new URL(request.url);
 
     try {
-      if (request.method === "GET" && url.pathname === "/") {
+      // -------------------------
+      // HEALTH CHECK
+      // -------------------------
+      if (
+        request.method === "GET" &&
+        url.pathname === "/"
+      ) {
         return json({
           success: true,
           service: "PickPrime AI Video Maker",
           status: "online",
-          endpoints: ["/", "/plan", "/fal/submit", "/fal/status"]
+          video_model: DEFAULT_MODEL,
+          endpoints: [
+            "/",
+            "/plan",
+            "/fal/submit",
+            "/fal/status",
+            "/fal/result"
+          ]
         });
       }
 
       if (request.method !== "POST") {
-        return json({ success: false, error: "POST required." }, 405);
+        return json(
+          {
+            success: false,
+            error: "POST required."
+          },
+          405
+        );
       }
 
-      const body = await request.json();
+      let body;
 
-      // Script -> AI scenes. This also keeps compatibility with the old frontend
-      // that POSTs {script} to the Worker root.
-      if (url.pathname === "/" || url.pathname === "/plan") {
-        const script = String(body.script || "").trim();
-        if (!script) return json({ success: false, error: "script is required" }, 400);
+      try {
+        body = await request.json();
+      } catch {
+        return json(
+          {
+            success: false,
+            error: "Invalid JSON request."
+          },
+          400
+        );
+      }
 
-        const plan = await cloudflareAI(env, script);
+      // -------------------------
+      // SCRIPT -> STORYBOARD
+      // -------------------------
+      if (
+        url.pathname === "/" ||
+        url.pathname === "/plan"
+      ) {
+        const script = String(
+          body.script || ""
+        ).trim();
+
+        if (!script) {
+          return json(
+            {
+              success: false,
+              error: "script is required."
+            },
+            400
+          );
+        }
+
+        const plan =
+          await cloudflareAI(env, script);
+
         return json({
           success: true,
-          title: plan.title || "PickPrime AI Video",
-          scenes: normalizeScenes(plan)
+          title:
+            plan.title ||
+            "PickPrime AI Video",
+          scenes:
+            normalizeScenes(plan)
         });
       }
 
-      // Server-side fal.ai queue submission.
-      // Example body:
-      // { "model":"fal-ai/flux-2/turbo", "input":{"prompt":"..." } }
+      // -------------------------
+      // TEXT -> VIDEO SUBMIT
+      // -------------------------
       if (url.pathname === "/fal/submit") {
-        // Friendly API: frontend may send only {prompt}.
-        // The FAL key stays server-side in env.FAL_KEY.
-        const model = String(body.model || "fal-ai/flux-2/turbo").trim();
-        let input = body.input;
+        const model =
+          String(
+            body.model ||
+            DEFAULT_MODEL
+          ).trim();
 
-        if (!input) {
-          const prompt = String(body.prompt || "").trim();
-          if (!prompt) {
-            return json({ success: false, error: "prompt is required" }, 400);
-          }
+        const prompt =
+          String(body.prompt || "").trim();
 
-          input = {
-            prompt,
-            image_size: body.image_size || "portrait_16_9",
-            num_images: 1
-          };
+        if (!prompt) {
+          return json(
+            {
+              success: false,
+              error: "prompt is required."
+            },
+            400
+          );
         }
 
-        const result = await falSubmit(env, model, input);
+        const input = {
+          prompt,
+
+          // Vertical Shorts/Reels
+          aspect_ratio:
+            body.aspect_ratio ||
+            "9:16",
+
+          // Kling supports native audio.
+          // Set false by default to control cost.
+          generate_audio:
+            body.generate_audio === true
+        };
+
+        const result =
+          await falSubmit(
+            env,
+            model,
+            input
+          );
+
         return json({
-          success: result.ok,
+          success: true,
           model,
-          ...result
-        }, result.ok ? 200 : 502);
+          request_id:
+            result.request_id,
+          status_url:
+            result.status_url,
+          response_url:
+            result.response_url,
+          message:
+            "Video generation started."
+        });
       }
 
-      // Poll a fal.ai queue request.
+      // -------------------------
+      // QUEUE STATUS
+      // -------------------------
       if (url.pathname === "/fal/status") {
-        if (!body.status_url) {
-          return json({ success: false, error: "status_url is required" }, 400);
+        const model =
+          String(
+            body.model ||
+            DEFAULT_MODEL
+          ).trim();
+
+        const requestId =
+          String(
+            body.request_id ||
+            body.requestId ||
+            ""
+          ).trim();
+
+        if (!requestId) {
+          return json(
+            {
+              success: false,
+              error: "request_id is required."
+            },
+            400
+          );
         }
-        const result = await falStatus(env, body.status_url, body.response_url);
-        return json(result, result.ok ? 200 : 502);
+
+        const status =
+          await falStatus(
+            env,
+            model,
+            requestId
+          );
+
+        return json({
+          success: true,
+          model,
+          request_id: requestId,
+          status:
+            status.status ||
+            status.state ||
+            "UNKNOWN",
+          details: status
+        });
       }
 
-      return json({ success: false, error: "Unknown endpoint" }, 404);
+      // -------------------------
+      // GET FINAL VIDEO
+      // -------------------------
+      if (url.pathname === "/fal/result") {
+        const model =
+          String(
+            body.model ||
+            DEFAULT_MODEL
+          ).trim();
 
-    } catch (err) {
-      return json({
-        success: false,
-        error: err?.message || String(err)
-      }, 500);
+        const requestId =
+          String(
+            body.request_id ||
+            body.requestId ||
+            ""
+          ).trim();
+
+        if (!requestId) {
+          return json(
+            {
+              success: false,
+              error: "request_id is required."
+            },
+            400
+          );
+        }
+
+        const result =
+          await falResult(
+            env,
+            model,
+            requestId
+          );
+
+        const videoUrl =
+          findVideoUrl(result);
+
+        return json({
+          success: true,
+          model,
+          request_id: requestId,
+          video_url: videoUrl,
+          result
+        });
+      }
+
+      return json(
+        {
+          success: false,
+          error: "Unknown endpoint."
+        },
+        404
+      );
+
+    } catch (error) {
+      console.error(
+        "Worker error:",
+        error
+      );
+
+      return json(
+        {
+          success: false,
+          error:
+            error?.message ||
+            String(error)
+        },
+        500
+      );
     }
   }
 };
