@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PickPrime AI Video Maker</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f6fb;color:#101828}
+header{background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff;padding:16px}.nav{max-width:1050px;margin:auto;display:flex;justify-content:space-between;align-items:center}.logo{font-size:22px;font-weight:800}.tag{font-size:12px;background:#ffffff25;padding:7px 10px;border-radius:20px}
+main{max-width:1050px;margin:auto;padding:18px 14px}.hero{text-align:center;padding:8px 0 20px}.hero h1{font-size:32px;margin:8px}.hero p{color:#667085}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.card{background:#fff;border:1px solid #e4e7ec;border-radius:18px;padding:18px;box-shadow:0 6px 24px #1018280b}
+label{display:block;font-weight:700;margin:12px 0 7px}textarea,select{width:100%;border:1px solid #d0d5dd;border-radius:10px;padding:12px;font-size:15px}textarea{height:150px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.btn{width:100%;border:0;border-radius:11px;padding:14px;margin-top:15px;font-weight:800;font-size:15px;background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff}.btn:disabled{opacity:.6}
+.status{margin-top:12px;padding:11px;border-radius:10px;background:#f2f4f7;font-size:14px}.preview{height:390px;background:#111827;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#98a2b3;overflow:hidden}.preview video{max-width:100%;max-height:100%}
+.download{display:none;margin-top:10px;text-align:center;text-decoration:none;background:#12b76a;color:#fff;padding:11px;border-radius:10px;font-weight:700}
+footer{text-align:center;padding:25px;color:#667085;font-size:13px}@media(max-width:750px){.grid{grid-template-columns:1fr}.hero h1{font-size:27px}.preview{height:300px}}
+</style>
+</head>
+<body>
+<header><div class="nav"><div class="logo">✨ PickPrime AI</div><div class="tag">AI Video Maker</div></div></header>
+<main>
+<div class="hero"><h1>Realistic AI Video Generator</h1><p>Write a prompt and generate your video.</p></div>
+<div class="grid">
+<div class="card">
+<h2>🎬 Create Video</h2>
+<label>Prompt</label>
+<textarea id="prompt" placeholder="A realistic cinematic scene of a young man walking through a beautiful Indian village at sunrise, natural light, realistic camera movement..."></textarea>
+<div class="row">
+<div><label>Aspect Ratio</label><select id="ratio"><option>9:16</option><option>16:9</option><option>1:1</option></select></div>
+<div><label>Duration</label><select id="duration"><option value="5">5 seconds</option><option value="10">10 seconds</option></select></div>
+</div>
+<button class="btn" id="generate">🚀 Generate Video</button>
+<div class="status" id="status">Ready.</div>
+</div>
+<div class="card">
+<h2>🎞️ Preview</h2>
+<div class="preview" id="preview">Generated video will appear here</div>
+<a id="download" class="download" target="_blank">⬇️ Open / Download Video</a>
+</div>
+</div>
+</main>
+<footer>© 2026 PickPrime AI · pickprimehelp@gmail.com</footer>
+<script>
+const $=id=>document.getElementById(id);
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+
+async function generate(){
+ const prompt=$("prompt").value.trim();
+ if(!prompt){$("status").textContent="⚠️ Please enter a prompt.";return}
+ $("generate").disabled=true;$("download").style.display="none";
+ $("preview").textContent="⏳ Starting...";
+ $("status").textContent="⏳ Sending request to fal.ai...";
+
+ try{
+  const start=await fetch("/api/generate",{method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({prompt,aspect_ratio:$("ratio").value,duration:Number($("duration").value)})});
+  const job=await start.json();
+  if(!start.ok) throw new Error(job.error||"Generation request failed");
+  if(!job.request_id) throw new Error("No request ID returned.");
+
+  for(let i=0;i<90;i++){
+    $("status").textContent=`⏳ Generating video... ${Math.min(99,Math.round(i/90*100))}%`;
+    await sleep(4000);
+
+    const sr=await fetch("/api/status?id="+encodeURIComponent(job.request_id));
+    const s=await sr.json();
+    if(!sr.ok) throw new Error(s.error||"Status request failed");
+
+    const state=s.status||"IN_QUEUE";
+    if(state==="COMPLETED"){
+      $("status").textContent="⏳ Fetching final video...";
+      const rr=await fetch("/api/result?id="+encodeURIComponent(job.request_id));
+      const result=await rr.json();
+      if(!rr.ok) throw new Error(result.error||"Could not fetch result");
+      if(!result.video_url) throw new Error("fal.ai completed but no video URL was found.");
+      $("preview").innerHTML='<video controls autoplay playsinline src="'+result.video_url+'"></video>';
+      $("download").href=result.video_url;$("download").style.display="block";
+      $("status").textContent="✅ Video ready!";
+      $("generate").disabled=false;return;
+    }
+    if(state==="FAILED"||state==="CANCELLED"){
+      throw new Error("Video generation "+state.toLowerCase()+".");
+    }
+  }
+  throw new Error("Generation is taking longer than expected. Please check again later.");
+ }catch(e){
+  $("status").textContent="❌ "+e.message;
+  $("preview").textContent="Generation failed.";
+ }
+ $("generate").disabled=false;
+}
+$("generate").onclick=generate;
+</script>
+</body></html>
