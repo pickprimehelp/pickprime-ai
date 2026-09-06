@@ -7,10 +7,11 @@ export default {
     if (request.method === "OPTIONS") {
       return new Response(null, {
         status: 204,
-        headers: cors()
+        headers: corsHeaders()
       });
     }
 
+    // Health check
     if (url.pathname === "/api/health") {
       return json({
         success: true,
@@ -20,6 +21,7 @@ export default {
       });
     }
 
+    // Generate video
     if (url.pathname === "/api/generate" && request.method === "POST") {
       try {
         if (!env.AI) {
@@ -40,32 +42,32 @@ export default {
           }, 400);
         }
 
-        const duration =
-          Math.max(3, Math.min(15, Number(body.duration) || 5));
+        const duration = Math.max(
+          3,
+          Math.min(15, Number(body.duration) || 5)
+        );
 
-        const allowedRatios = [
+        const ratio = [
           "16:9",
           "9:16",
           "1:1",
           "4:3",
           "3:4"
-        ];
-
-        const ratio = allowedRatios.includes(body.ratio)
+        ].includes(body.ratio)
           ? body.ratio
           : "16:9";
 
         const result = await env.AI.run(MODEL, {
-          prompt,
-          duration,
-          ratio,
+          prompt: prompt,
+          duration: duration,
+          ratio: ratio,
           resolution: "720P"
         });
 
         return json({
           success: true,
-          video: result?.video || result?.result?.video || null,
-          result
+          video: result?.video || null,
+          result: result
         });
 
       } catch (error) {
@@ -84,7 +86,7 @@ export default {
   }
 };
 
-function cors() {
+function corsHeaders() {
   return {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
@@ -93,11 +95,14 @@ function cors() {
 }
 
 function json(data, status = 200) {
-  return new Response(JSON.stringify(data, null, 2), {
-    status,
-    headers: {
-      "Content-Type": "application/json; charset=UTF-8",
-      ...cors()
+  return new Response(
+    JSON.stringify(data, null, 2),
+    {
+      status: status,
+      headers: {
+        "Content-Type": "application/json; charset=UTF-8",
+        ...corsHeaders()
+      }
     }
-  });
+  );
 }
