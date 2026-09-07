@@ -1,432 +1,1161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="PickPrime Tools - Free online GST invoice, image editor, resume maker, wedding card maker, calculators and daily useful tools.">
+<meta name="robots" content="index,follow">
+<title>PickPrime Tools - Free Online Tools</title>
 
-  <title>PickPrime AI Video Maker</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+font-family:Arial,sans-serif;
+background:#f5f7fb;
+color:#172033;
+padding-bottom:75px
+}
+header{
+background:linear-gradient(135deg,#6c2cff,#00a8ff);
+color:#fff;
+padding:18px 15px 22px;
+position:sticky;
+top:0;
+z-index:50;
+box-shadow:0 4px 18px #0002
+}
+.logo{
+font-size:25px;
+font-weight:800;
+display:flex;
+align-items:center;
+gap:8px
+}
+.logo span{font-size:29px}
+.tagline{font-size:12px;margin-top:3px;opacity:.9}
+.search{
+margin-top:15px;
+width:100%;
+padding:13px 16px;
+border:0;
+border-radius:14px;
+font-size:15px;
+outline:none
+}
+.categories{
+display:flex;
+gap:8px;
+overflow-x:auto;
+margin-top:13px;
+padding-bottom:3px
+}
+.categories button{
+border:1px solid #ffffff55;
+background:#ffffff18;
+color:white;
+padding:8px 13px;
+border-radius:20px;
+white-space:nowrap
+}
+.categories button.active{background:#fff;color:#5924d8}
 
-  <meta name="description" content="Create AI videos with PickPrime AI Video Maker.">
+.container{max-width:1100px;margin:auto;padding:15px}
+.hero{
+background:white;
+border-radius:20px;
+padding:20px;
+margin-bottom:15px;
+box-shadow:0 5px 20px #1720330c
+}
+.hero h1{font-size:24px;margin-bottom:7px}
+.hero p{color:#667085;line-height:1.5;font-size:14px}
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+.ad{
+margin:15px 0;
+min-height:70px;
+border:1px dashed #c8ced8;
+border-radius:14px;
+display:flex;
+align-items:center;
+justify-content:center;
+color:#98a0ad;
+font-size:12px
+}
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f7fb;
-      color: #111827;
-    }
+.tools{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:12px
+}
+.tool{
+background:#fff;
+border:0;
+border-radius:17px;
+padding:16px 10px;
+min-height:125px;
+box-shadow:0 4px 16px #1720330b;
+cursor:pointer;
+text-align:center;
+transition:.2s
+}
+.tool:active{transform:scale(.97)}
+.tool .icon{font-size:32px;margin-bottom:9px}
+.tool b{display:block;font-size:14px}
+.tool small{display:block;color:#8a93a3;margin-top:5px;font-size:11px}
 
-    .header {
-      background: linear-gradient(135deg, #6d28d9, #2563eb);
-      color: white;
-      padding: 24px 18px;
-      text-align: center;
-    }
+@media(max-width:700px){
+.tools{grid-template-columns:repeat(2,1fr)}
+}
+@media(min-width:1000px){
+.tools{grid-template-columns:repeat(5,1fr)}
+}
 
-    .logo {
-      font-size: 28px;
-      font-weight: 800;
-    }
+.panel{
+display:none;
+background:white;
+border-radius:20px;
+padding:18px;
+margin-top:15px;
+box-shadow:0 5px 22px #17203312
+}
+.panel.show{display:block}
+.panel h2{font-size:21px;margin-bottom:15px}
+.close{
+float:right;
+border:0;
+background:#f0f2f6;
+width:35px;height:35px;
+border-radius:50%;
+font-size:18px
+}
+.field{margin-bottom:12px}
+.field label{
+display:block;
+font-size:13px;
+font-weight:700;
+margin-bottom:6px
+}
+input,textarea,select{
+width:100%;
+padding:12px;
+border:1px solid #d9dee8;
+border-radius:11px;
+font-size:14px;
+outline:none;
+background:#fff
+}
+textarea{min-height:100px;resize:vertical}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:500px){.grid2{grid-template-columns:1fr}}
 
-    .tagline {
-      margin-top: 7px;
-      opacity: .9;
-      font-size: 14px;
-    }
+.btn{
+border:0;
+background:linear-gradient(135deg,#6c2cff,#00a8ff);
+color:white;
+padding:12px 17px;
+border-radius:11px;
+font-weight:700;
+cursor:pointer;
+margin:3px
+}
+.btn.secondary{background:#eef0f5;color:#273044}
+.btn.green{background:#159957}
+.btn.red{background:#e5484d}
 
-    .container {
-      max-width: 720px;
-      margin: auto;
-      padding: 18px;
-    }
+.result{
+margin-top:14px;
+background:#f6f8fc;
+border-radius:13px;
+padding:14px;
+line-height:1.7
+}
 
-    .card {
-      background: white;
-      border-radius: 18px;
-      padding: 20px;
-      margin-bottom: 18px;
-      box-shadow: 0 5px 20px rgba(0,0,0,.07);
-    }
+.bottom{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+height:65px;
+background:#fff;
+border-top:1px solid #e5e7eb;
+display:flex;
+justify-content:space-around;
+align-items:center;
+z-index:100
+}
+.bottom button{
+border:0;
+background:none;
+font-size:11px;
+color:#667085
+}
+.bottom span{display:block;font-size:22px;margin-bottom:2px}
 
-    label {
-      display: block;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
+.item{
+border:1px solid #e1e5ec;
+padding:10px;
+border-radius:12px;
+margin-bottom:9px
+}
+.itemgrid{
+display:grid;
+grid-template-columns:2fr .7fr 1fr .7fr 1fr;
+gap:7px
+}
+@media(max-width:650px){
+.itemgrid{grid-template-columns:1fr 1fr}
+}
 
-    textarea,
-    select {
-      width: 100%;
-      border: 1px solid #d1d5db;
-      border-radius: 12px;
-      padding: 13px;
-      font-size: 15px;
-      outline: none;
-      margin-bottom: 16px;
-      background: white;
-    }
+canvas{
+max-width:100%;
+border:1px solid #ddd;
+border-radius:12px;
+background:#fff;
+display:block;
+margin:10px auto
+}
 
-    textarea {
-      min-height: 130px;
-      resize: vertical;
-    }
+.card-preview{
+padding:30px 18px;
+border-radius:20px;
+background:linear-gradient(135deg,#ff5f9e,#7148ff);
+color:#fff;
+text-align:center;
+min-height:280px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+margin-bottom:12px
+}
+.card-preview h3{font-size:30px;margin:12px}
+.card-preview p{font-size:16px;line-height:1.6}
 
-    .row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
+.invoice{
+background:#fff;
+padding:20px;
+border:1px solid #ddd;
+color:#111
+}
+.invoice table{width:100%;border-collapse:collapse;margin-top:15px}
+.invoice th,.invoice td{
+border:1px solid #bbb;
+padding:7px;
+font-size:12px
+}
+.invoice .total{text-align:right;margin-top:15px;font-weight:bold}
 
-    button {
-      width: 100%;
-      border: 0;
-      border-radius: 13px;
-      padding: 15px;
-      font-size: 16px;
-      font-weight: 800;
-      color: white;
-      background: linear-gradient(135deg, #7c3aed, #2563eb);
-      cursor: pointer;
-    }
-
-    button:disabled {
-      opacity: .6;
-    }
-
-    .status {
-      margin-top: 15px;
-      padding: 12px;
-      border-radius: 10px;
-      display: none;
-      white-space: pre-wrap;
-      word-break: break-word;
-      font-size: 14px;
-    }
-
-    .loading {
-      display: block;
-      background: #eff6ff;
-      color: #1d4ed8;
-    }
-
-    .error {
-      display: block;
-      background: #fef2f2;
-      color: #b91c1c;
-    }
-
-    .success {
-      display: block;
-      background: #f0fdf4;
-      color: #15803d;
-    }
-
-    video {
-      width: 100%;
-      border-radius: 14px;
-      margin-top: 15px;
-      background: black;
-    }
-
-    .download {
-      display: block;
-      text-align: center;
-      text-decoration: none;
-      margin-top: 12px;
-      padding: 13px;
-      border-radius: 11px;
-      background: #111827;
-      color: white;
-      font-weight: 700;
-    }
-
-    .example {
-      font-size: 13px;
-      color: #6b7280;
-      margin-top: -8px;
-      margin-bottom: 15px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 25px;
-      color: #6b7280;
-      font-size: 13px;
-    }
-  </style>
+footer{
+padding:30px 15px;
+text-align:center;
+color:#788193;
+font-size:12px;
+line-height:1.8
+}
+footer a{color:#5d2de2;text-decoration:none}
+</style>
 </head>
 
 <body>
 
-  <header class="header">
-    <div class="logo">✨ PickPrime AI</div>
-    <div class="tagline">AI Video Maker</div>
-  </header>
+<header>
+<div class="logo"><span>⚡</span> PickPrime</div>
+<div class="tagline">Free Online Tools • Fast • Mobile Friendly</div>
+<input id="search" class="search" placeholder="🔎 Search tools..." oninput="searchTools()">
 
-  <main class="container">
+<div class="categories">
+<button class="active" onclick="filterTools('all',this)">All</button>
+<button onclick="filterTools('business',this)">💼 Business</button>
+<button onclick="filterTools('creator',this)">🎨 Creator</button>
+<button onclick="filterTools('wedding',this)">💍 Wedding</button>
+<button onclick="filterTools('document',this)">📄 Documents</button>
+<button onclick="filterTools('daily',this)">🧮 Daily</button>
+</div>
+</header>
 
-    <div class="card">
+<main class="container">
 
-      <label for="prompt">Describe your video</label>
+<section class="hero">
+<h1>All-in-One Free Online Tools</h1>
+<p>
+Create invoices, edit photos, make wedding cards, build resumes,
+calculate GST, EMI, percentage, age and much more — directly from your mobile.
+</p>
+</section>
 
-      <textarea
-        id="prompt"
-        placeholder="Example: A cinematic sunset over the mountains, realistic camera movement, beautiful sky..."
-      ></textarea>
+<div class="ad">ADVERTISEMENT</div>
 
-      <div class="example">
-        English prompts usually give better results.
-      </div>
+<div id="tools" class="tools"></div>
 
-      <div class="row">
+<div id="panel" class="panel">
+<button class="close" onclick="closeTool()">×</button>
+<h2 id="toolTitle"></h2>
+<div id="toolBody"></div>
+</div>
 
-        <div>
-          <label for="ratio">Aspect Ratio</label>
+<footer>
+<div>© 2026 PickPrime Tools</div>
+<div>
+<a href="#" onclick="legal('about');return false">About Us</a> ·
+<a href="#" onclick="legal('contact');return false">Contact</a> ·
+<a href="#" onclick="legal('privacy');return false">Privacy Policy</a> ·
+<a href="#" onclick="legal('terms');return false">Terms</a> ·
+<a href="#" onclick="legal('disclaimer');return false">Disclaimer</a>
+</div>
+<div>Contact: pickprimehelp@gmail.com</div>
+</footer>
 
-          <select id="ratio">
-            <option value="16:9">16:9 Landscape</option>
-            <option value="9:16">9:16 Portrait</option>
-            <option value="1:1">1:1 Square</option>
-            <option value="4:3">4:3</option>
-            <option value="3:4">3:4</option>
-          </select>
-        </div>
+</main>
 
-        <div>
-          <label for="duration">Duration</label>
-
-          <select id="duration">
-            <option value="5">5 Seconds</option>
-            <option value="10">10 Seconds</option>
-            <option value="15">15 Seconds</option>
-          </select>
-        </div>
-
-      </div>
-
-      <button id="generateBtn" onclick="generateVideo()">
-        🎬 Generate Video
-      </button>
-
-      <div id="status" class="status"></div>
-
-    </div>
-
-
-    <div class="card" id="resultCard" style="display:none;">
-
-      <h3>🎥 Your AI Video</h3>
-
-      <video id="video" controls playsinline></video>
-
-      <a
-        id="download"
-        class="download"
-        target="_blank"
-        rel="noopener"
-      >
-        ⬇️ Open / Download Video
-      </a>
-
-    </div>
-
-  </main>
-
-
-  <footer>
-    © 2026 PickPrime AI<br>
-    Contact: pickprimehelp@gmail.com
-  </footer>
-
+<nav class="bottom">
+<button onclick="window.scrollTo({top:0,behavior:'smooth'})"><span>🏠</span>Home</button>
+<button onclick="filterTools('business',null)"><span>💼</span>Business</button>
+<button onclick="filterTools('creator',null)"><span>🎨</span>Creator</button>
+<button onclick="filterTools('wedding',null)"><span>💍</span>Cards</button>
+<button onclick="filterTools('daily',null)"><span>🧮</span>Daily</button>
+</nav>
 
 <script>
+const tools=[
+["invoice","🧾","GST Invoice Maker","business"],
+["gst","💰","GST Calculator","business"],
+["profit","📈","Profit Calculator","business"],
+["discount","🏷️","Discount Calculator","business"],
+["emi","🏦","EMI Calculator","business"],
+["quotation","📋","Quotation Maker","business"],
+["receipt","🧾","Receipt Maker","business"],
+["khata","📒","Udhaar Khata","business"],
+["salary","💼","Salary Calculator","business"],
 
-async function generateVideo() {
+["photo","🖼️","Photo Editor","creator"],
+["resize","↔️","Image Resizer","creator"],
+["compress","🗜️","Image Compressor","creator"],
+["gray","⚫","Grayscale Filter","creator"],
+["brightness","☀️","Brightness Tool","creator"],
+["signature","✍️","Signature Maker","document"],
+["qr","▣","QR Code Generator","creator"],
+["caption","✍️","Caption Generator","creator"],
+["hashtags","#️⃣","Hashtag Generator","creator"],
+["youtube","▶️","YouTube Title Ideas","creator"],
+["status","📱","WhatsApp Status Maker","creator"],
 
-  const prompt =
-    document.getElementById("prompt").value.trim();
+["wedding","💍","Wedding Card Maker","wedding"],
+["birthday","🎂","Birthday Invitation","wedding"],
+["engagement","💑","Engagement Card","wedding"],
+["anniversary","❤️","Anniversary Card","wedding"],
+["baby","👶","Baby Announcement","wedding"],
+["festival","🎉","Festival Card","wedding"],
 
-  const ratio =
-    document.getElementById("ratio").value;
+["resume","📄","Resume Maker","document"],
+["application","📝","Application Maker","document"],
+["passport","🪪","Passport Photo Tool","document"],
+["jpgpdf","📕","JPG to PDF","document"],
 
-  const duration =
-    Number(document.getElementById("duration").value);
+["age","🎂","Age Calculator","daily"],
+["datediff","📅","Date Difference","daily"],
+["countdown","⏳","Days Until Date","daily"],
+["percentage","%","Percentage Calculator","daily"],
+["unit","📏","Unit Converter","daily"],
+["temperature","🌡️","Temperature Converter","daily"],
+["length","📐","Length Converter","daily"],
+["weight","⚖️","Weight Converter","daily"],
+["numberwords","🔢","Number to Words","daily"],
+["password","🔐","Password Generator","daily"],
+["random","🎲","Random Number","daily"],
+["bmi","⚕️","BMI Calculator","daily"],
+["time","⏱️","Time Calculator","daily"]
+];
 
-  const button =
-    document.getElementById("generateBtn");
-
-  const status =
-    document.getElementById("status");
-
-  const resultCard =
-    document.getElementById("resultCard");
-
-  const video =
-    document.getElementById("video");
-
-  const download =
-    document.getElementById("download");
-
-
-  if (!prompt) {
-
-    showError("Please enter a video prompt.");
-
-    return;
-  }
-
-
-  button.disabled = true;
-
-  button.textContent = "⏳ Generating...";
-
-  resultCard.style.display = "none";
-
-  showLoading(
-    "Sending request to PickPrime AI...\nPlease wait."
-  );
-
-
-  try {
-
-    const response = await fetch(
-      "/api/generate",
-      {
-        method: "POST",
-
-        headers: {
-          "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify({
-          prompt: prompt,
-          duration: duration,
-          ratio: ratio,
-          resolution: "720P"
-        })
-      }
-    );
-
-
-    const text = await response.text();
-
-
-    let data;
-
-    try {
-      data = JSON.parse(text);
-    } catch (e) {
-
-      throw new Error(
-        "Server returned invalid response:\n\n" +
-        text.substring(0, 1000)
-      );
-
-    }
-
-
-    if (!response.ok || !data.success) {
-
-      throw new Error(
-        data.message ||
-        data.error ||
-        "Video generation failed"
-      );
-
-    }
-
-
-    if (!data.video) {
-
-      throw new Error(
-        "Cloudflare did not return a video URL."
-      );
-
-    }
-
-
-    video.src = data.video;
-
-    download.href = data.video;
-
-    resultCard.style.display = "block";
-
-    showSuccess(
-      "✅ Video generated successfully!"
-    );
-
-
-    resultCard.scrollIntoView({
-      behavior: "smooth"
-    });
-
-
-  } catch (error) {
-
-    console.error(error);
-
-    showError(
-      "❌ Sending request failed\n\n" +
-      (error.message || error)
-    );
-
-  } finally {
-
-    button.disabled = false;
-
-    button.textContent =
-      "🎬 Generate Video";
-
-  }
-
+function render(list=tools){
+const box=document.getElementById("tools");
+box.innerHTML=list.map(t=>`
+<button class="tool" data-cat="${t[3]}" onclick="openTool('${t[0]}')">
+<div class="icon">${t[1]}</div>
+<b>${t[2]}</b>
+<small>Free Tool</small>
+</button>`).join("");
 }
 
+render();
 
-function showLoading(message) {
-
-  const status =
-    document.getElementById("status");
-
-  status.className =
-    "status loading";
-
-  status.textContent =
-    message;
-
+function filterTools(cat,btn){
+document.querySelectorAll(".categories button").forEach(x=>x.classList.remove("active"));
+if(btn)btn.classList.add("active");
+const list=cat==="all"?tools:tools.filter(x=>x[3]===cat);
+render(list);
+window.scrollTo({top:250,behavior:"smooth"});
 }
 
-
-function showError(message) {
-
-  const status =
-    document.getElementById("status");
-
-  status.className =
-    "status error";
-
-  status.textContent =
-    message;
-
+function searchTools(){
+const q=document.getElementById("search").value.toLowerCase();
+render(tools.filter(t=>(t[2]+" "+t[3]).toLowerCase().includes(q)));
 }
 
-
-function showSuccess(message) {
-
-  const status =
-    document.getElementById("status");
-
-  status.className =
-    "status success";
-
-  status.textContent =
-    message;
-
+function openTool(id){
+const t=tools.find(x=>x[0]===id);
+if(!t)return;
+document.getElementById("toolTitle").textContent=t[1]+" "+t[2];
+document.getElementById("panel").classList.add("show");
+document.getElementById("toolBody").innerHTML=body(id);
+document.getElementById("panel").scrollIntoView({behavior:"smooth"});
 }
 
+function closeTool(){
+document.getElementById("panel").classList.remove("show");
+}
+
+/* ---------- TOOL BODY ---------- */
+
+function body(id){
+
+if(id==="gst")return `
+<div class="grid2">
+<div class="field"><label>Amount ₹</label><input id="ga" type="number" placeholder="1000"></div>
+<div class="field"><label>GST %</label><select id="gr"><option>5</option><option>12</option><option>18</option><option>28</option></select></div>
+</div>
+<button class="btn" onclick="gstCalc()">Calculate GST</button>
+<div id="res" class="result"></div>`;
+
+if(id==="profit")return `
+<div class="grid2">
+<div class="field"><label>Cost Price ₹</label><input id="cp" type="number"></div>
+<div class="field"><label>Selling Price ₹</label><input id="sp" type="number"></div>
+</div>
+<button class="btn" onclick="profitCalc()">Calculate</button>
+<div id="res" class="result"></div>`;
+
+if(id==="discount")return `
+<div class="grid2">
+<div class="field"><label>Original Price ₹</label><input id="dp" type="number"></div>
+<div class="field"><label>Discount %</label><input id="dr" type="number"></div>
+</div>
+<button class="btn" onclick="discountCalc()">Calculate</button>
+<div id="res" class="result"></div>`;
+
+if(id==="emi")return `
+<div class="field"><label>Loan Amount ₹</label><input id="loan" type="number"></div>
+<div class="grid2">
+<div class="field"><label>Annual Interest %</label><input id="interest" type="number" value="10"></div>
+<div class="field"><label>Years</label><input id="years" type="number" value="5"></div>
+</div>
+<button class="btn" onclick="emiCalc()">Calculate EMI</button>
+<div id="res" class="result"></div>`;
+
+if(id==="percentage")return `
+<div class="grid2">
+<div class="field"><label>Value</label><input id="pv" type="number"></div>
+<div class="field"><label>Total</label><input id="pt" type="number"></div>
+</div>
+<button class="btn" onclick="percentCalc()">Calculate</button>
+<div id="res" class="result"></div>`;
+
+if(id==="bmi")return `
+<div class="grid2">
+<div class="field"><label>Weight kg</label><input id="bw" type="number"></div>
+<div class="field"><label>Height cm</label><input id="bh" type="number"></div>
+</div>
+<button class="btn" onclick="bmiCalc()">Calculate BMI</button>
+<div id="res" class="result"></div>`;
+
+if(id==="age")return `
+<div class="field"><label>Date of Birth</label><input id="dob" type="date"></div>
+<button class="btn" onclick="ageCalc()">Calculate Age</button>
+<div id="res" class="result"></div>`;
+
+if(id==="datediff")return `
+<div class="grid2">
+<div class="field"><label>Start Date</label><input id="ds" type="date"></div>
+<div class="field"><label>End Date</label><input id="de" type="date"></div>
+</div>
+<button class="btn" onclick="dateDiff()">Calculate</button>
+<div id="res" class="result"></div>`;
+
+if(id==="countdown")return `
+<div class="field"><label>Select Future Date</label><input id="cd" type="date"></div>
+<button class="btn" onclick="countDays()">Calculate</button>
+<div id="res" class="result"></div>`;
+
+if(id==="random")return `
+<div class="grid2">
+<div class="field"><label>Minimum</label><input id="rmin" type="number" value="1"></div>
+<div class="field"><label>Maximum</label><input id="rmax" type="number" value="100"></div>
+</div>
+<button class="btn" onclick="randomNum()">Generate</button>
+<div id="res" class="result"></div>`;
+
+if(id==="password")return `
+<div class="grid2">
+<div class="field"><label>Password Length</label><input id="pl" type="number" value="16"></div>
+<div class="field"><label>Numbers</label><select id="pn"><option value="yes">Yes</option><option value="no">No</option></select></div>
+</div>
+<button class="btn" onclick="makePassword()">Generate Password</button>
+<div id="res" class="result"></div>`;
+
+if(id==="numberwords")return `
+<div class="field"><label>Enter Number</label><input id="nw" type="number"></div>
+<button class="btn" onclick="numberWords()">Convert</button>
+<div id="res" class="result"></div>`;
+
+if(id==="unit")return `
+<div class="field"><label>Value</label><input id="uv" type="number"></div>
+<div class="grid2">
+<div class="field"><label>From</label>
+<select id="uf"><option>Meter</option><option>Kilometer</option><option>Centimeter</option><option>Feet</option><option>Inch</option></select></div>
+<div class="field"><label>To</label>
+<select id="ut"><option>Meter</option><option>Kilometer</option><option>Centimeter</option><option>Feet</option><option>Inch</option></select></div>
+</div>
+<button class="btn" onclick="unitCalc()">Convert</button>
+<div id="res" class="result"></div>`;
+
+if(id==="temperature")return `
+<div class="field"><label>Temperature</label><input id="tv" type="number"></div>
+<div class="grid2">
+<select id="tf"><option>Celsius</option><option>Fahrenheit</option><option>Kelvin</option></select>
+<select id="tt"><option>Celsius</option><option>Fahrenheit</option><option>Kelvin</option></select>
+</div>
+<br><button class="btn" onclick="tempCalc()">Convert</button>
+<div id="res" class="result"></div>`;
+
+if(id==="salary")return `
+<div class="field"><label>Monthly Salary ₹</label><input id="sal" type="number"></div>
+<button class="btn" onclick="salaryCalc()">Calculate</button>
+<div id="res" class="result"></div>`;
+
+if(id==="photo"||id==="resize"||id==="compress"||id==="gray"||id==="brightness")return `
+<div class="field">
+<label>Select Image</label>
+<input id="imgFile" type="file" accept="image/*" onchange="loadImage(event)">
+</div>
+<div class="grid2">
+<div class="field"><label>Width</label><input id="iw" type="number" value="900"></div>
+<div class="field"><label>Height</label><input id="ih" type="number" value="600"></div>
+</div>
+<div class="field"><label>Brightness</label><input id="ib" type="range" min="50" max="150" value="100"></div>
+<div class="field"><label>Quality</label><input id="iq" type="range" min="20" max="100" value="85"></div>
+<canvas id="canvas" width="900" height="600"></canvas>
+<button class="btn" onclick="applyImage()">Apply</button>
+<button class="btn green" onclick="downloadImage()">Download JPG</button>`;
+
+if(id==="signature")return `
+<p style="color:#667085;font-size:13px">Draw your signature with your finger.</p>
+<canvas id="sign" width="700" height="300"></canvas>
+<button class="btn secondary" onclick="clearSign()">Clear</button>
+<button class="btn green" onclick="downloadSign()">Download Signature</button>`;
+
+if(id==="qr")return `
+<div class="field"><label>Text / URL</label><textarea id="qrtext" placeholder="https://pickprime.in"></textarea></div>
+<button class="btn" onclick="makeQR()">Generate QR</button>
+<div id="qrout" style="text-align:center;margin-top:15px"></div>`;
+
+if(id==="caption")return `
+<div class="field"><label>Topic</label><input id="ct" placeholder="My new product"></div>
+<button class="btn" onclick="captionGen()">Generate Captions</button>
+<div id="res" class="result"></div>`;
+
+if(id==="hashtags")return `
+<div class="field"><label>Topic</label><input id="ht" placeholder="Wedding photography"></div>
+<button class="btn" onclick="hashGen()">Generate Hashtags</button>
+<div id="res" class="result"></div>`;
+
+if(id==="youtube")return `
+<div class="field"><label>Video Topic</label><input id="yt" placeholder="Online earning"></div>
+<button class="btn" onclick="youtubeGen()">Generate Titles</button>
+<div id="res" class="result"></div>`;
+
+if(["wedding","birthday","engagement","anniversary","baby","festival","status"].includes(id))return `
+<div class="field"><label>Main Name / Title</label><input id="cardname" placeholder="Rambeer & Family"></div>
+<div class="field"><label>Message</label><textarea id="cardmsg">You are warmly invited to join us and make this occasion special.</textarea></div>
+<div class="card-preview" id="cardpreview">
+<div>✨ PICKPRIME ✨</div>
+<h3>${id==="wedding"?"Wedding Invitation":"Special Invitation"}</h3>
+<p id="cardp">Your special message will appear here.</p>
+</div>
+<button class="btn" onclick="updateCard()">Preview</button>
+<button class="btn green" onclick="printCard()">Print / Save PDF</button>`;
+
+if(id==="resume")return `
+<div class="field"><label>Full Name</label><input id="rn"></div>
+<div class="field"><label>Professional Title</label><input id="rt"></div>
+<div class="field"><label>Contact</label><input id="rc"></div>
+<div class="field"><label>About Me</label><textarea id="ra"></textarea></div>
+<div class="field"><label>Skills</label><textarea id="rs"></textarea></div>
+<div class="field"><label>Experience</label><textarea id="re"></textarea></div>
+<button class="btn" onclick="resumePreview()">Create Resume</button>
+<div id="resumeout" style="margin-top:15px"></div>`;
+
+if(["quotation","receipt","application"].includes(id))return `
+<div class="field"><label>Your Name / Business</label><input id="docname"></div>
+<div class="field"><label>Customer / Receiver</label><input id="doccustomer"></div>
+<div class="field"><label>Details</label><textarea id="docdetails"></textarea></div>
+<div class="field"><label>Amount ₹</label><input id="docamount" type="number"></div>
+<button class="btn" onclick="createDoc('${id}')">Create Document</button>
+<div id="docout"></div>`;
+
+if(id==="invoice")return invoiceBody();
+
+if(id==="khata")return khataBody();
+
+if(id==="passport")return `
+<div class="field"><label>Select Photo</label><input id="passfile" type="file" accept="image/*" onchange="passportLoad(event)"></div>
+<p style="font-size:13px;color:#667085">Passport ratio: 35 × 45 mm</p>
+<canvas id="passcanvas" width="350" height="450"></canvas>
+<button class="btn green" onclick="downloadCanvas('passcanvas','passport-photo.jpg')">Download Photo</button>`;
+
+if(id==="jpgpdf")return `
+<div class="field"><label>Select JPG Images</label><input id="pdfimgs" type="file" accept="image/jpeg,image/png" multiple></div>
+<p style="font-size:13px;color:#667085;margin:10px 0">This tool opens the browser print dialog. Choose “Save as PDF”.</p>
+<button class="btn" onclick="printImages()">Create PDF</button>`;
+
+return `<div class="result">This tool is ready for the next module.</div>`;
+}
+
+/* ---------- CALCULATORS ---------- */
+
+function gstCalc(){
+let a=+ga.value||0,r=+gr.value||0,g=a*r/100;
+res.innerHTML=`GST: ₹${g.toFixed(2)}<br>Subtotal: ₹${a.toFixed(2)}<br><b>Total: ₹${(a+g).toFixed(2)}</b>`;
+}
+
+function profitCalc(){
+let c=+cp.value||0,s=+sp.value||0,p=s-c;
+let percent=c?p/c*100:0;
+res.innerHTML=p>=0?`Profit: ₹${p.toFixed(2)}<br>Profit %: ${percent.toFixed(2)}%`:`Loss: ₹${Math.abs(p).toFixed(2)}<br>Loss %: ${Math.abs(percent).toFixed(2)}%`;
+}
+
+function discountCalc(){
+let p=+dp.value||0,d=+dr.value||0,x=p*d/100;
+res.innerHTML=`Discount: ₹${x.toFixed(2)}<br><b>Final Price: ₹${(p-x).toFixed(2)}</b>`;
+}
+
+function emiCalc(){
+let P=+loan.value||0;
+let R=(+interest.value||0)/1200;
+let n=(+years.value||0)*12;
+if(!P||!n){res.innerHTML="Enter loan details";return}
+let e=R?P*R*Math.pow(1+R,n)/(Math.pow(1+R,n)-1):P/n;
+res.innerHTML=`Monthly EMI: <b>₹${e.toFixed(2)}</b><br>Total Payment: ₹${(e*n).toFixed(2)}<br>Total Interest: ₹${(e*n-P).toFixed(2)}`;
+}
+
+function percentCalc(){
+let a=+pv.value||0,b=+pt.value||0;
+res.innerHTML=b?`Result: <b>${(a/b*100).toFixed(2)}%</b>`:"Enter values";
+}
+
+function bmiCalc(){
+let w=+bw.value||0,h=(+bh.value||0)/100;
+let b=w/(h*h);
+let cat=b<18.5?"Underweight":b<25?"Normal":b<30?"Overweight":"Obesity";
+res.innerHTML=`BMI: <b>${b.toFixed(2)}</b><br>Status: ${cat}`;
+}
+
+function ageCalc(){
+let d=new Date(dob.value),n=new Date();
+if(isNaN(d)){res.innerHTML="Select date";return}
+let age=n.getFullYear()-d.getFullYear();
+let m=n.getMonth()-d.getMonth();
+if(m<0||(m===0&&n.getDate()<d.getDate()))age--;
+res.innerHTML=`Your age is approximately <b>${age} years</b>`;
+}
+
+function dateDiff(){
+let a=new Date(ds.value),b=new Date(de.value);
+if(isNaN(a)||isNaN(b)){res.innerHTML="Select both dates";return}
+let days=Math.round(Math.abs(b-a)/86400000);
+res.innerHTML=`Difference: <b>${days} days</b>`;
+}
+
+function countDays(){
+let d=new Date(cd.value),n=new Date();
+if(isNaN(d)){res.innerHTML="Select date";return}
+let days=Math.ceil((d-n)/86400000);
+res.innerHTML=days>=0?`<b>${days}</b> days remaining`:`Date has passed by <b>${Math.abs(days)}</b> days`;
+}
+
+function randomNum(){
+let a=+rmin.value,b=+rmax.value;
+res.innerHTML=`Random Number: <b>${Math.floor(Math.random()*(b-a+1))+a}</b>`;
+}
+
+function makePassword(){
+let len=Math.max(4,Math.min(100,+pl.value||16));
+let chars="ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz!@#$%^&*";
+if(pn.value==="yes")chars+="0123456789";
+let out="";
+for(let i=0;i<len;i++)out+=chars[Math.floor(Math.random()*chars.length)];
+res.innerHTML=`<input value="${out}" readonly onclick="this.select()"><br><small>Tap the field to copy.</small>`;
+}
+
+function salaryCalc(){
+let m=+sal.value||0;
+res.innerHTML=`Monthly: ₹${m.toFixed(2)}<br>Yearly: <b>₹${(m*12).toFixed(2)}</b>`;
+}
+
+function unitCalc(){
+const f={Meter:1,Kilometer:1000,Centimeter:.01,Feet:.3048,Inch:.0254};
+let v=+uv.value||0;
+let out=v*f[uf.value]/f[ut.value];
+res.innerHTML=`<b>${out}</b> ${ut.value}`;
+}
+
+function tempCalc(){
+let v=+tv.value||0;
+let c=tf.value==="Celsius"?v:tf.value==="Fahrenheit"?(v-32)*5/9:v-273.15;
+let out=tt.value==="Celsius"?c:tt.value==="Fahrenheit"?c*9/5+32:c+273.15;
+res.innerHTML=`Result: <b>${out.toFixed(2)}°</b> ${tt.value}`;
+}
+
+/* ---------- NUMBER TO WORDS ---------- */
+
+function numberWords(){
+let n=Math.floor(+nw.value||0);
+res.innerHTML=n===0?"Zero":`<b>${toWords(n)}</b>`;
+}
+
+function toWords(n){
+const ones=["","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"];
+const tens=["","","Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"];
+if(n<20)return ones[n];
+if(n<100)return tens[Math.floor(n/10)]+(n%10?" "+ones[n%10]:"");
+if(n<1000)return ones[Math.floor(n/100)]+" Hundred"+(n%100?" "+toWords(n%100):"");
+if(n<100000)return toWords(Math.floor(n/1000))+" Thousand"+(n%1000?" "+toWords(n%1000):"");
+if(n<10000000)return toWords(Math.floor(n/100000))+" Lakh"+(n%100000?" "+toWords(n%100000):"");
+return toWords(Math.floor(n/10000000))+" Crore"+(n%10000000?" "+toWords(n%10000000):"");
+}
+
+/* ---------- IMAGE TOOLS ---------- */
+
+let imageObj=null;
+
+function loadImage(e){
+let file=e.target.files[0];
+if(!file)return;
+let img=new Image();
+img.onload=()=>{
+imageObj=img;
+iw.value=img.width;
+ih.value=img.height;
+drawImageTool();
+};
+img.src=URL.createObjectURL(file);
+}
+
+function drawImageTool(){
+if(!imageObj)return;
+let c=document.getElementById("canvas");
+let ctx=c.getContext("2d");
+c.width=+iw.value||900;
+c.height=+ih.value||600;
+ctx.filter=`brightness(${ib.value}%)`;
+ctx.drawImage(imageObj,0,0,c.width,c.height);
+}
+
+function applyImage(){
+drawImageTool();
+}
+
+function downloadImage(){
+let c=document.getElementById("canvas");
+downloadCanvas("canvas","pickprime-edited.jpg",+iq.value/100);
+}
+
+function downloadCanvas(id,name,quality=.9){
+let c=document.getElementById(id);
+if(!c)return;
+let a=document.createElement("a");
+a.href=c.toDataURL("image/jpeg",quality);
+a.download=name;
+a.click();
+}
+
+/* ---------- SIGNATURE ---------- */
+
+let drawing=false,lastX=0,lastY=0;
+
+function setupSignature(){
+let c=document.getElementById("sign");
+if(!c)return;
+let ctx=c.getContext("2d");
+ctx.lineWidth=3;
+ctx.lineCap="round";
+
+function pos(e){
+let r=c.getBoundingClientRect();
+let p=e.touches?e.touches[0]:e;
+return [(p.clientX-r.left)*c.width/r.width,(p.clientY-r.top)*c.height/r.height];
+}
+function start(e){
+e.preventDefault();
+let p=pos(e);drawing=true;lastX=p[0];lastY=p[1];
+}
+function move(e){
+if(!drawing)return;
+e.preventDefault();
+let p=pos(e);
+ctx.beginPath();
+ctx.moveTo(lastX,lastY);
+ctx.lineTo(p[0],p[1]);
+ctx.stroke();
+lastX=p[0];lastY=p[1];
+}
+function end(){drawing=false}
+
+c.addEventListener("mousedown",start);
+c.addEventListener("mousemove",move);
+c.addEventListener("mouseup",end);
+c.addEventListener("mouseleave",end);
+c.addEventListener("touchstart",start,{passive:false});
+c.addEventListener("touchmove",move,{passive:false});
+c.addEventListener("touchend",end);
+}
+
+function clearSign(){
+let c=document.getElementById("sign");
+if(c)c.getContext("2d").clearRect(0,0,c.width,c.height);
+}
+
+function downloadSign(){
+downloadCanvas("sign","pickprime-signature.png");
+}
+
+/* ---------- QR ---------- */
+
+function makeQR(){
+let text=document.getElementById("qrtext").value.trim();
+if(!text){qrout.innerHTML="Enter text or URL";return}
+let url="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data="+encodeURIComponent(text);
+qrout.innerHTML=`
+<img src="${url}" style="max-width:300px;border:8px solid white;border-radius:12px">
+<br><br>
+<a class="btn" href="${url}" target="_blank" download="pickprime-qr.png">Open / Save QR</a>`;
+}
+
+/* ---------- TEXT GENERATORS ---------- */
+
+function captionGen(){
+let x=ct.value||"your topic";
+res.innerHTML=[
+`✨ ${x} — something worth sharing!`,
+`New update about ${x} 🚀 What do you think?`,
+`Making ${x} simple, useful and better every day. ❤️`,
+`Don't miss this ${x}! 🔥`,
+`Save this post for later 📌`
+].join("<br><br>");
+}
+
+function hashGen(){
+let x=(ht.value||"content").toLowerCase().replace(/[^a-z0-9 ]/g,"").trim().replace(/\s+/g,"");
+res.innerHTML=["#"+x,"#trending","#viral","#india","#reels","#shorts","#creator","#contentcreator","#tips","#pickprime"].join(" ");
+}
+
+function youtubeGen(){
+let x=yt.value||"Your Topic";
+res.innerHTML=[
+`🔥 ${x} | Complete Guide 2026`,
+`How to ${x} Step by Step`,
+`${x} for Beginners — Full Tutorial`,
+`10 Best Tips for ${x}`,
+`I Tried ${x} — Here's What Happened`,
+`${x} Kaise Kare? Full Hindi Guide`
+].join("<br><br>");
+}
+
+/* ---------- CARDS ---------- */
+
+function updateCard(){
+let name=document.getElementById("cardname").value||"Your Name";
+let msg=document.getElementById("cardmsg").value||"Welcome";
+document.getElementById("cardp").innerHTML=`${name}<br><br>${msg}`;
+}
+
+function printCard(){
+let el=document.getElementById("cardpreview");
+printHTML(el.outerHTML);
+}
+
+/* ---------- RESUME ---------- */
+
+function resumePreview(){
+let n=rn.value||"Your Name";
+resumeout.innerHTML=`
+<div class="invoice">
+<h1>${n}</h1>
+<h3>${rt.value||"Professional"}</h3>
+<p>${rc.value||""}</p>
+<hr style="margin:15px 0">
+<h3>PROFILE</h3><p>${ra.value||""}</p>
+<h3 style="margin-top:15px">SKILLS</h3><p>${rs.value||""}</p>
+<h3 style="margin-top:15px">EXPERIENCE</h3><p>${re.value||""}</p>
+</div>
+<br>
+<button class="btn green" onclick="printHTML(document.getElementById('resumeout').innerHTML)">Print / Save PDF</button>`;
+}
+
+/* ---------- DOCUMENTS ---------- */
+
+function createDoc(type){
+let title=type==="quotation"?"QUOTATION":type==="receipt"?"RECEIPT":"APPLICATION";
+docout.innerHTML=`
+<div class="invoice" id="docprint">
+<h1>${title}</h1>
+<hr style="margin:15px 0">
+<p><b>From:</b> ${docname.value}</p>
+<p><b>To:</b> ${doccustomer.value}</p>
+<h3 style="margin-top:20px">Details</h3>
+<p>${docdetails.value}</p>
+<h3 style="margin-top:20px">Amount: ₹${docamount.value||0}</h3>
+<br><p>Generated with PickPrime Tools</p>
+</div>
+<br>
+<button class="btn green" onclick="printHTML(document.getElementById('docprint').outerHTML)">Print / Save PDF</button>`;
+}
+
+/* ---------- KHATA ---------- */
+
+function khataBody(){
+let data=JSON.parse(localStorage.getItem("pickprimeKhata")||"[]");
+return `
+<div class="grid2">
+<div class="field"><label>Name</label><input id="kn"></div>
+<div class="field"><label>Amount ₹</label><input id="ka" type="number"></div>
+</div>
+<div class="field"><label>Type</label>
+<select id="kt"><option>Given</option><option>Received</option></select></div>
+<button class="btn" onclick="addKhata()">Save Entry</button>
+<button class="btn red" onclick="clearKhata()">Clear All</button>
+<div id="khatalist" class="result">${khataList(data)}</div>`;
+}
+
+function khataList(data){
+if(!data.length)return"No entries yet.";
+return data.map((x,i)=>`
+<div class="item">
+<b>${x.name}</b><br>
+${x.type}: ₹${x.amount}<br>
+<small>${x.date}</small>
+</div>`).join("");
+}
+
+function addKhata(){
+let data=JSON.parse(localStorage.getItem("pickprimeKhata")||"[]");
+data.push({
+name:kn.value||"Unknown",
+amount:+ka.value||0,
+type:kt.value,
+date:new Date().toLocaleString()
+});
+localStorage.setItem("pickprimeKhata",JSON.stringify(data));
+document.getElementById("khatalist").innerHTML=khataList(data);
+}
+
+function clearKhata(){
+if(confirm("Delete all entries?")){
+localStorage.removeItem("pickprimeKhata");
+document.getElementById("khatalist").innerHTML="No entries yet.";
+}
+}
+
+/* ---------- INVOICE ---------- */
+
+function invoiceBody(){
+return `
+<div class="grid2">
+<div class="field"><label>Business Name</label><input id="ibname" value="PickPrime"></div>
+<div class="field"><label>GSTIN</label><input id="igst" placeholder="GST Number"></div>
+<div class="field"><label>Customer</label><input id="icustomer"></div>
+<div class="field"><label>Invoice Number</label><input id="ino" value="PP-001"></div>
+</div>
+
+<div id="items">
+<div class="item">
+<div class="itemgrid">
+<input class="ip" placeholder="Product / Service">
+<input class="iqty" type="number" value="1">
+<input class="irate" type="number" placeholder="Rate">
+<select class="igstp">
+<option>0</option><option>5</option><option>12</option><option selected>18</option><option>28</option>
+</select>
+<input class="idis" type="number" value="0" placeholder="Discount %">
+</div>
+</div>
+</div>
+
+<button class="btn secondary" onclick="addInvoiceItem()">+ Add Product</button>
+
+<div class="grid2" style="margin-top:12px">
+<div class="field"><label>GST Type</label>
+<select id="igtype"><option>CGST + SGST</option><option>IGST</option></select></div>
+<div class="field"><label>Extra Discount ₹</label><input id="iextra" type="number" value="0"></div>
+</div>
+
+<button class="btn" onclick="calculateInvoice()">Generate Invoice</button>
+<div id="invoiceout" style="margin-top:15px"></div>`;
+}
+
+function addInvoiceItem(){
+let div=document.createElement("div");
+div.className="item";
+div.innerHTML=`
+<div class="itemgrid">
+<input class="ip" placeholder="Product / Service">
+<input class="iqty" type="number" value="1">
+<input class="irate" type="number" placeholder="Rate">
+<select class="igstp"><option>0</option><option>5</option><option>12</option><option selected>18</option><option>28</option></select>
+<input class="idis" type="number" value="0" placeholder="Discount %">
+</div>`;
+document.getElementById("items").appendChild(div);
+}
+
+function calculateInvoice(){
+let rows=document.querySelectorAll("#items .item");
+let subtotal=0,tax=0;
+let table="";
+
+rows.forEach(r=>{
+let p=r.querySelector(".ip").value||"Item";
+let q=+r.querySelector(".iqty").value||1;
+let rate=+r.querySelector(".irate").value||0;
+let gst=+r.querySelector(".igstp").value||0;
+let dis=+r.querySelector(".idis").value||0;
+let base=q*rate;
+base-=base*dis/100;
+let gt=base*gst/100;
+subtotal+=base;
+tax+=gt;
+table+=`<tr><td>${p}</td><td>${q}</td><td>₹${rate.toFixed(2)}</td><td>${gst}%</td><td>₹${(base+gt).toFixed(2)}</td></tr>`;
+});
+
+let extra=+iextra.value||0;
+let total=subtotal+tax-extra;
+
+invoiceout.innerHTML=`
+<div class="invoice" id="invoiceprint">
+<h2>${ibname.value||"Business"}</h2>
+<p>GSTIN: ${igst.value||"—"}</p>
+<p>Invoice No: ${ino.value}</p>
+<p>Customer: ${icustomer.value||"Customer"}</p>
+<table>
+<tr><th>Product</th><th>Qty</th><th>Rate</th><th>GST</th><th>Total</th></tr>
+${table}
+</table>
+<div class="total">
+Subtotal: ₹${subtotal.toFixed(2)}<br>
+GST: ₹${tax.toFixed(2)}<br>
+Discount: ₹${extra.toFixed(2)}<br>
+Grand Total: ₹${total.toFixed(2)}
+</div>
+<p style="margin-top:25px">Thank you for your business.</p>
+</div>
+<br>
+<button class="btn green" onclick="printHTML(document.getElementById('invoiceprint').outerHTML)">Print / Save PDF</button>`;
+}
+
+/* ---------- PASSPORT ---------- */
+
+function passportLoad(e){
+let file=e.target.files[0];
+if(!file)return;
+let img=new Image();
+img.onload=()=>{
+let c=document.getElementById("passcanvas");
+let ctx=c.getContext("2d");
+let target=350/450;
+let sr=img.width/img.height;
+let sw,sh,sx,sy;
+if(sr>target){
+sh=img.height;
+sw=sh*target;
+sx=(img.width-sw)/2;
+sy=0;
+}else{
+sw=img.width;
+sh=sw/target;
+sx=0;
+sy=(img.height-sh)/2;
+}
+ctx.clearRect(0,0,c.width,c.height);
+ctx.drawImage(img,sx,sy,sw,sh,0,0,c.width,c.height);
+};
+img.src=URL.createObjectURL(file);
+}
+
+/* ---------- JPG PDF ---------- */
+
+function printImages(){
+let files=document.getElementById("pdfimgs").files;
+if(!files.length){alert("Select images first");return}
+let html="<div style='text-align:center'>";
+[...files].forEach(f=>{
+html+=`<img src="${URL.createObjectURL(f)}" style="max-width:100%;display:block;margin:20px auto;page-break-after:always">`;
+});
+html+="</div>";
+printHTML(html);
+}
+
+/* ---------- PRINT ---------- */
+
+function printHTML(html){
+let w=window.open("","_blank");
+if(!w){
+alert("Browser popup blocked. Please allow popups for this site.");
+return;
+}
+w.document.write(`
+<!DOCTYPE html>
+<html>
+<head>
+<title>PickPrime Print</title>
+<style>
+body{font-family:Arial;padding:25px;color:#111}
+img{max-width:100%}
+</style>
+</head>
+<body>${html}</body>
+</html>`);
+w.document.close();
+setTimeout(()=>w.print(),600);
+}
+
+/* ---------- LEGAL ---------- */
+
+function legal(type){
+const pages={
+about:{
+title:"About PickPrime",
+text:`PickPrime Tools is an online utility platform designed to provide simple and useful tools for everyday users, creators, students and small businesses. Our goal is to make common digital tasks easier from mobile devices.`
+},
+contact:{
+title:"Contact Us",
+text:`For questions, suggestions, corrections or support, contact us at pickprimehelp@gmail.com.`
+},
+privacy:{
+title:"Privacy Policy",
+text:`PickPrime respects user privacy. Most browser-based tools process information locally on the user's device. We do not ask users to submit unnecessary personal information. Third-party services may be used for selected features such as QR generation. Advertising and analytics providers may use cookies or similar technologies according to their own policies.`
+},
+terms:{
+title:"Terms & Conditions",
+text:`By using PickPrime Tools, you agree to use the website for lawful purposes. Tools are provided for general informational and utility purposes. Users are responsible for checking generated documents, calculations and information before using them commercially or officially.`
+},
+disclaimer:{
+title:"Disclaimer",
+text:`PickPrime Tools provides general-purpose online utilities. We make reasonable efforts to keep tools functional and accurate, but results should be independently verified where accuracy is important. PickPrime is not responsible for decisions made solely from tool outputs.`
+}
+};
+let p=pages[type];
+openToolCustom(p.title,`<div class="result"><p style="line-height:1.8">${p.text}</p></div>`);
+}
+
+function openToolCustom(title,html){
+document.getElementById("toolTitle").textContent=title;
+document.getElementById("toolBody").innerHTML=html;
+document.getElementById("panel").classList.add("show");
+document.getElementById("panel").scrollIntoView({behavior:"smooth"});
+}
+
+/* setup signature whenever opened */
+const oldOpenTool=openTool;
+openTool=function(id){
+oldOpenTool(id);
+if(id==="signature")setTimeout(setupSignature,100);
+};
 </script>
 
 </body>
