@@ -1,507 +1,636 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="PickPrime Reel Saver - Facebook Reel links को आसानी से manage, copy, share और authorized content save करने का आसान tool.">
+<meta name="robots" content="index,follow">
+<title>PickPrime Reel Saver - Facebook Reel Link Tool</title>
 
-  <title>PickPrime – AI, Online Earning, Blogging & Digital Tools</title>
-
-  <meta name="description" content="PickPrime पर AI, online earning, blogging, digital marketing और useful online tools से जुड़ी आसान जानकारी पढ़ें।">
-  <meta name="keywords" content="AI tools, online earning, blogging, digital marketing, PickPrime, online tools">
-
-  <link rel="stylesheet" href="assets/css/style.css">
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f4f7fb;
+  color:#172033;
+}
+header{
+  background:linear-gradient(135deg,#1769ff,#6b35ff);
+  color:white;
+  padding:18px 15px;
+  position:sticky;
+  top:0;
+  z-index:10;
+  box-shadow:0 3px 15px #0002;
+}
+.nav{
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+.logo{
+  font-size:23px;
+  font-weight:800;
+}
+.logo span{color:#ffe600}
+nav a{
+  color:white;
+  text-decoration:none;
+  margin-left:14px;
+  font-size:14px;
+}
+.hero{
+  max-width:1000px;
+  margin:35px auto 20px;
+  padding:15px;
+}
+.heroBox{
+  background:white;
+  border-radius:22px;
+  padding:35px 20px;
+  text-align:center;
+  box-shadow:0 8px 30px #17203312;
+}
+.badge{
+  display:inline-block;
+  background:#eaf1ff;
+  color:#1769ff;
+  padding:7px 13px;
+  border-radius:50px;
+  font-size:13px;
+  font-weight:bold;
+}
+h1{
+  font-size:36px;
+  margin:15px 0 10px;
+}
+.hero p{
+  max-width:700px;
+  margin:0 auto 25px;
+  color:#687386;
+  line-height:1.6;
+}
+.inputBox{
+  max-width:760px;
+  margin:auto;
+  display:flex;
+  gap:10px;
+}
+input{
+  flex:1;
+  min-width:0;
+  border:1px solid #d9dfeb;
+  border-radius:12px;
+  padding:16px;
+  font-size:15px;
+  outline:none;
+}
+input:focus{
+  border-color:#1769ff;
+  box-shadow:0 0 0 3px #1769ff18;
+}
+button{
+  border:0;
+  border-radius:12px;
+  padding:14px 19px;
+  background:#1769ff;
+  color:white;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer;
+}
+button:hover{opacity:.9}
+.secondary{
+  background:#edf2fa;
+  color:#172033;
+}
+.danger{
+  background:#e53935;
+}
+.result{
+  display:none;
+  max-width:760px;
+  margin:18px auto 0;
+  text-align:left;
+  background:#f5f9ff;
+  border:1px solid #dbe8ff;
+  border-radius:15px;
+  padding:18px;
+}
+.resultTitle{
+  font-weight:bold;
+  margin-bottom:10px;
+}
+.url{
+  word-break:break-all;
+  background:white;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #e0e5ed;
+  font-size:13px;
+}
+.actions{
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+.container{
+  max-width:1000px;
+  margin:auto;
+  padding:15px;
+}
+.ad{
+  min-height:90px;
+  border:1px dashed #c8cfdb;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#8791a3;
+  background:#fafbfd;
+  margin:25px 0;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+.card{
+  background:white;
+  padding:22px;
+  border-radius:17px;
+  box-shadow:0 5px 20px #1720330c;
+}
+.icon{
+  width:45px;
+  height:45px;
+  border-radius:13px;
+  background:#eaf1ff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:23px;
+  margin-bottom:12px;
+}
+.card h3{margin:5px 0 8px}
+.card p{
+  color:#687386;
+  line-height:1.6;
+  font-size:14px;
+}
+.section{
+  background:white;
+  border-radius:18px;
+  padding:25px;
+  margin:25px 0;
+  box-shadow:0 5px 20px #1720330c;
+}
+.section h2{margin-top:0}
+.section p,.section li{
+  line-height:1.7;
+  color:#586477;
+}
+.notice{
+  background:#fff8e5;
+  border-left:4px solid #ffb300;
+  padding:15px;
+  border-radius:8px;
+  line-height:1.6;
+}
+footer{
+  background:#101828;
+  color:#b8c0ce;
+  margin-top:40px;
+  padding:30px 15px;
+}
+.footerInner{
+  max-width:1000px;
+  margin:auto;
+  text-align:center;
+}
+footer a{
+  color:#fff;
+  text-decoration:none;
+  margin:0 8px;
+  font-size:14px;
+}
+.small{
+  font-size:13px;
+  color:#7b8799;
+}
+.toast{
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#172033;
+  color:white;
+  padding:12px 18px;
+  border-radius:10px;
+  display:none;
+  z-index:100;
+}
+@media(max-width:750px){
+  h1{font-size:28px}
+  .inputBox{flex-direction:column}
+  .inputBox button{width:100%}
+  .grid{grid-template-columns:1fr}
+  nav a{display:none}
+  .heroBox{padding:28px 15px}
+}
+</style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-<header class="site-header">
-  <div class="container header-inner">
-
-    <a href="index.html" class="logo">
-      PickPrime<span>.in</span>
-    </a>
-
-    <button class="menu-btn" onclick="toggleMenu()">☰</button>
-
-    <nav id="mainMenu">
-      <a href="index.html">Home</a>
-      <a href="#articles">Articles</a>
-      <a href="#categories">Categories</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
+<header>
+  <div class="nav">
+    <div class="logo">PickPrime<span>.in</span></div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#how">How It Works</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
     </nav>
-
   </div>
 </header>
 
+<main id="home">
 
-<!-- HERO -->
 <section class="hero">
-  <div class="container">
+  <div class="heroBox">
+    <div class="badge">⚡ PickPrime Online Tool</div>
 
-    <div class="hero-content">
-
-      <div class="hero-text">
-
-        <span class="badge">WELCOME TO PICKPRIME</span>
-
-        <h1>
-          Digital World की Useful जानकारी
-          <strong>एक ही जगह</strong>
-        </h1>
-
-        <p>
-          AI, Online Earning, Blogging, Digital Marketing,
-          Technology और useful online tools से जुड़ी आसान
-          और practical जानकारी पढ़ें।
-        </p>
-
-        <div class="hero-buttons">
-          <a href="#articles" class="btn primary">Articles पढ़ें</a>
-          <a href="#categories" class="btn secondary">Categories</a>
-        </div>
-
-      </div>
-
-      <div class="hero-card">
-
-        <div class="hero-icon">🚀</div>
-
-        <h3>PickPrime Knowledge Hub</h3>
-
-        <p>
-          नई technology और digital दुनिया की
-          useful जानकारी beginners के लिए आसान भाषा में।
-        </p>
-
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-
-<!-- SEARCH -->
-<section class="search-section">
-
-  <div class="container">
-
-    <div class="search-box">
-
-      <input
-        type="search"
-        id="searchInput"
-        placeholder="Article खोजें..."
-        onkeyup="searchArticles()"
-      >
-
-      <button onclick="searchArticles()">🔍 Search</button>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- CATEGORIES -->
-<section id="categories" class="section">
-
-  <div class="container">
-
-    <div class="section-heading">
-      <span>EXPLORE</span>
-      <h2>Popular Categories</h2>
-      <p>अपनी पसंद की category चुनकर articles पढ़ें।</p>
-    </div>
-
-    <div class="category-grid">
-
-      <a href="category/ai-tools.html" class="category-card">
-        <div>🤖</div>
-        <h3>AI Tools</h3>
-        <p>AI और नई technology</p>
-      </a>
-
-      <a href="category/earning.html" class="category-card">
-        <div>💰</div>
-        <h3>Online Earning</h3>
-        <p>Online income ideas</p>
-      </a>
-
-      <a href="category/blogging.html" class="category-card">
-        <div>📝</div>
-        <h3>Blogging</h3>
-        <p>Blogging और SEO</p>
-      </a>
-
-      <a href="category/digital-marketing.html" class="category-card">
-        <div>📈</div>
-        <h3>Digital Marketing</h3>
-        <p>Marketing strategies</p>
-      </a>
-
-      <a href="#" class="category-card">
-        <div>💻</div>
-        <h3>Technology</h3>
-        <p>Tech tips और guides</p>
-      </a>
-
-      <a href="#" class="category-card">
-        <div>🛠️</div>
-        <h3>Useful Tools</h3>
-        <p>Daily-use online tools</p>
-      </a>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ARTICLES -->
-<section id="articles" class="section articles-section">
-
-  <div class="container">
-
-    <div class="section-heading">
-
-      <span>LATEST POSTS</span>
-
-      <h2>Latest Articles</h2>
-
-      <p>
-        Digital world से जुड़ी नई और useful जानकारी।
-      </p>
-
-    </div>
-
-
-    <div class="article-grid" id="articleGrid">
-
-
-      <!-- ARTICLE 1 -->
-
-      <article class="article-card">
-
-        <div class="article-image">
-          <img
-            src="assets/images/ai-tools.jpg"
-            alt="AI Tools"
-            onerror="this.style.display='none'"
-          >
-
-          <span>AI</span>
-        </div>
-
-        <div class="article-content">
-
-          <small>AI Tools • 12 Sep 2026</small>
-
-          <h3>
-            Beginners के लिए AI Tools क्या हैं और इनका इस्तेमाल कैसे करें?
-          </h3>
-
-          <p>
-            AI tools आज पढ़ाई, content creation और digital काम को
-            आसान बना रहे हैं। जानिए शुरुआत कैसे करें।
-          </p>
-
-          <a href="articles/article-1.html">
-            Read More →
-          </a>
-
-        </div>
-
-      </article>
-
-
-      <!-- ARTICLE 2 -->
-
-      <article class="article-card">
-
-        <div class="article-image">
-          <img
-            src="assets/images/online-earning.jpg"
-            alt="Online Earning"
-            onerror="this.style.display='none'"
-          >
-
-          <span>EARNING</span>
-        </div>
-
-        <div class="article-content">
-
-          <small>Online Earning • 12 Sep 2026</small>
-
-          <h3>
-            Online Earning शुरू करने से पहले किन बातों का ध्यान रखें?
-          </h3>
-
-          <p>
-            Online income शुरू करने वालों के लिए जरूरी बातें और
-            practical तरीके।
-          </p>
-
-          <a href="articles/article-2.html">
-            Read More →
-          </a>
-
-        </div>
-
-      </article>
-
-
-      <!-- ARTICLE 3 -->
-
-      <article class="article-card">
-
-        <div class="article-image">
-          <img
-            src="assets/images/blogging.jpg"
-            alt="Blogging"
-            onerror="this.style.display='none'"
-          >
-
-          <span>BLOGGING</span>
-        </div>
-
-        <div class="article-content">
-
-          <small>Blogging • 12 Sep 2026</small>
-
-          <h3>
-            नया Blog शुरू करने का आसान तरीका
-          </h3>
-
-          <p>
-            Beginner के लिए blog बनाने और उसे धीरे-धीरे grow करने
-            की basic जानकारी।
-          </p>
-
-          <a href="articles/article-3.html">
-            Read More →
-          </a>
-
-        </div>
-
-      </article>
-
-
-      <!-- ARTICLE 4 -->
-
-      <article class="article-card">
-
-        <div class="article-image">
-          <img
-            src="assets/images/digital-marketing.jpg"
-            alt="Digital Marketing"
-            onerror="this.style.display='none'"
-          >
-
-          <span>MARKETING</span>
-        </div>
-
-        <div class="article-content">
-
-          <small>Digital Marketing • 12 Sep 2026</small>
-
-          <h3>
-            Digital Marketing क्या है? Beginners Guide
-          </h3>
-
-          <p>
-            Digital marketing की basic concepts को आसान भाषा में समझें।
-          </p>
-
-          <a href="articles/article-4.html">
-            Read More →
-          </a>
-
-        </div>
-
-      </article>
-
-
-      <!-- ARTICLE 5 -->
-
-      <article class="article-card">
-
-        <div class="article-image">
-          <span>TECH</span>
-        </div>
-
-        <div class="article-content">
-
-          <small>Technology • 12 Sep 2026</small>
-
-          <h3>
-            Smartphone से Digital काम कैसे शुरू करें?
-          </h3>
-
-          <p>
-            केवल smartphone का इस्तेमाल करके online digital work
-            शुरू करने की basic जानकारी।
-          </p>
-
-          <a href="articles/article-5.html">
-            Read More →
-          </a>
-
-        </div>
-
-      </article>
-
-
-      <!-- ARTICLE 6 -->
-
-      <article class="article-card">
-
-        <div class="article-image">
-          <span>SEO</span>
-        </div>
-
-        <div class="article-content">
-
-          <small>Blogging • 12 Sep 2026</small>
-
-          <h3>
-            SEO क्या है और Website के लिए क्यों जरूरी है?
-          </h3>
-
-          <p>
-            Search Engine Optimization की basic जानकारी beginners के लिए।
-          </p>
-
-          <a href="articles/article-6.html">
-            Read More →
-          </a>
-
-        </div>
-
-      </article>
-
-
-    </div>
-
-
-    <div class="load-more">
-
-      <button class="btn primary" onclick="showMessage()">
-        और Articles जल्द पढ़ें
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- NEWSLETTER -->
-<section class="newsletter">
-
-  <div class="container newsletter-box">
-
-    <div>
-
-      <span>STAY UPDATED</span>
-
-      <h2>नई जानकारी के साथ जुड़े रहें</h2>
-
-      <p>
-        PickPrime पर नई digital जानकारी और useful guides पढ़ते रहें।
-      </p>
-
-    </div>
-
-    <form onsubmit="subscribe(event)">
-
-      <input
-        type="email"
-        placeholder="आपका Email"
-        required
-      >
-
-      <button type="submit">
-        Subscribe
-      </button>
-
-    </form>
-
-  </div>
-
-</section>
-
-
-<!-- FOOTER -->
-
-<footer class="footer">
-
-  <div class="container footer-grid">
-
-    <div>
-
-      <div class="footer-logo">
-        PickPrime<span>.in</span>
-      </div>
-
-      <p>
-        AI, technology, online earning, blogging और
-        digital world की useful जानकारी।
-      </p>
-
-    </div>
-
-
-    <div>
-
-      <h3>Quick Links</h3>
-
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-      <a href="privacy-policy.html">Privacy Policy</a>
-
-    </div>
-
-
-    <div>
-
-      <h3>Important</h3>
-
-      <a href="terms.html">Terms & Conditions</a>
-      <a href="disclaimer.html">Disclaimer</a>
-
-    </div>
-
-
-    <div>
-
-      <h3>Contact</h3>
-
-      <p>📧 pickprimehelp@gmail.com</p>
-
-    </div>
-
-  </div>
-
-
-  <div class="footer-bottom">
+    <h1>Facebook Reel Saver</h1>
 
     <p>
-      © 2026 PickPrime.in — All Rights Reserved.
+      Facebook Reel का public या authorized link यहाँ डालें।
+      Link को check करें, copy करें, share करें या Facebook पर खोलें।
+    </p>
+
+    <div class="inputBox">
+      <input
+        id="reelUrl"
+        type="url"
+        placeholder="https://www.facebook.com/reel/..."
+        autocomplete="off">
+      <button onclick="checkReel()">Check Link</button>
+    </div>
+
+    <div class="result" id="result">
+
+      <div class="resultTitle">✅ Reel Link Ready</div>
+
+      <div class="url" id="showUrl"></div>
+
+      <div class="actions">
+        <button onclick="openFacebook()">Open Facebook</button>
+        <button onclick="copyLink()" class="secondary">Copy Link</button>
+        <button onclick="shareLink()" class="secondary">Share</button>
+        <button onclick="clearLink()" class="danger">Clear</button>
+      </div>
+
+      <p class="small" style="margin-top:14px">
+        केवल अपने या ऐसे content को save करें जिसे download/use करने की अनुमति आपके पास है।
+      </p>
+
+    </div>
+  </div>
+</section>
+
+<div class="container">
+
+  <div class="ad">
+    Advertisement
+  </div>
+
+  <section class="grid">
+
+    <div class="card">
+      <div class="icon">🔗</div>
+      <h3>Link Checker</h3>
+      <p>
+        Facebook Reel URL डालकर देखें कि link सही Facebook URL है या नहीं।
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="icon">📋</div>
+      <h3>Copy Link</h3>
+      <p>
+        Reel का link एक tap में clipboard में copy करें।
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="icon">📤</div>
+      <h3>Share Reel</h3>
+      <p>
+        अपने phone के available sharing apps से Reel link share करें।
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="icon">📱</div>
+      <h3>Mobile Friendly</h3>
+      <p>
+        Tool Android mobile और छोटे screens के लिए responsive बनाया गया है।
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🔒</div>
+      <h3>Privacy Friendly</h3>
+      <p>
+        यह page आपके Reel URL को किसी database में save नहीं करता।
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="icon">⚡</div>
+      <h3>Fast Tool</h3>
+      <p>
+        किसी भारी server processing के बिना browser में link processing होती है।
+      </p>
+    </div>
+
+  </section>
+
+  <section id="how" class="section">
+    <h2>Facebook Reel Link कैसे Save करें?</h2>
+
+    <ol>
+      <li>Facebook app में अपनी Reel खोलें।</li>
+      <li>Share button दबाएँ।</li>
+      <li>Copy Link चुनें।</li>
+      <li>ऊपर PickPrime Reel Saver में link paste करें।</li>
+      <li>Check Link दबाएँ।</li>
+      <li>इसके बाद Copy, Share या Open Facebook का इस्तेमाल करें।</li>
+    </ol>
+
+    <div class="notice">
+      <b>Important:</b> केवल अपने, public-domain या permission वाले videos को
+      download/save/use करें। Private, restricted, DRM-protected या access-controlled
+      content को bypass करने के लिए इस tool का इस्तेमाल न करें।
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>क्या यह हर Facebook Reel download कर सकता है?</h2>
+
+    <p>
+      नहीं। Facebook की platform restrictions और browser security की वजह से
+      केवल HTML/JavaScript से किसी भी Facebook Reel की actual video file को
+      reliably extract करना संभव नहीं है।
+    </p>
+
+    <p>
+      PickPrime का यह version सुरक्षित तरीके से Reel URL को process करता है।
+      अगर आपको अपने खुद के videos download करने हैं, तो Facebook के official
+      download/export options का इस्तेमाल करना सबसे अच्छा तरीका है।
+    </p>
+  </section>
+
+  <section id="faq" class="section">
+    <h2>Frequently Asked Questions</h2>
+
+    <h3>क्या यह mobile पर चलेगा?</h3>
+    <p>हाँ। यह Android और अन्य modern mobile browsers के लिए responsive है।</p>
+
+    <h3>क्या Reel URL server पर save होता है?</h3>
+    <p>इस single-page version में Reel URL को किसी database में store नहीं किया जाता।</p>
+
+    <h3>क्या login की जरूरत है?</h3>
+    <p>PickPrime tool में Facebook login की जरूरत नहीं है।</p>
+
+    <h3>क्या private Reel download कर सकते हैं?</h3>
+    <p>नहीं। Private या restricted content की access restrictions को bypass नहीं करना चाहिए।</p>
+
+    <h3>क्या अपने Reel को save कर सकते हैं?</h3>
+    <p>
+      हाँ, अपने content के लिए Facebook के उपलब्ध official download/export
+      options का उपयोग करें।
+    </p>
+  </section>
+
+  <section id="contact" class="section">
+    <h2>Contact PickPrime</h2>
+    <p>
+      किसी समस्या, सुझाव या feedback के लिए संपर्क करें:
+    </p>
+
+    <p>
+      <b>Email:</b>
+      <a href="mailto:pickprimehelp@gmail.com">
+        pickprimehelp@gmail.com
+      </a>
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>Disclaimer</h2>
+
+    <p>
+      PickPrime एक independent online tool है। यह Facebook/Meta से affiliated,
+      endorsed या officially connected नहीं है।
+    </p>
+
+    <p>
+      Users स्वयं सुनिश्चित करें कि उनके द्वारा save, download, reproduce या
+      share किया जा रहा content उनके अधिकार या अनुमति के अंतर्गत है।
+    </p>
+  </section>
+
+</div>
+
+</main>
+
+<footer>
+  <div class="footerInner">
+
+    <div style="font-size:21px;font-weight:bold;margin-bottom:12px">
+      PickPrime.in
+    </div>
+
+    <p>
+      Useful online tools for everyday users.
+    </p>
+
+    <div style="margin:18px 0">
+      <a href="#home">Home</a>
+      <a href="#how">How It Works</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <p class="small">
+      © <span id="year"></span> PickPrime.in. All rights reserved.
     </p>
 
   </div>
-
 </footer>
 
+<div class="toast" id="toast"></div>
 
-<script src="assets/js/main.js"></script>
+<script>
+
+let currentUrl = "";
+
+function toast(message){
+  const t = document.getElementById("toast");
+  t.textContent = message;
+  t.style.display = "block";
+
+  setTimeout(()=>{
+    t.style.display = "none";
+  },2200);
+}
+
+function isFacebookUrl(value){
+
+  try{
+
+    const url = new URL(value);
+
+    const host = url.hostname.toLowerCase().replace("www.","");
+
+    const allowed = [
+      "facebook.com",
+      "m.facebook.com",
+      "fb.watch"
+    ];
+
+    return allowed.some(domain =>
+      host === domain || host.endsWith("." + domain)
+    );
+
+  }catch(e){
+    return false;
+  }
+}
+
+function checkReel(){
+
+  const input = document.getElementById("reelUrl");
+  const value = input.value.trim();
+
+  if(!value){
+    toast("पहले Facebook Reel URL डालें");
+    input.focus();
+    return;
+  }
+
+  if(!isFacebookUrl(value)){
+    toast("यह valid Facebook URL नहीं है");
+    return;
+  }
+
+  currentUrl = value;
+
+  document.getElementById("showUrl").textContent = value;
+
+  document.getElementById("result").style.display = "block";
+
+  toast("Facebook link ready ✓");
+}
+
+function openFacebook(){
+
+  if(!currentUrl){
+    toast("पहले Reel URL check करें");
+    return;
+  }
+
+  window.open(currentUrl,"_blank","noopener,noreferrer");
+}
+
+async function copyLink(){
+
+  if(!currentUrl){
+    toast("पहले Reel URL check करें");
+    return;
+  }
+
+  try{
+
+    await navigator.clipboard.writeText(currentUrl);
+
+    toast("Link copied ✓");
+
+  }catch(e){
+
+    const temp = document.createElement("textarea");
+
+    temp.value = currentUrl;
+
+    document.body.appendChild(temp);
+
+    temp.select();
+
+    document.execCommand("copy");
+
+    temp.remove();
+
+    toast("Link copied ✓");
+  }
+}
+
+async function shareLink(){
+
+  if(!currentUrl){
+    toast("पहले Reel URL check करें");
+    return;
+  }
+
+  if(navigator.share){
+
+    try{
+
+      await navigator.share({
+        title:"Facebook Reel",
+        text:"Facebook Reel",
+        url:currentUrl
+      });
+
+    }catch(e){}
+
+  }else{
+
+    await copyLink();
+
+    toast("Share supported नहीं है, link copied है");
+  }
+}
+
+function clearLink(){
+
+  currentUrl = "";
+
+  document.getElementById("reelUrl").value = "";
+
+  document.getElementById("showUrl").textContent = "";
+
+  document.getElementById("result").style.display = "none";
+
+  toast("Cleared");
+}
+
+document.getElementById("reelUrl").addEventListener("keydown",function(e){
+
+  if(e.key === "Enter"){
+    checkReel();
+  }
+
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+</script>
 
 </body>
 </html>
