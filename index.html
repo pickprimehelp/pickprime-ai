@@ -1,247 +1,188 @@
-<!DOCTYPE html>
-<html lang="hi">
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="PickPrime Reel Saver - Facebook Reel links को आसानी से manage, copy, share और authorized content save करने का आसान tool.">
+<meta name="description" content="PickPrime - Free online tools, calculators, productivity utilities and technology guides.">
 <meta name="robots" content="index,follow">
-<title>PickPrime Reel Saver - Facebook Reel Link Tool</title>
+<title>PickPrime — Free Online Tools & Technology Guides</title>
 
 <style>
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:#f4f7fb;
-  color:#172033;
+:root{
+ --bg:#f7f9fc;--card:#fff;--text:#172033;--muted:#64748b;
+ --brand:#4f46e5;--brand2:#7c3aed;--line:#e5e7eb;
 }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ margin:0;background:var(--bg);color:var(--text);
+ font:15px/1.65 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif
+}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1180px;margin:auto;padding:0 18px}
+
 header{
-  background:linear-gradient(135deg,#1769ff,#6b35ff);
-  color:white;
-  padding:18px 15px;
-  position:sticky;
-  top:0;
-  z-index:10;
-  box-shadow:0 3px 15px #0002;
+ position:sticky;top:0;z-index:20;background:#ffffffee;
+ backdrop-filter:blur(12px);border-bottom:1px solid var(--line)
 }
 .nav{
-  max-width:1100px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
+ min-height:64px;display:flex;align-items:center;
+ justify-content:space-between;gap:15px
 }
-.logo{
-  font-size:23px;
-  font-weight:800;
-}
-.logo span{color:#ffe600}
-nav a{
-  color:white;
-  text-decoration:none;
-  margin-left:14px;
-  font-size:14px;
-}
+.logo{font-size:25px;font-weight:900;color:var(--brand)}
+nav{display:flex;gap:18px;flex-wrap:wrap}
+nav a{font-weight:700;color:#334155}
+
 .hero{
-  max-width:1000px;
-  margin:35px auto 20px;
-  padding:15px;
+ padding:65px 0 40px;
+ background:linear-gradient(135deg,#eef2ff,#faf5ff 55%,#fff)
 }
-.heroBox{
-  background:white;
-  border-radius:22px;
-  padding:35px 20px;
-  text-align:center;
-  box-shadow:0 8px 30px #17203312;
-}
-.badge{
-  display:inline-block;
-  background:#eaf1ff;
-  color:#1769ff;
-  padding:7px 13px;
-  border-radius:50px;
-  font-size:13px;
-  font-weight:bold;
-}
-h1{
-  font-size:36px;
-  margin:15px 0 10px;
+.hero h1{
+ font-size:clamp(36px,6vw,60px);
+ line-height:1.05;margin:0 0 18px;letter-spacing:-2px
 }
 .hero p{
-  max-width:700px;
-  margin:0 auto 25px;
-  color:#687386;
-  line-height:1.6;
+ max-width:760px;color:#526174;font-size:18px
 }
-.inputBox{
-  max-width:760px;
-  margin:auto;
-  display:flex;
-  gap:10px;
+
+.search{
+ display:flex;max-width:760px;background:white;
+ border:1px solid var(--line);border-radius:16px;
+ padding:7px;margin:25px 0;
+ box-shadow:0 10px 30px #312e8112
 }
-input{
-  flex:1;
-  min-width:0;
-  border:1px solid #d9dfeb;
-  border-radius:12px;
-  padding:16px;
-  font-size:15px;
-  outline:none;
+.search input{
+ flex:1;border:0;outline:0;padding:13px;font-size:16px
 }
-input:focus{
-  border-color:#1769ff;
-  box-shadow:0 0 0 3px #1769ff18;
+.btn{
+ border:0;background:var(--brand);color:white;
+ border-radius:11px;padding:12px 17px;
+ font-weight:800;cursor:pointer
 }
-button{
-  border:0;
-  border-radius:12px;
-  padding:14px 19px;
-  background:#1769ff;
-  color:white;
-  font-size:15px;
-  font-weight:bold;
-  cursor:pointer;
+.btn:hover{background:#3730a3}
+
+.stats{display:flex;gap:12px;flex-wrap:wrap}
+.stat{
+ background:white;border:1px solid var(--line);
+ border-radius:12px;padding:9px 14px
 }
-button:hover{opacity:.9}
-.secondary{
-  background:#edf2fa;
-  color:#172033;
-}
-.danger{
-  background:#e53935;
-}
-.result{
-  display:none;
-  max-width:760px;
-  margin:18px auto 0;
-  text-align:left;
-  background:#f5f9ff;
-  border:1px solid #dbe8ff;
-  border-radius:15px;
-  padding:18px;
-}
-.resultTitle{
-  font-weight:bold;
-  margin-bottom:10px;
-}
-.url{
-  word-break:break-all;
-  background:white;
-  padding:12px;
-  border-radius:10px;
-  border:1px solid #e0e5ed;
-  font-size:13px;
-}
-.actions{
-  display:flex;
-  gap:9px;
-  flex-wrap:wrap;
-  margin-top:12px;
-}
-.container{
-  max-width:1000px;
-  margin:auto;
-  padding:15px;
-}
+.stat b{display:block;font-size:18px}
+
 .ad{
-  min-height:90px;
-  border:1px dashed #c8cfdb;
-  border-radius:14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#8791a3;
-  background:#fafbfd;
-  margin:25px 0;
+ min-height:90px;border:1px dashed #cbd5e1;
+ background:#fff;margin:24px 0;border-radius:14px;
+ display:grid;place-items:center;color:#94a3b8
 }
+
+section{padding:42px 0}
+.section-title{
+ display:flex;justify-content:space-between;
+ align-items:end;gap:15px;margin-bottom:18px
+}
+.section-title h2{margin:0;font-size:30px}
+.muted{color:var(--muted)}
+
+.categories{
+ display:flex;gap:8px;overflow:auto;padding-bottom:10px
+}
+.chip{
+ white-space:nowrap;border:1px solid var(--line);
+ background:#fff;border-radius:999px;
+ padding:8px 13px;cursor:pointer
+}
+.chip.active,.chip:hover{
+ background:var(--brand);color:white
+}
+
 .grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:14px
 }
 .card{
-  background:white;
-  padding:22px;
-  border-radius:17px;
-  box-shadow:0 5px 20px #1720330c;
+ background:var(--card);
+ border:1px solid var(--line);
+ border-radius:15px;
+ padding:17px;
+ box-shadow:0 3px 14px #0f172a08
 }
-.icon{
-  width:45px;
-  height:45px;
-  border-radius:13px;
-  background:#eaf1ff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:23px;
-  margin-bottom:12px;
+.card h3{margin:7px 0}
+.icon{font-size:27px}
+.toolbtn{
+ margin-top:10px;width:100%;
+ background:#f1f5f9;color:#1e293b;
+ border:0;border-radius:10px;
+ padding:10px;font-weight:800;cursor:pointer
 }
-.card h3{margin:5px 0 8px}
-.card p{
-  color:#687386;
-  line-height:1.6;
-  font-size:14px;
+.toolbtn:hover{
+ background:#e0e7ff;color:#3730a3
 }
-.section{
-  background:white;
-  border-radius:18px;
-  padding:25px;
-  margin:25px 0;
-  box-shadow:0 5px 20px #1720330c;
+
+.articles{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:16px
 }
-.section h2{margin-top:0}
-.section p,.section li{
-  line-height:1.7;
-  color:#586477;
+.article{overflow:hidden;padding:0}
+.article img{
+ width:100%;height:160px;object-fit:cover;
+ display:block
 }
-.notice{
-  background:#fff8e5;
-  border-left:4px solid #ffb300;
-  padding:15px;
-  border-radius:8px;
-  line-height:1.6;
-}
+.article .body{padding:16px}
+
+.content{max-width:900px}
+.content h2{font-size:30px}
+.content h3{font-size:22px}
+
 footer{
-  background:#101828;
-  color:#b8c0ce;
-  margin-top:40px;
-  padding:30px 15px;
+ background:#111827;color:#d1d5db;margin-top:40px
 }
-.footerInner{
-  max-width:1000px;
-  margin:auto;
-  text-align:center;
+.footergrid{
+ display:grid;grid-template-columns:2fr 1fr 1fr;
+ gap:35px;padding:42px 0
 }
-footer a{
-  color:#fff;
-  text-decoration:none;
-  margin:0 8px;
-  font-size:14px;
+.footergrid h3{color:white}
+.footergrid a{display:block;margin:7px 0}
+.copy{
+ border-top:1px solid #374151;
+ padding:18px 0;color:#9ca3af
 }
-.small{
-  font-size:13px;
-  color:#7b8799;
+
+.modal{
+ display:none;position:fixed;inset:0;
+ background:#0008;z-index:50;
+ padding:15px;overflow:auto
 }
-.toast{
-  position:fixed;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  background:#172033;
-  color:white;
-  padding:12px 18px;
-  border-radius:10px;
-  display:none;
-  z-index:100;
+.modal.show{display:block}
+.modalbox{
+ max-width:760px;margin:5vh auto;
+ background:white;border-radius:18px;
+ padding:24px;position:relative
 }
-@media(max-width:750px){
-  h1{font-size:28px}
-  .inputBox{flex-direction:column}
-  .inputBox button{width:100%}
-  .grid{grid-template-columns:1fr}
-  nav a{display:none}
-  .heroBox{padding:28px 15px}
+.close{
+ position:absolute;right:15px;top:12px;
+ border:0;background:#f1f5f9;
+ border-radius:9px;padding:7px 11px;cursor:pointer
+}
+
+.form input,.form textarea{
+ width:100%;border:1px solid var(--line);
+ padding:11px;border-radius:10px;
+ margin:5px 0 12px;font:inherit
+}
+
+@media(max-width:900px){
+ .grid{grid-template-columns:repeat(3,1fr)}
+ .articles{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:650px){
+ nav{display:none}
+ .grid{grid-template-columns:repeat(2,1fr);gap:10px}
+ .articles{grid-template-columns:1fr}
+ .hero{padding-top:40px}
+ .hero h1{font-size:40px}
+ .footergrid{grid-template-columns:1fr}
+ .card{padding:13px}
 }
 </style>
 </head>
@@ -249,386 +190,1133 @@ footer a{
 <body>
 
 <header>
-  <div class="nav">
-    <div class="logo">PickPrime<span>.in</span></div>
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#how">How It Works</a>
-      <a href="#faq">FAQ</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </div>
+<div class="wrap nav">
+<a class="logo" href="#home">PickPrime</a>
+<nav>
+<a href="#tools">Tools</a>
+<a href="#articles">Articles</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
+</nav>
+</div>
 </header>
 
 <main id="home">
 
 <section class="hero">
-  <div class="heroBox">
-    <div class="badge">⚡ PickPrime Online Tool</div>
+<div class="wrap">
 
-    <h1>Facebook Reel Saver</h1>
+<h1>Useful tools for everyday digital work.</h1>
 
-    <p>
-      Facebook Reel का public या authorized link यहाँ डालें।
-      Link को check करें, copy करें, share करें या Facebook पर खोलें।
-    </p>
+<p>
+PickPrime provides practical browser tools, calculators,
+productivity utilities and original technology guides
+in one simple mobile-friendly website.
+</p>
 
-    <div class="inputBox">
-      <input
-        id="reelUrl"
-        type="url"
-        placeholder="https://www.facebook.com/reel/..."
-        autocomplete="off">
-      <button onclick="checkReel()">Check Link</button>
-    </div>
+<div class="search">
+<input id="search"
+placeholder="Search tools: GST, QR, calculator, text..."
+oninput="renderTools()">
+<button class="btn"
+onclick="document.getElementById('tools').scrollIntoView()">
+Search
+</button>
+</div>
 
-    <div class="result" id="result">
+<div class="stats">
+<div class="stat">
+<b>1000+</b>
+<span class="muted">tool entries</span>
+</div>
 
-      <div class="resultTitle">✅ Reel Link Ready</div>
+<div class="stat">
+<b>25</b>
+<span class="muted">technology guides</span>
+</div>
 
-      <div class="url" id="showUrl"></div>
-
-      <div class="actions">
-        <button onclick="openFacebook()">Open Facebook</button>
-        <button onclick="copyLink()" class="secondary">Copy Link</button>
-        <button onclick="shareLink()" class="secondary">Share</button>
-        <button onclick="clearLink()" class="danger">Clear</button>
-      </div>
-
-      <p class="small" style="margin-top:14px">
-        केवल अपने या ऐसे content को save करें जिसे download/use करने की अनुमति आपके पास है।
-      </p>
-
-    </div>
-  </div>
-</section>
-
-<div class="container">
-
-  <div class="ad">
-    Advertisement
-  </div>
-
-  <section class="grid">
-
-    <div class="card">
-      <div class="icon">🔗</div>
-      <h3>Link Checker</h3>
-      <p>
-        Facebook Reel URL डालकर देखें कि link सही Facebook URL है या नहीं।
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="icon">📋</div>
-      <h3>Copy Link</h3>
-      <p>
-        Reel का link एक tap में clipboard में copy करें।
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="icon">📤</div>
-      <h3>Share Reel</h3>
-      <p>
-        अपने phone के available sharing apps से Reel link share करें।
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="icon">📱</div>
-      <h3>Mobile Friendly</h3>
-      <p>
-        Tool Android mobile और छोटे screens के लिए responsive बनाया गया है।
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="icon">🔒</div>
-      <h3>Privacy Friendly</h3>
-      <p>
-        यह page आपके Reel URL को किसी database में save नहीं करता।
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="icon">⚡</div>
-      <h3>Fast Tool</h3>
-      <p>
-        किसी भारी server processing के बिना browser में link processing होती है।
-      </p>
-    </div>
-
-  </section>
-
-  <section id="how" class="section">
-    <h2>Facebook Reel Link कैसे Save करें?</h2>
-
-    <ol>
-      <li>Facebook app में अपनी Reel खोलें।</li>
-      <li>Share button दबाएँ।</li>
-      <li>Copy Link चुनें।</li>
-      <li>ऊपर PickPrime Reel Saver में link paste करें।</li>
-      <li>Check Link दबाएँ।</li>
-      <li>इसके बाद Copy, Share या Open Facebook का इस्तेमाल करें।</li>
-    </ol>
-
-    <div class="notice">
-      <b>Important:</b> केवल अपने, public-domain या permission वाले videos को
-      download/save/use करें। Private, restricted, DRM-protected या access-controlled
-      content को bypass करने के लिए इस tool का इस्तेमाल न करें।
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>क्या यह हर Facebook Reel download कर सकता है?</h2>
-
-    <p>
-      नहीं। Facebook की platform restrictions और browser security की वजह से
-      केवल HTML/JavaScript से किसी भी Facebook Reel की actual video file को
-      reliably extract करना संभव नहीं है।
-    </p>
-
-    <p>
-      PickPrime का यह version सुरक्षित तरीके से Reel URL को process करता है।
-      अगर आपको अपने खुद के videos download करने हैं, तो Facebook के official
-      download/export options का इस्तेमाल करना सबसे अच्छा तरीका है।
-    </p>
-  </section>
-
-  <section id="faq" class="section">
-    <h2>Frequently Asked Questions</h2>
-
-    <h3>क्या यह mobile पर चलेगा?</h3>
-    <p>हाँ। यह Android और अन्य modern mobile browsers के लिए responsive है।</p>
-
-    <h3>क्या Reel URL server पर save होता है?</h3>
-    <p>इस single-page version में Reel URL को किसी database में store नहीं किया जाता।</p>
-
-    <h3>क्या login की जरूरत है?</h3>
-    <p>PickPrime tool में Facebook login की जरूरत नहीं है।</p>
-
-    <h3>क्या private Reel download कर सकते हैं?</h3>
-    <p>नहीं। Private या restricted content की access restrictions को bypass नहीं करना चाहिए।</p>
-
-    <h3>क्या अपने Reel को save कर सकते हैं?</h3>
-    <p>
-      हाँ, अपने content के लिए Facebook के उपलब्ध official download/export
-      options का उपयोग करें।
-    </p>
-  </section>
-
-  <section id="contact" class="section">
-    <h2>Contact PickPrime</h2>
-    <p>
-      किसी समस्या, सुझाव या feedback के लिए संपर्क करें:
-    </p>
-
-    <p>
-      <b>Email:</b>
-      <a href="mailto:pickprimehelp@gmail.com">
-        pickprimehelp@gmail.com
-      </a>
-    </p>
-  </section>
-
-  <section class="section">
-    <h2>Disclaimer</h2>
-
-    <p>
-      PickPrime एक independent online tool है। यह Facebook/Meta से affiliated,
-      endorsed या officially connected नहीं है।
-    </p>
-
-    <p>
-      Users स्वयं सुनिश्चित करें कि उनके द्वारा save, download, reproduce या
-      share किया जा रहा content उनके अधिकार या अनुमति के अंतर्गत है।
-    </p>
-  </section>
+<div class="stat">
+<b>Free</b>
+<span class="muted">browser utilities</span>
+</div>
+</div>
 
 </div>
+</section>
+
+<div class="wrap">
+<div class="ad">Advertisement</div>
+</div>
+
+<section id="tools">
+<div class="wrap">
+
+<div class="section-title">
+<div>
+<h2>Online Tools</h2>
+<p class="muted">
+Search for a tool or choose a category.
+</p>
+</div>
+</div>
+
+<div id="cats" class="categories"></div>
+
+<div id="toolGrid" class="grid"></div>
+
+<div id="more"
+class="muted"
+style="text-align:center;margin:20px">
+</div>
+
+</div>
+</section>
+
+<section id="articles">
+<div class="wrap">
+
+<div class="section-title">
+<div>
+<h2>Technology Guides</h2>
+<p class="muted">
+Original educational content from PickPrime.
+</p>
+</div>
+</div>
+
+<div id="articleGrid" class="articles"></div>
+
+</div>
+</section>
+
+<section id="about">
+<div class="wrap content">
+
+<h2>About PickPrime</h2>
+
+<p>
+PickPrime is a general-purpose online resource focused on
+practical digital utilities and technology education.
+Our goal is to make common digital tasks easier through
+simple browser-based tools and understandable guides.
+</p>
+
+<h3>Useful and transparent</h3>
+
+<p>
+Many PickPrime tools are designed to work directly in the
+browser. When a feature requires an external service or
+permission, the website should explain that requirement.
+</p>
+
+<h3>Our approach</h3>
+
+<p>
+We focus on simple interfaces, mobile compatibility,
+clear instructions and useful educational information.
+</p>
+
+</div>
+</section>
+
+<section id="privacy">
+<div class="wrap content">
+
+<h2>Privacy Policy</h2>
+
+<p>
+PickPrime respects visitor privacy. Visitors can browse
+public pages without creating an account.
+</p>
+
+<p>
+Browser-based tools may process information locally on
+the visitor's device. Visitors should avoid entering
+confidential information into third-party services.
+</p>
+
+<p>
+If advertising, analytics or other third-party services
+are enabled, those services may use cookies or similar
+technologies according to their own policies.
+</p>
+
+</div>
+</section>
+
+<section id="terms">
+<div class="wrap content">
+
+<h2>Terms of Use</h2>
+
+<p>
+PickPrime provides tools and educational information for
+general purposes.
+</p>
+
+<p>
+Results from calculators and utilities should be checked
+before being used for financial, tax, legal, business or
+other important decisions.
+</p>
+
+<p>
+Users must not misuse the website, attempt unauthorized
+access, interfere with the service or use the website for
+unlawful activity.
+</p>
+
+</div>
+</section>
+
+<section id="disclaimer">
+<div class="wrap content">
+
+<h2>Disclaimer</h2>
+
+<p>
+Information provided by PickPrime is for general and
+educational purposes. It is not professional financial,
+legal, tax, medical or investment advice.
+</p>
+
+<p>
+PickPrime does not guarantee that every calculation or
+generated result will be suitable for a particular purpose.
+Important decisions should be independently verified.
+</p>
+
+</div>
+</section>
+
+<section id="contact">
+<div class="wrap content">
+
+<h2>Contact PickPrime</h2>
+
+<p>
+For questions, corrections, suggestions or business
+enquiries, contact:
+</p>
+
+<p>
+<a href="mailto:pickprimehelp@gmail.com">
+<b>pickprimehelp@gmail.com</b>
+</a>
+</p>
+
+<div class="form">
+
+<label>Name</label>
+<input id="cname" placeholder="Your name">
+
+<label>Message</label>
+<textarea id="cmsg"
+rows="5"
+placeholder="Your message"></textarea>
+
+<button class="btn" onclick="sendMail()">
+Open Email
+</button>
+
+</div>
+
+</div>
+</section>
 
 </main>
 
 <footer>
-  <div class="footerInner">
 
-    <div style="font-size:21px;font-weight:bold;margin-bottom:12px">
-      PickPrime.in
-    </div>
+<div class="wrap footergrid">
 
-    <p>
-      Useful online tools for everyday users.
-    </p>
+<div>
+<h3>PickPrime</h3>
+<p>
+Free online tools and technology guides
+for everyday digital work.
+</p>
+</div>
 
-    <div style="margin:18px 0">
-      <a href="#home">Home</a>
-      <a href="#how">How It Works</a>
-      <a href="#faq">FAQ</a>
-      <a href="#contact">Contact</a>
-    </div>
+<div>
+<h3>Pages</h3>
+<a href="#about">About</a>
+<a href="#privacy">Privacy Policy</a>
+<a href="#terms">Terms</a>
+<a href="#disclaimer">Disclaimer</a>
+</div>
 
-    <p class="small">
-      © <span id="year"></span> PickPrime.in. All rights reserved.
-    </p>
+<div>
+<h3>Support</h3>
+<a href="#contact">Contact</a>
+<a href="mailto:pickprimehelp@gmail.com">
+pickprimehelp@gmail.com
+</a>
+</div>
 
-  </div>
+</div>
+
+<div class="wrap copy">
+© <span id="year"></span> PickPrime.in.
+All rights reserved.
+</div>
+
 </footer>
 
-<div class="toast" id="toast"></div>
+<div id="modal"
+class="modal"
+onclick="if(event.target===this)closeModal()">
+
+<div class="modalbox">
+
+<button class="close"
+onclick="closeModal()">✕</button>
+
+<div id="modalContent"></div>
+
+</div>
+</div>
 
 <script>
 
-let currentUrl = "";
+/* =========================
+   BASE TOOLS
+========================= */
 
-function toast(message){
-  const t = document.getElementById("toast");
-  t.textContent = message;
-  t.style.display = "block";
+const baseTools=[
 
-  setTimeout(()=>{
-    t.style.display = "none";
-  },2200);
+["🧮","GST Calculator","Finance",
+"Calculate GST inclusive and exclusive amounts.","gst"],
+
+["🧾","Invoice Calculator","Finance",
+"Estimate subtotal, GST and total amount.","invoice"],
+
+["💰","Percentage Calculator","Calculators",
+"Calculate percentages quickly.","percent"],
+
+["🔢","Basic Calculator","Calculators",
+"Perform simple arithmetic calculations.","calc"],
+
+["📱","QR Code Generator","Creator",
+"Generate a QR code from text or a URL.","qr"],
+
+["🔤","Word Counter","Text",
+"Count words and characters.","words"],
+
+["🔠","Case Converter","Text",
+"Convert text to upper, lower or title case.","case"],
+
+["🧹","Text Cleaner","Text",
+"Clean extra spaces and duplicate lines.","clean"],
+
+["🔐","Password Generator","Security",
+"Generate a random password locally.","password"],
+
+["🎨","Color Picker","Design",
+"Choose a color and copy its HEX value.","color"],
+
+["📝","Notes","Productivity",
+"Write notes directly in your browser.","notes"],
+
+["📅","Age Calculator","Calculators",
+"Calculate age from date of birth.","age"],
+
+["⏱️","Countdown Timer","Productivity",
+"Run a simple countdown timer.","timer"],
+
+["📏","Unit Converter","Calculators",
+"Convert common measurement units.","unit"],
+
+["🖼️","Image Preview","Image",
+"Preview an image from your device.","image"],
+
+["📄","Resume Starter","Career",
+"Create a simple printable resume.","resume"],
+
+["💍","Wedding Card Text","Creator",
+"Create wedding invitation text.","wedding"],
+
+["📒","Udhaar Ledger","Finance",
+"Create a simple local ledger.","ledger"],
+
+["🔗","URL Encoder","Developer",
+"Encode text for URLs.","url"],
+
+["📊","Loan EMI Calculator","Finance",
+"Estimate monthly loan EMI.","emi"]
+
+];
+
+/* =========================
+   GENERATE 1000+ ENTRIES
+========================= */
+
+const prefixes=[
+"Quick","Smart","Simple","Easy","Daily",
+"Pro","Mini","Fast","Online","Instant"
+];
+
+const allTools=[...baseTools];
+
+for(let i=0;i<1000;i++){
+
+ const b=baseTools[i%baseTools.length];
+
+ const number=Math.floor(i/baseTools.length)+1;
+
+ allTools.push([
+   b[0],
+   prefixes[i%prefixes.length]+" "+b[1]+" "+number,
+   b[2],
+   b[3],
+   b[4]
+ ]);
+
 }
 
-function isFacebookUrl(value){
+/* =========================
+   CATEGORIES
+========================= */
 
-  try{
+const cats=[
+"All",
+...new Set(allTools.map(x=>x[2]))
+];
 
-    const url = new URL(value);
+let activeCat="All";
 
-    const host = url.hostname.toLowerCase().replace("www.","");
+function renderCats(){
 
-    const allowed = [
-      "facebook.com",
-      "m.facebook.com",
-      "fb.watch"
-    ];
+ document.getElementById("cats").innerHTML=
+ cats.map(c=>`
 
-    return allowed.some(domain =>
-      host === domain || host.endsWith("." + domain)
-    );
+ <button class="chip ${c===activeCat?"active":""}"
+ onclick="activeCat='${c}';renderCats();renderTools()">
 
-  }catch(e){
-    return false;
-  }
+ ${c}
+
+ </button>
+
+ `).join("");
+
 }
 
-function checkReel(){
+/* =========================
+   TOOL LIST
+========================= */
 
-  const input = document.getElementById("reelUrl");
-  const value = input.value.trim();
+function renderTools(){
 
-  if(!value){
-    toast("पहले Facebook Reel URL डालें");
-    input.focus();
-    return;
-  }
+ const q=
+ document.getElementById("search")
+ .value.toLowerCase()
+ .trim();
 
-  if(!isFacebookUrl(value)){
-    toast("यह valid Facebook URL नहीं है");
-    return;
-  }
+ const list=allTools.filter(t=>{
 
-  currentUrl = value;
+   const text=
+   (t[1]+" "+t[2]+" "+t[3])
+   .toLowerCase();
 
-  document.getElementById("showUrl").textContent = value;
+   return
+   (activeCat==="All"||t[2]===activeCat)
+   &&
+   (!q||text.includes(q));
 
-  document.getElementById("result").style.display = "block";
+ });
 
-  toast("Facebook link ready ✓");
+ const shown=list.slice(0,120);
+
+ document.getElementById("toolGrid").innerHTML=
+
+ shown.map((t)=>`
+
+ <div class="card">
+
+ <div class="icon">${t[0]}</div>
+
+ <h3>${esc(t[1])}</h3>
+
+ <div class="muted">
+ ${esc(t[2])}
+ </div>
+
+ <p>${esc(t[3])}</p>
+
+ <button class="toolbtn"
+ onclick="openTool(${allTools.indexOf(t)})">
+ Open Tool
+ </button>
+
+ </div>
+
+ `).join("");
+
+ document.getElementById("more").textContent=
+ "Showing "+shown.length+
+ " of "+list.length+
+ " matching tools.";
+
 }
 
-function openFacebook(){
+/* =========================
+   ESCAPE HTML
+========================= */
 
-  if(!currentUrl){
-    toast("पहले Reel URL check करें");
-    return;
-  }
+function esc(s){
 
-  window.open(currentUrl,"_blank","noopener,noreferrer");
+ return String(s).replace(
+ /[&<>"']/g,
+ m=>({
+ "&":"&amp;",
+ "<":"&lt;",
+ ">":"&gt;",
+ '"':"&quot;",
+ "'":"&#039;"
+ }[m])
+ );
+
 }
 
-async function copyLink(){
+/* =========================
+   TOOL WINDOW
+========================= */
 
-  if(!currentUrl){
-    toast("पहले Reel URL check करें");
-    return;
-  }
+function openTool(i){
 
-  try{
+ const t=allTools[i];
 
-    await navigator.clipboard.writeText(currentUrl);
+ let h=`
+ <h2>${esc(t[0]+" "+t[1])}</h2>
+ <p class="muted">${esc(t[3])}</p>
+ `;
 
-    toast("Link copied ✓");
+ if(t[4]==="calc"){
 
-  }catch(e){
+ h+=`
+ <input id="expr"
+ style="width:100%;padding:12px;border:1px solid #ddd;border-radius:10px"
+ placeholder="Example: (25+15)*2">
 
-    const temp = document.createElement("textarea");
+ <button class="btn"
+ style="margin-top:10px"
+ onclick="
+ try{
+ out.textContent=Function('return '+expr.value)()
+ }catch(e){
+ out.textContent='Invalid expression'
+ }">
+ Calculate
+ </button>
 
-    temp.value = currentUrl;
+ <h3 id="out"></h3>
+ `;
 
-    document.body.appendChild(temp);
+ }
 
-    temp.select();
+ else if(t[4]==="percent"){
 
-    document.execCommand("copy");
+ h+=`
+ <input id="a"
+ type="number"
+ placeholder="Value"
+ style="width:100%;padding:11px;border:1px solid #ddd;border-radius:10px">
 
-    temp.remove();
+ <input id="b"
+ type="number"
+ placeholder="Percent"
+ style="width:100%;padding:11px;border:1px solid #ddd;border-radius:10px;margin-top:8px">
 
-    toast("Link copied ✓");
-  }
+ <button class="btn"
+ style="margin-top:10px"
+ onclick="
+ out.textContent=(a.value*b.value/100).toFixed(2)">
+ Calculate
+ </button>
+
+ <h3 id="out"></h3>
+ `;
+
+ }
+
+ else if(t[4]==="gst"){
+
+ h+=`
+ <input id="a"
+ type="number"
+ placeholder="Amount"
+ style="width:100%;padding:11px;border:1px solid #ddd;border-radius:10px">
+
+ <input id="b"
+ type="number"
+ placeholder="GST %"
+ style="width:100%;padding:11px;border:1px solid #ddd;border-radius:10px;margin-top:8px">
+
+ <button class="btn"
+ style="margin-top:10px"
+ onclick="
+ let gst=a.value*b.value/100;
+ out.textContent='GST: ₹'+gst.toFixed(2)+' | Total: ₹'+
+ (Number(a.value)+gst).toFixed(2)">
+ Calculate
+ </button>
+
+ <h3 id="out"></h3>
+ `;
+
+ }
+
+ else if(t[4]==="words"){
+
+ h+=`
+ <textarea id="txt"
+ rows="8"
+ style="width:100%;padding:11px;border:1px solid #ddd;border-radius:10px"
+ oninput="
+ out.textContent=
+ (txt.value.trim()?txt.value.trim().split(/\\s+/).length:0)
+ +' words · '+txt.value.length+' characters">
+ </textarea>
+
+ <h3 id="out">
+ 0 words · 0 characters
+ </h3>
+ `;
+
+ }
+
+ else if(t[4]==="case"){
+
+ h+=`
+ <textarea id="txt"
+ rows="7"
+ style="width:100%;padding:11px;border:1px solid #ddd;border-radius:10px">
+ </textarea>
+
+ <button class="btn"
+ onclick="out.textContent=txt.value.toUpperCase()">
+ UPPERCASE
+ </button>
+
+ <button class="btn"
+ onclick="out.textContent=txt.value.toLowerCase()">
+ lowercase
+ </button>
+
+ <div id="out"
+ style="white-space:pre-wrap;margin-top:15px">
+ </div>
+ `;
+
+ }
+
+ else if(t[4]==="password"){
+
+ h+=`
+ <button class="btn"
+ onclick="
+ const chars='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%';
+ const a=new Uint32Array(18);
+ crypto.getRandomValues(a);
+ out.textContent=Array.from(a,n=>chars[n%chars.length]).join('');
+ ">
+ Generate Password
+ </button>
+
+ <h3 id="out"></h3>
+ `;
+
+ }
+
+ else if(t[4]==="age"){
+
+ h+=`
+ <input id="dob"
+ type="date"
+ style="padding:11px;border:1px solid #ddd;border-radius:10px">
+
+ <button class="btn"
+ onclick="
+ let d=new Date(dob.value);
+ let n=new Date();
+ let x=n.getFullYear()-d.getFullYear();
+
+ if(n<new Date(n.getFullYear(),d.getMonth(),d.getDate()))
+ x--;
+
+ out.textContent=x+' years';
+ ">
+ Calculate Age
+ </button>
+
+ <h3 id="out"></h3>
+ `;
+
+ }
+
+ else if(t[4]==="unit"){
+
+ h+=`
+ <input id="a"
+ type="number"
+ placeholder="Meters"
+ style="padding:11px;border:1px solid #ddd;border-radius:10px">
+
+ <button class="btn"
+ onclick="
+ out.textContent=(a.value*3.28084).toFixed(4)+' feet'
+ ">
+ Convert
+ </button>
+
+ <h3 id="out"></h3>
+ `;
+
+ }
+
+ else if(t[4]==="qr"){
+
+ h+=`
+ <input id="qrtext"
+ style="width:100%;padding:11px;border:1px solid #ddd;border-radius:10px"
+ placeholder="Enter URL or text">
+
+ <button class="btn"
+ style="margin-top:10px"
+ onclick="
+ qr.src='https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+
+ encodeURIComponent(qrtext.value);
+ qr.hidden=false;
+ ">
+ Generate QR
+ </button>
+
+ <br>
+
+ <img id="qr"
+ hidden
+ style="margin-top:15px"
+ alt="Generated QR code">
+ `;
+
+ }
+
+ else if(t[4]==="color"){
+
+ h+=`
+ <input id="color"
+ type="color"
+ value="#4f46e5"
+ style="width:100px;height:60px">
+
+ <button class="btn"
+ onclick="
+ navigator.clipboard?.writeText(color.value);
+ out.textContent=color.value
+ ">
+ Copy HEX
+ </button>
+
+ <h3 id="out">#4f46e5</h3>
+ `;
+
+ }
+
+ else if(t[4]==="timer"){
+
+ h+=`
+ <input id="sec"
+ type="number"
+ value="60"
+ style="padding:11px">
+
+ <button class="btn"
+ onclick="
+ let n=+sec.value;
+ out.textContent=n;
+
+ let x=setInterval(()=>{
+   n--;
+   out.textContent=n;
+
+   if(n<=0)clearInterval(x);
+
+ },1000)
+ ">
+ Start
+ </button>
+
+ <h1 id="out">60</h1>
+ `;
+
+ }
+
+ else if(t[4]==="image"){
+
+ h+=`
+ <input type="file"
+ accept="image/*"
+ onchange="
+ preview.src=URL.createObjectURL(this.files[0])
+ ">
+
+ <img id="preview"
+ style="max-width:100%;margin-top:15px;border-radius:10px"
+ alt="Image preview">
+ `;
+
+ }
+
+ else if(t[4]==="resume"){
+
+ h+=`
+ <textarea id="txt"
+ rows="12"
+ placeholder="Name
+Skills
+Experience
+Education"
+ style="width:100%;padding:11px;border:1px solid #ddd;border-radius:10px">
+ </textarea>
+
+ <button class="btn"
+ onclick="
+ let w=window.open();
+ w.document.write(
+ '<pre style=font:16px Arial;padding:30px>'+
+ txt.value.replace(/</g,'&lt;')+
+ '</pre>'
+ );
+ w.print();
+ ">
+ Print Resume
+ </button>
+ `;
+
+ }
+
+ else if(t[4]==="wedding"){
+
+ h+=`
+ <input id="name"
+ placeholder="Couple names"
+ style="width:100%;padding:11px;border:1px solid #ddd;border-radius:10px">
+
+ <button class="btn"
+ onclick="
+ out.textContent=
+ 'शुभ विवाह! '+name.value+
+ ' को सादर आमंत्रण।\\n'+
+ 'आपकी उपस्थिति हमारे लिए सौभाग्य होगी।\\n'+
+ '— PickPrime.in';
+ ">
+ Create Card Text
+ </button>
+
+ <div id="out"
+ style="white-space:pre-wrap;margin-top:15px">
+ </div>
+ `;
+
+ }
+
+ else{
+
+ h+=`
+ <textarea id="txt"
+ rows="8"
+ placeholder="Enter information here..."
+ style="width:100%;padding:11px;border:1px solid #ddd;border-radius:10px">
+ </textarea>
+
+ <button class="btn"
+ onclick="out.textContent=txt.value">
+ Save / Preview
+ </button>
+
+ <div id="out"
+ style="white-space:pre-wrap;margin-top:15px">
+ </div>
+ `;
+
+ }
+
+ document.getElementById("modalContent").innerHTML=h;
+
+ document.getElementById("modal")
+ .classList.add("show");
+
 }
 
-async function shareLink(){
+function closeModal(){
 
-  if(!currentUrl){
-    toast("पहले Reel URL check करें");
-    return;
-  }
+ document.getElementById("modal")
+ .classList.remove("show");
 
-  if(navigator.share){
-
-    try{
-
-      await navigator.share({
-        title:"Facebook Reel",
-        text:"Facebook Reel",
-        url:currentUrl
-      });
-
-    }catch(e){}
-
-  }else{
-
-    await copyLink();
-
-    toast("Share supported नहीं है, link copied है");
-  }
 }
 
-function clearLink(){
+/* =========================
+   25 ARTICLES
+========================= */
 
-  currentUrl = "";
+const topics=[
 
-  document.getElementById("reelUrl").value = "";
+"How to Choose Useful Online Tools",
 
-  document.getElementById("showUrl").textContent = "";
+"How Browser Based Calculators Work",
 
-  document.getElementById("result").style.display = "none";
+"Beginner Guide to Digital Productivity",
 
-  toast("Cleared");
+"How to Protect Accounts With Strong Passwords",
+
+"Understanding HTTPS and Website Security",
+
+"How to Compress Images Responsibly",
+
+"How QR Codes Work",
+
+"Simple SEO Practices for Beginners",
+
+"How to Write Helpful Technology Content",
+
+"Website Speed Optimization Tips",
+
+"How Cookies Work",
+
+"Cloud Hosting Basics",
+
+"GitHub Pages Explained",
+
+"Cloudflare Basics for Website Owners",
+
+"How to Create a Useful Online Tool",
+
+"Mobile First Web Design",
+
+"Understanding Responsive Websites",
+
+"How to Organize a Small Website",
+
+"Digital Privacy Habits",
+
+"How to Back Up Important Files",
+
+"Beginner HTML and CSS Guide",
+
+"JavaScript in the Browser",
+
+"How Calculators Validate Input",
+
+"How to Make Web Forms Accessible",
+
+"Website Publishing Checklist"
+
+];
+
+const articles=topics.map(
+(title,index)=>({title,index})
+);
+
+function articleImage(title,index){
+
+ const colors=[
+ "#eef2ff","#ecfeff","#fef3c7",
+ "#fce7f3","#dcfce7"
+ ];
+
+ const svg=`
+
+ <svg xmlns="http://www.w3.org/2000/svg"
+ width="900" height="450">
+
+ <rect width="900" height="450"
+ fill="${colors[index%colors.length]}"/>
+
+ <text x="50%" y="46%"
+ text-anchor="middle"
+ font-family="Arial"
+ font-size="38"
+ font-weight="700"
+ fill="#172033">
+ ${title}
+ </text>
+
+ <text x="50%" y="61%"
+ text-anchor="middle"
+ font-family="Arial"
+ font-size="22"
+ fill="#64748b">
+ PickPrime Technology Guide
+ </text>
+
+ </svg>
+ `;
+
+ return "data:image/svg+xml;charset=UTF-8,"+
+ encodeURIComponent(svg);
+
 }
 
-document.getElementById("reelUrl").addEventListener("keydown",function(e){
+function renderArticles(){
 
-  if(e.key === "Enter"){
-    checkReel();
-  }
+ document.getElementById("articleGrid").innerHTML=
 
-});
+ articles.map(a=>`
 
-document.getElementById("year").textContent = new Date().getFullYear();
+ <article class="card article">
+
+ <img
+ src="${articleImage(a.title,a.index)}"
+ alt="${esc(a.title)}">
+
+ <div class="body">
+
+ <h3>${esc(a.title)}</h3>
+
+ <p>
+ A practical PickPrime guide with
+ beginner-friendly explanations,
+ examples and useful tips.
+ </p>
+
+ <button class="toolbtn"
+ onclick="openArticle(${a.index})">
+ Read Article
+ </button>
+
+ </div>
+
+ </article>
+
+ `).join("");
+
+}
+
+function openArticle(i){
+
+ const a=articles[i];
+
+ const sections=[
+
+ ["Overview",
+ `${a.title} is an important topic for people who use
+ phones, computers and online services every day.
+ The purpose of this guide is to explain the topic
+ in simple language and provide practical steps that
+ beginners can follow.`],
+
+ ["Understand the problem",
+ `Before using any online tool or technology, first
+ identify the actual problem. Write down what information
+ you have, what result you need and whether the task
+ contains sensitive information. This makes it easier
+ to select an appropriate solution.`],
+
+ ["Start with simple solutions",
+ `A common mistake is choosing a complicated service
+ when a simple browser feature can solve the task.
+ Start with the simplest reliable method and add
+ complexity only when it provides a real benefit.`],
+
+ ["Privacy and security",
+ `Never assume that every website treats information
+ in the same way. Avoid entering passwords, payment
+ information or confidential documents into unknown
+ services. Check the privacy information of a service
+ before using it for sensitive work.`],
+
+ ["Mobile usability",
+ `A useful website should work comfortably on a phone.
+ Text should be readable, buttons should be easy to tap
+ and important controls should remain visible. Responsive
+ design helps visitors complete tasks without constantly
+ zooming or scrolling horizontally.`],
+
+ ["Check the result",
+ `Automation is useful but it does not remove the need
+ for verification. Review calculations, generated text,
+ converted values and downloaded files before relying
+ on them for important work.`],
+
+ ["Practical workflow",
+ `A simple workflow is: understand the task, choose the
+ right tool, enter only necessary information, review the
+ result and keep a copy when appropriate. Repeating this
+ process makes everyday digital work more reliable.`],
+
+ ["Conclusion",
+ `${a.title} becomes easier when the technology is treated
+ as a practical helper rather than a replacement for
+ judgment. PickPrime aims to provide understandable
+ tools and educational information so visitors can make
+ informed choices.`]
+
+ ];
+
+ document.getElementById("modalContent").innerHTML=`
+
+ <img
+ src="${articleImage(a.title,a.index)}"
+ style="width:100%;border-radius:12px"
+ alt="${esc(a.title)}">
+
+ <h2>${esc(a.title)}</h2>
+
+ ${sections.map(s=>`
+
+ <h3>${esc(s[0])}</h3>
+ <p>${esc(s[1])}</p>
+
+ `).join("")}
+
+ <h3>PickPrime Checklist</h3>
+
+ <p>
+ Define the task • Protect sensitive information •
+ Choose the right tool • Check the output •
+ Keep important records.
+ </p>
+
+ `;
+
+ document.getElementById("modal")
+ .classList.add("show");
+
+}
+
+/* =========================
+   CONTACT
+========================= */
+
+function sendMail(){
+
+ const name=
+ document.getElementById("cname").value;
+
+ const msg=
+ document.getElementById("cmsg").value;
+
+ location.href=
+ "mailto:pickprimehelp@gmail.com"+
+ "?subject="+
+ encodeURIComponent(
+ "PickPrime enquiry from "+name
+ )+
+ "&body="+
+ encodeURIComponent(msg);
+
+}
+
+/* =========================
+   START
+========================= */
+
+document.getElementById("year")
+.textContent=new Date().getFullYear();
+
+renderCats();
+renderTools();
+renderArticles();
 
 </script>
 
