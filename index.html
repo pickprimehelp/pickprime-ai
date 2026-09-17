@@ -7,7 +7,7 @@
     <meta name="description" content="PickPrime provides deep-dive technical articles, programming guides, cloud computing tutorials, and modern tech news.">
     <link rel="canonical" href="https://pickprime.in">
     
-    <!-- Google AdSense Script Placeholder -->
+    <!-- Google AdSense Script -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 
     <style>
@@ -50,6 +50,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 1rem 1.5rem;
+            position: relative;
         }
 
         .logo {
@@ -57,9 +58,19 @@
             font-weight: 800;
             color: #38bdf8;
             text-decoration: none;
+            cursor: pointer;
         }
 
         .logo span { color: #ffffff; }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
 
         .nav-links {
             display: flex;
@@ -71,6 +82,8 @@
             color: #cbd5e1;
             text-decoration: none;
             font-weight: 500;
+            cursor: pointer;
+            transition: color 0.2s;
         }
 
         .nav-links a:hover { color: #38bdf8; }
@@ -108,23 +121,31 @@
         .article-card {
             border: 1px solid var(--border-color);
             border-radius: 10px;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             overflow: hidden;
             background: white;
+            transition: transform 0.2s;
         }
+
+        .article-card:hover { transform: translateY(-3px); }
 
         .article-card img {
             width: 100%;
-            height: 280px;
+            height: 250px;
             object-fit: cover;
         }
 
         .article-card-content { padding: 1.5rem; }
 
         .article-card-content h2 {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             margin-bottom: 0.8rem;
+        }
+
+        .article-card-content h2 a {
             color: var(--text-main);
+            text-decoration: none;
+            cursor: pointer;
         }
 
         .article-meta {
@@ -132,6 +153,30 @@
             color: var(--text-muted);
             margin-bottom: 0.8rem;
         }
+
+        .read-more-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Full Post Styling */
+        .full-article img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .full-article h1 { font-size: 2rem; margin-bottom: 0.8rem; }
+        .full-article h2 { font-size: 1.4rem; margin: 1.8rem 0 0.8rem; }
+        .full-article p { margin-bottom: 1.2rem; font-size: 1.05rem; color: #334155; }
+        .full-article pre { background: #0f172a; color: #f8fafc; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1.2rem 0; }
+        .full-article code { font-family: monospace; }
 
         .sidebar {
             display: flex;
@@ -155,7 +200,7 @@
 
         .recent-list { list-style: none; }
         .recent-list li { margin-bottom: 0.8rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; }
-        .recent-list a { color: var(--text-main); text-decoration: none; font-weight: 500; }
+        .recent-list a { color: var(--text-main); text-decoration: none; font-weight: 500; cursor: pointer; }
 
         footer {
             background: #0f172a;
@@ -175,7 +220,7 @@
         .footer-col h4 { color: white; margin-bottom: 1rem; }
         .footer-col ul { list-style: none; }
         .footer-col ul li { margin-bottom: 0.5rem; }
-        .footer-col a { color: #94a3b8; text-decoration: none; }
+        .footer-col a { color: #94a3b8; text-decoration: none; cursor: pointer; }
 
         .footer-bottom {
             text-align: center;
@@ -184,10 +229,27 @@
             margin-top: 2rem;
         }
 
+        /* Mobile Menu Fix */
         @media (max-width: 868px) {
             .container { grid-template-columns: 1fr; }
-            .nav-links { flex-direction: column; gap: 0.8rem; }
-            .nav-container { flex-direction: column; gap: 1rem; }
+            
+            .hamburger { display: block; }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #1e293b;
+                padding: 1.5rem;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
         }
     </style>
 </head>
@@ -195,203 +257,21 @@
 
     <header>
         <div class="nav-container">
-            <a href="#home" class="logo">Pick<span>Prime</span></a>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#articles">Articles</a></li>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#privacy">Privacy Policy</a></li>
-                <li><a href="#terms">Terms & Conditions</a></li>
-                <li><a href="#contact">Contact Us</a></li>
+            <a onclick="showHome()" class="logo">Pick<span>Prime</span></a>
+            <button class="hamburger" onclick="toggleMenu()">☰</button>
+            <ul class="nav-links" id="menuList">
+                <li><a onclick="showHome()">Home</a></li>
+                <li><a onclick="showPage('about')">About Us</a></li>
+                <li><a onclick="showPage('privacy')">Privacy Policy</a></li>
+                <li><a onclick="showPage('terms')">Terms & Conditions</a></li>
+                <li><a onclick="showPage('contact')">Contact Us</a></li>
             </ul>
         </div>
     </header>
 
-    <div class="container" id="home">
-        <main class="main-content">
-            
-            <div class="ad-banner">
-                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            </div>
-
-            <section id="articles">
-                <h1 style="margin-bottom: 2rem;">Technical Guides & Engineering Articles</h1>
-
-                <!-- Article 1 -->
-                <article class="article-card" id="art1">
-                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=80" alt="Microservices Architecture">
-                    <div class="article-card-content">
-                        <div class="article-meta">Category: Backend & Cloud | September 12, 2026</div>
-                        <h2>Complete Guide to Microservices Architecture with Node.js and Docker</h2>
-                        <p>Microservices architecture has become the standard design pattern for building modern, scalable enterprise applications. Unlike traditional monolithic applications, microservices break down applications into small, independent services that communicate over network protocols. Containerizing each service using Docker ensures seamless deployments across staging and production clusters.</p>
-                    </div>
-                </article>
-
-                <!-- Article 2 -->
-                <article class="article-card" id="art2">
-                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80" alt="Cloudflare Workers">
-                    <div class="article-card-content">
-                        <div class="article-meta">Category: Cloud & DevOps | September 11, 2026</div>
-                        <h2>Deep Dive into Cloudflare Workers and Edge Computing Mechanics</h2>
-                        <p>Serverless computing transformed backend development by abstracting server management. Cloudflare Workers executes serverless code at the edge using V8 Isolates instead of heavy container virtual machines, achieving cold start response times under 5 milliseconds globally.</p>
-                    </div>
-                </article>
-
-                <!-- Article 3 -->
-                <article class="article-card" id="art3">
-                    <img src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=1000&q=80" alt="PostgreSQL Indexing">
-                    <div class="article-card-content">
-                        <div class="article-meta">Category: Databases | September 10, 2026</div>
-                        <h2>Mastering Database Indexing and Query Optimization in PostgreSQL</h2>
-                        <p>Database performance determines overall system throughput. Learn how B-Tree, GIN, and BRIN indexes work inside PostgreSQL alongside EXPLAIN ANALYZE execution plan profiling to eliminate slow full table scans.</p>
-                    </div>
-                </article>
-
-                <!-- Article 4 -->
-                <article class="article-card" id="art4">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80" alt="Apache Kafka">
-                    <div class="article-card-content">
-                        <div class="article-meta">Category: System Design | September 09, 2026</div>
-                        <h2>Building Real-Time Data Pipelines using Apache Kafka and WebSockets</h2>
-                        <p>Modern applications require real-time stream ingestion. By integrating Apache Kafka message consumer groups with bidirectional WebSockets, applications push live metrics to clients with sub-50ms latency.</p>
-                    </div>
-                </article>
-
-                <!-- Article 5 -->
-                <article class="article-card" id="art5">
-                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1000&q=80" alt="Next.js Server Components">
-                    <div class="article-card-content">
-                        <div class="article-meta">Category: Frontend & Web | September 08, 2026</div>
-                        <h2>Next.js Server Components and Modern Rendering Architecture</h2>
-                        <p>React Server Components shift component rendering from client browser JavaScript engines to server runtimes, eliminating bundle weight while enabling direct async database querying and progressive HTTP streaming.</p>
-                    </div>
-                </article>
-
-                <!-- Article 6 -->
-                <article class="article-card" id="art6">
-                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1000&q=80" alt="OAuth2 and Security">
-                    <div class="article-card-content">
-                        <div class="article-meta">Category: Security | September 07, 2026</div>
-                        <h2>Securing Distributed Systems with OAuth2, OIDC, and JWT Best Practices</h2>
-                        <p>Protecting microservices requires stateless authentication standard protocols. Understand PKCE authorization code flows, asymmetric RSA/Ed25519 JSON Web Token verification, and refresh token revocation strategies.</p>
-                    </div>
-                </article>
-
-                <!-- Article 7 -->
-                <article class="article-card" id="art7">
-                    <img src="https://images.unsplash.com/photo-1667372335854-7882b0454733?auto=format&fit=crop&w=1000&q=80" alt="Terraform AWS">
-                    <div class="article-card-content">
-                        <div class="article-meta">Category: DevOps | September 06, 2026</div>
-                        <h2>Introduction to Infrastructure as Code using Terraform and AWS</h2>
-                        <p>Automate AWS cloud infrastructure provisioning using HashiCorp Terraform modules. Store state files securely in S3 backends with DynamoDB state locking to ensure idempotent infrastructure deployments.</p>
-                    </div>
-                </article>
-
-                <!-- Article 8 -->
-                <article class="article-card" id="art8">
-                    <img src="https://images.unsplash.com/photo-1607799279861-4dd421887fb3?auto=format&fit=crop&w=1000&q=80" alt="Kubernetes Cluster">
-                    <div class="article-card-content">
-                        <div class="article-meta">Category: DevOps & Cloud | September 05, 2026</div>
-                        <h2>Container Orchestration with Kubernetes: Core Concepts and Yaml Declarations</h2>
-                        <p>Deploy scalable containerized applications across Kubernetes worker node clusters using declarative YAML manifests covering Pods, Deployments, Services, and automated Horizontal Pod Autoscalers.</p>
-                    </div>
-                </article>
-
-                <!-- Article 9 -->
-                <article class="article-card" id="art9">
-                    <img src="https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?auto=format&fit=crop&w=1000&q=80" alt="GraphQL vs REST">
-                    <div class="article-card-content">
-                        <div class="article-meta">Category: API Design | September 04, 2026</div>
-                        <h2>Understanding GraphQL Architecture vs REST APIs in Enterprise Systems</h2>
-                        <p>Compare declarative GraphQL schemas and resolvers against REST URL endpoints to eliminate mobile network data over-fetching and under-fetching (N+1 query problems).</p>
-                    </div>
-                </article>
-
-                <!-- Article 10 -->
-                <article class="article-card" id="art10">
-                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1000&q=80" alt="Redis Caching">
-                    <div class="article-card-content">
-                        <div class="article-meta">Category: Backend Architecture | September 03, 2026</div>
-                        <h2>Building Enterprise Redis Caching Strategies for High-Throughput Web Apps</h2>
-                        <p>Implement Cache-Aside, Write-Through, and probabilistic early expiration strategies using Redis in-memory key-value clusters to protect primary SQL databases from thundering herd traffic stampedes.</p>
-                    </div>
-                </article>
-
-                <!-- Article 11 -->
-                <article class="article-card" id="art11">
-                    <img src="https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?auto=format&fit=crop&w=1000&q=80" alt="JavaScript Event Loop">
-                    <div class="article-card-content">
-                        <div class="article-meta">Category: Programming | September 02, 2026</div>
-                        <h2>Demystifying Modern JavaScript Asynchronous Execution: Event Loop and Promises</h2>
-                        <p>Deep dive into V8 engine internals, Call Stack execution, Microtask queue priority, Macrotasks, and Promises to write non-blocking asynchronous Node.js backend services.</p>
-                    </div>
-                </article>
-
-                <!-- Article 12 -->
-                <article class="article-card" id="art12">
-                    <img src="https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=1000&q=80" alt="GitHub Actions CI CD">
-                    <div class="article-card-content">
-                        <div class="article-meta">Category: DevOps | September 01, 2026</div>
-                        <h2>Architecting Distributed CI/CD Pipelines with GitHub Actions and Docker</h2>
-                        <p>Automate static security analysis, unit test suites, Docker image compilation, and automated production cloud deployments using version-controlled GitHub Actions YAML workflows.</p>
-                    </div>
-                </article>
-
-                <!-- Article 13 -->
-                <article class="article-card" id="art13">
-                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1000&q=80" alt="Clean Code SOLID">
-                    <div class="article-card-content">
-                        <div class="article-meta">Category: Software Engineering | August 31, 2026</div>
-                        <h2>Comprehensive Guide to Clean Code, DRY, and SOLID Software Principles</h2>
-                        <p>Reduce technical debt and maintain long-term code quality by adhering to Single Responsibility, Open-Closed, Liskov Substitution, Interface Segregation, and Dependency Inversion software engineering principles.</p>
-                    </div>
-                </article>
-
-                <!-- Article 14 -->
-                <article class="article-card" id="art14">
-                    <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1000&q=80" alt="CSS Grid Flexbox">
-                    <div class="article-card-content">
-                        <div class="article-meta">Category: Frontend Development | August 30, 2026</div>
-                        <h2>Understanding CSS Grid and Flexbox for Enterprise Responsive UI Layouts</h2>
-                        <p>Master two-dimensional page layout skeletons with CSS Grid and one-dimensional component alignment using CSS Flexbox for fluid, mobile-first responsive viewports without heavy third-party CSS frameworks.</p>
-                    </div>
-                </article>
-
-                <!-- Article 15 -->
-                <article class="article-card" id="art15">
-                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1000&q=80" alt="Cybersecurity OWASP">
-                    <div class="article-card-content">
-                        <div class="article-meta">Category: Cybersecurity | August 29, 2026</div>
-                        <h2>Introduction to Cybersecurity Fundamentals and OWASP Top 10 Web Vulnerabilities</h2>
-                        <p>Safeguard enterprise applications against SQL Injection, Cross-Site Scripting (XSS), Broken Access Control (IDOR), and CSRF vulnerabilities using backend parameterization and strict security headers.</p>
-                    </div>
-                </article>
-            </section>
-
-            <!-- Legal Pages Embedded -->
-            <hr style="margin: 3rem 0; border: none; border-top: 1px solid var(--border-color);">
-
-            <section id="about" style="margin-bottom: 3rem;">
-                <h2>About Us - PickPrime.in</h2>
-                <p>Welcome to <strong>PickPrime.in</strong>, your premier online resource for deep-dive technical engineering tutorials, cloud computing insights, database optimization strategies, and modern software design patterns.</p>
-                <p><strong>Official Contact Email:</strong> pickprimehelp@gmail.com</p>
-            </section>
-
-            <section id="privacy" style="margin-bottom: 3rem;">
-                <h2>Privacy Policy</h2>
-                <p>At PickPrime.in, accessible from https://pickprime.in, visitor privacy is a main priority. We log standard ISP web traffic metrics for analytics purposes and use Google AdSense cookies (including DoubleClick DART cookies) to serve relevant advertisements to visitors.</p>
-            </section>
-
-            <section id="terms" style="margin-bottom: 3rem;">
-                <h2>Terms and Conditions</h2>
-                <p>By accessing PickPrime.in, you agree to comply with our terms. All intellectual content and technical material published on PickPrime.in are protected by copyright laws.</p>
-            </section>
-
-            <section id="contact">
-                <h2>Contact Us</h2>
-                <p>For editorial inquiries, technical questions, or sponsorship opportunities, reach out to us at <strong>pickprimehelp@gmail.com</strong>.</p>
-            </section>
-
+    <div class="container">
+        <main class="main-content" id="appView">
+            <!-- Dynamic Content Renders Here -->
         </main>
 
         <aside class="sidebar">
@@ -401,14 +281,8 @@
             </div>
 
             <div class="widget">
-                <h3>Latest Articles</h3>
-                <ul class="recent-list">
-                    <li><a href="#art1">Microservices with Node.js & Docker</a></li>
-                    <li><a href="#art2">Cloudflare Workers Edge Computing</a></li>
-                    <li><a href="#art3">PostgreSQL Database Indexing</a></li>
-                    <li><a href="#art4">Apache Kafka & WebSockets Pipeline</a></li>
-                    <li><a href="#art5">Next.js Server Components</a></li>
-                </ul>
+                <h3>Recent Posts</h3>
+                <ul class="recent-list" id="recentSideList"></ul>
             </div>
         </aside>
     </div>
@@ -422,16 +296,16 @@
             <div class="footer-col">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a onclick="showHome()">Home</a></li>
+                    <li><a onclick="showPage('about')">About Us</a></li>
+                    <li><a onclick="showPage('contact')">Contact Us</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Legal</h4>
                 <ul>
-                    <li><a href="#privacy">Privacy Policy</a></li>
-                    <li><a href="#terms">Terms & Conditions</a></li>
+                    <li><a onclick="showPage('privacy')">Privacy Policy</a></li>
+                    <li><a onclick="showPage('terms')">Terms & Conditions</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -445,5 +319,143 @@
         </div>
     </footer>
 
+    <script>
+        const posts = [
+            {
+                id: 1,
+                title: "Complete Guide to Microservices Architecture with Node.js and Docker",
+                date: "September 12, 2026",
+                category: "Backend & Cloud",
+                image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=80",
+                excerpt: "Learn how to build scalable, fault-tolerant microservices using Node.js, Express, Docker containers, and API Gateways from scratch.",
+                content: `
+                    <p>Microservices architecture has become the standard design pattern for building modern, scalable enterprise applications. Unlike traditional monolithic applications, where all components are tightly coupled into a single codebase, microservices break down applications into small, independent, and loosely coupled services that communicate over network protocols.</p>
+                    
+                    <p>In this technical breakdown, we will examine how to build, containerize, and orchestrate microservices using Node.js, Express, Docker, and NGINX as an API Gateway.</p>
+
+                    <h2>1. Understanding Monolithic vs. Microservices Architecture</h2>
+                    <p>In a monolithic architecture, the user interface, database access layer, business logic, and background processing exist within a single executable unit. While easy to build initially, monoliths present significant challenges as systems scale:</p>
+                    <ul>
+                        <li><strong>Scalability Bottlenecks:</strong> You must scale the entire application, even if only one module requires extra throughput.</li>
+                        <li><strong>Deployment Risks:</strong> A single bug in a non-critical module can crash the entire application.</li>
+                        <li><strong>Tech Stack Lock-in:</strong> Upgrading core frameworks across a legacy monolith is extremely expensive.</li>
+                    </ul>
+
+                    <h2>2. Containerizing Node.js Services with Docker</h2>
+                    <p>Containerization ensures microservices run identically across development, staging, and production environments:</p>
+                    <pre><code>FROM node:18-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production
+COPY . .
+CMD ["node", "server.js"]</code></pre>
+
+                    <h2>3. Implementing API Gateway with NGINX</h2>
+                    <p>An API Gateway acts as a single reverse proxy entry point, managing routing, rate-limiting, and SSL termination.</p>
+
+                    <h2>Conclusion</h2>
+                    <p>Transitioning to microservices offers unmatched flexibility, deployment speed, and isolation for enterprise systems.</p>
+                `
+            },
+            {
+                id: 2,
+                title: "Deep Dive into Cloudflare Workers and Edge Computing Mechanics",
+                date: "September 11, 2026",
+                category: "Cloud & DevOps",
+                image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80",
+                excerpt: "Explore serverless compute at the edge using Cloudflare Workers, V8 isolates, KV storage, and global low-latency API handling.",
+                content: `
+                    <p>Serverless computing transformed backend development by abstracting server management. Cloudflare Workers is at the forefront of edge computing, running JavaScript directly on Cloudflare's global CDN network.</p>
+                    <h2>1. V8 Isolates vs Containers</h2>
+                    <p>Cloudflare Workers eliminates cold starts by utilizing Google Chrome V8 Isolates, spinning up runtimes in under 5 milliseconds.</p>
+                    <h2>Conclusion</h2>
+                    <p>Edge computing empowers developers to build low-latency globally distributed applications seamlessly.</p>
+                `
+            },
+            {
+                id: 3,
+                title: "Mastering Database Indexing and Query Optimization in PostgreSQL",
+                date: "September 10, 2026",
+                category: "Databases",
+                image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=1000&q=80",
+                excerpt: "Master B-Trees, Hash indexes, GIN, BRIN, EXPLAIN ANALYZE execution plans, and query tuning in relational database systems.",
+                content: `
+                    <p>Database performance determines overall application latency. Proper indexing strategies and execution plan analysis are vital software engineering skills.</p>
+                    <h2>1. How B-Tree Indexes Work</h2>
+                    <p>B-Trees keep data sorted in a self-balancing structure, reducing query time from linear scans O(N) to logarithmic time O(log N).</p>
+                `
+            }
+        ];
+
+        const pages = {
+            about: `<h1>About PickPrime.in</h1><p>Welcome to <strong>PickPrime.in</strong>, your premier online resource for deep-dive technical engineering tutorials, cloud computing insights, and modern software design patterns.</p><p><strong>Contact Email:</strong> pickprimehelp@gmail.com</p>`,
+            privacy: `<h1>Privacy Policy</h1><p>At PickPrime.in, accessible from https://pickprime.in, visitor privacy is a main priority. We use standard web logs and Google AdSense DART cookies for serving personalized ads.</p>`,
+            terms: `<h1>Terms and Conditions</h1><p>All content published on PickPrime.in is owned by PickPrime. Unauthorized distribution of site materials without permission is prohibited.</p>`,
+            contact: `<h1>Contact Us</h1><p>Send your feedback and inquiries to: <strong>pickprimehelp@gmail.com</strong></p>`
+        };
+
+        function showHome() {
+            window.scrollTo(0, 0);
+            let html = `<h1>Latest Technical Articles</h1><br>`;
+            posts.forEach(post => {
+                html += `
+                    <article class="article-card">
+                        <img src="${post.image}" alt="${post.title}">
+                        <div class="article-card-content">
+                            <div class="article-meta">Category: ${post.category} | ${post.date}</div>
+                            <h2><a onclick="showPost(${post.id})">${post.title}</a></h2>
+                            <p>${post.excerpt}</p>
+                            <a onclick="showPost(${post.id})" class="read-more-btn">Read Full Article →</a>
+                        </div>
+                    </article>
+                `;
+            });
+            document.getElementById('appView').innerHTML = html;
+            closeMenu();
+        }
+
+        function showPost(id) {
+            window.scrollTo(0, 0);
+            const post = posts.find(p => p.id === id);
+            if (!post) return;
+            document.getElementById('appView').innerHTML = `
+                <div class="full-article">
+                    <div class="article-meta">Category: ${post.category} | Published ${post.date}</div>
+                    <h1>${post.title}</h1>
+                    <img src="${post.image}" alt="${post.title}">
+                    ${post.content}
+                </div>
+            `;
+            closeMenu();
+        }
+
+        function showPage(key) {
+            window.scrollTo(0, 0);
+            document.getElementById('appView').innerHTML = `<div class="full-article">${pages[key]}</div>`;
+            closeMenu();
+        }
+
+        function renderSidebar() {
+            let html = '';
+            posts.forEach(p => {
+                html += `<li><a onclick="showPost(${p.id})">${p.title}</a></li>`;
+            });
+            document.getElementById('recentSideList').innerHTML = html;
+        }
+
+        function toggleMenu() {
+            document.getElementById('menuList').classList.toggle('active');
+        }
+
+        function closeMenu() {
+            document.getElementById('menuList').classList.remove('active');
+        }
+
+        // Init
+        window.onload = function() {
+            showHome();
+            renderSidebar();
+        };
+    </script>
 </body>
 </html>
