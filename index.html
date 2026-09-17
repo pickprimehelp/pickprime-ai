@@ -8,7 +8,6 @@
     <link rel="canonical" href="https://pickprime.in">
     
     <!-- Google AdSense Script Placeholder -->
-    <!-- Replace ca-pub-XXXXXXXXXXXXXXXX with your actual AdSense Publisher ID -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 
     <style>
@@ -20,7 +19,6 @@
             --text-main: #0f172a;
             --text-muted: #475569;
             --border-color: #e2e8f0;
-            --accent: #0ea5e9;
         }
 
         * {
@@ -59,12 +57,9 @@
             font-weight: 800;
             color: #38bdf8;
             text-decoration: none;
-            letter-spacing: -0.5px;
         }
 
-        .logo span {
-            color: #ffffff;
-        }
+        .logo span { color: #ffffff; }
 
         .nav-links {
             display: flex;
@@ -76,22 +71,9 @@
             color: #cbd5e1;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.2s;
-            cursor: pointer;
         }
 
-        .nav-links a:hover, .nav-links a.active {
-            color: #38bdf8;
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
+        .nav-links a:hover { color: #38bdf8; }
 
         .container {
             max-width: 1200px;
@@ -102,7 +84,6 @@
             gap: 2rem;
         }
 
-        /* AdSense Slots */
         .ad-banner {
             background: #e2e8f0;
             border: 1px dashed #cbd5e1;
@@ -115,30 +96,41 @@
             align-items: center;
             justify-content: center;
             color: #64748b;
-            font-size: 0.85rem;
-        }
-
-        .ad-sidebar {
-            background: #e2e8f0;
-            border: 1px dashed #cbd5e1;
-            text-align: center;
-            padding: 1rem;
-            margin-bottom: 2rem;
-            border-radius: 8px;
-            min-height: 250px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #64748b;
-            font-size: 0.85rem;
         }
 
         .main-content {
             background: var(--card-bg);
             padding: 2rem;
             border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
             border: 1px solid var(--border-color);
+        }
+
+        .article-card {
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            margin-bottom: 2.5rem;
+            overflow: hidden;
+            background: white;
+        }
+
+        .article-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+
+        .article-card-content { padding: 1.5rem; }
+
+        .article-card-content h2 {
+            font-size: 1.6rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-main);
+        }
+
+        .article-meta {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
         }
 
         .sidebar {
@@ -157,176 +149,13 @@
         .widget h3 {
             font-size: 1.1rem;
             margin-bottom: 1rem;
-            color: var(--text-main);
             border-bottom: 2px solid var(--primary);
             padding-bottom: 0.4rem;
-            display: inline-block;
         }
 
-        .recent-list {
-            list-style: none;
-        }
-
-        .recent-list li {
-            margin-bottom: 0.8rem;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 0.5rem;
-        }
-
-        .recent-list a {
-            color: var(--text-main);
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: color 0.2s;
-            cursor: pointer;
-        }
-
-        .recent-list a:hover {
-            color: var(--primary);
-        }
-
-        /* Article Cards Layout for Home */
-        .article-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-
-        .article-card {
-            display: flex;
-            flex-direction: column;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            overflow: hidden;
-            transition: transform 0.2s, box-shadow 0.2s;
-            background: white;
-        }
-
-        .article-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-
-        .article-card img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-        }
-
-        .article-card-content {
-            padding: 1.5rem;
-        }
-
-        .article-card-content h2 {
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .article-card-content h2 a {
-            color: var(--text-main);
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .article-meta {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 0.8rem;
-        }
-
-        .read-more-btn {
-            display: inline-block;
-            margin-top: 1rem;
-            color: var(--primary);
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        /* Article Full View */
-        .full-article img {
-            width: 100%;
-            max-height: 400px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin: 1.5rem 0;
-        }
-
-        .full-article h1 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            line-height: 1.3;
-        }
-
-        .full-article p {
-            margin-bottom: 1.2rem;
-            font-size: 1.05rem;
-            color: #334155;
-        }
-
-        .full-article h2 {
-            font-size: 1.5rem;
-            margin: 1.8rem 0 0.8rem 0;
-            color: #0f172a;
-        }
-
-        .full-article h3 {
-            font-size: 1.2rem;
-            margin: 1.4rem 0 0.6rem 0;
-            color: #1e293b;
-        }
-
-        .full-article ul, .full-article ol {
-            margin: 1rem 0 1.5rem 2rem;
-        }
-
-        .full-article code {
-            background: #f1f5f9;
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            font-family: monospace;
-            font-size: 0.9em;
-        }
-
-        .full-article pre {
-            background: #0f172a;
-            color: #f8fafc;
-            padding: 1rem;
-            border-radius: 8px;
-            overflow-x: auto;
-            margin: 1.2rem 0;
-        }
-
-        /* Contact Form */
-        .form-group {
-            margin-bottom: 1.2rem;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.4rem;
-        }
-
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            font-size: 1rem;
-        }
-
-        .submit-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 0.8rem 1.8rem;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-        }
+        .recent-list { list-style: none; }
+        .recent-list li { margin-bottom: 0.8rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; }
+        .recent-list a { color: var(--text-main); text-decoration: none; font-weight: 500; }
 
         footer {
             background: #0f172a;
@@ -339,64 +168,26 @@
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 2rem;
-            margin-bottom: 2rem;
         }
 
-        .footer-col h4 {
-            color: white;
-            margin-bottom: 1rem;
-        }
-
-        .footer-col ul {
-            list-style: none;
-        }
-
-        .footer-col ul li {
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-col a {
-            color: #94a3b8;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .footer-col a:hover {
-            color: white;
-        }
+        .footer-col h4 { color: white; margin-bottom: 1rem; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 0.5rem; }
+        .footer-col a { color: #94a3b8; text-decoration: none; }
 
         .footer-bottom {
             text-align: center;
             border-top: 1px solid #334155;
             padding-top: 1.5rem;
-            font-size: 0.9rem;
+            margin-top: 2rem;
         }
 
         @media (max-width: 868px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
-
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: #1e293b;
-                padding: 1.5rem;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
+            .container { grid-template-columns: 1fr; }
+            .nav-links { flex-direction: column; gap: 0.8rem; }
+            .nav-container { flex-direction: column; gap: 1rem; }
         }
     </style>
 </head>
@@ -404,48 +195,220 @@
 
     <header>
         <div class="nav-container">
-            <a href="#" onclick="showHome()" class="logo">Pick<span>Prime</span></a>
-            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
-            <ul class="nav-links" id="navLinks">
-                <li><a onclick="showHome()">Home</a></li>
-                <li><a onclick="showPage('about')">About Us</a></li>
-                <li><a onclick="showPage('privacy')">Privacy Policy</a></li>
-                <li><a onclick="showPage('terms')">Terms & Conditions</a></li>
-                <li><a onclick="showPage('contact')">Contact Us</a></li>
+            <a href="#home" class="logo">Pick<span>Prime</span></a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#articles">Articles</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#privacy">Privacy Policy</a></li>
+                <li><a href="#terms">Terms & Conditions</a></li>
+                <li><a href="#contact">Contact Us</a></li>
             </ul>
         </div>
     </header>
 
-    <div class="container">
-        <main class="main-content" id="appContent">
-            <!-- Dynamic Content Injected Here -->
+    <div class="container" id="home">
+        <main class="main-content">
+            
+            <div class="ad-banner">
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            </div>
+
+            <section id="articles">
+                <h1 style="margin-bottom: 2rem;">Technical Guides & Engineering Articles</h1>
+
+                <!-- Article 1 -->
+                <article class="article-card" id="art1">
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=80" alt="Microservices Architecture">
+                    <div class="article-card-content">
+                        <div class="article-meta">Category: Backend & Cloud | September 12, 2026</div>
+                        <h2>Complete Guide to Microservices Architecture with Node.js and Docker</h2>
+                        <p>Microservices architecture has become the standard design pattern for building modern, scalable enterprise applications. Unlike traditional monolithic applications, microservices break down applications into small, independent services that communicate over network protocols. Containerizing each service using Docker ensures seamless deployments across staging and production clusters.</p>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="article-card" id="art2">
+                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80" alt="Cloudflare Workers">
+                    <div class="article-card-content">
+                        <div class="article-meta">Category: Cloud & DevOps | September 11, 2026</div>
+                        <h2>Deep Dive into Cloudflare Workers and Edge Computing Mechanics</h2>
+                        <p>Serverless computing transformed backend development by abstracting server management. Cloudflare Workers executes serverless code at the edge using V8 Isolates instead of heavy container virtual machines, achieving cold start response times under 5 milliseconds globally.</p>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="article-card" id="art3">
+                    <img src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=1000&q=80" alt="PostgreSQL Indexing">
+                    <div class="article-card-content">
+                        <div class="article-meta">Category: Databases | September 10, 2026</div>
+                        <h2>Mastering Database Indexing and Query Optimization in PostgreSQL</h2>
+                        <p>Database performance determines overall system throughput. Learn how B-Tree, GIN, and BRIN indexes work inside PostgreSQL alongside EXPLAIN ANALYZE execution plan profiling to eliminate slow full table scans.</p>
+                    </div>
+                </article>
+
+                <!-- Article 4 -->
+                <article class="article-card" id="art4">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80" alt="Apache Kafka">
+                    <div class="article-card-content">
+                        <div class="article-meta">Category: System Design | September 09, 2026</div>
+                        <h2>Building Real-Time Data Pipelines using Apache Kafka and WebSockets</h2>
+                        <p>Modern applications require real-time stream ingestion. By integrating Apache Kafka message consumer groups with bidirectional WebSockets, applications push live metrics to clients with sub-50ms latency.</p>
+                    </div>
+                </article>
+
+                <!-- Article 5 -->
+                <article class="article-card" id="art5">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1000&q=80" alt="Next.js Server Components">
+                    <div class="article-card-content">
+                        <div class="article-meta">Category: Frontend & Web | September 08, 2026</div>
+                        <h2>Next.js Server Components and Modern Rendering Architecture</h2>
+                        <p>React Server Components shift component rendering from client browser JavaScript engines to server runtimes, eliminating bundle weight while enabling direct async database querying and progressive HTTP streaming.</p>
+                    </div>
+                </article>
+
+                <!-- Article 6 -->
+                <article class="article-card" id="art6">
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1000&q=80" alt="OAuth2 and Security">
+                    <div class="article-card-content">
+                        <div class="article-meta">Category: Security | September 07, 2026</div>
+                        <h2>Securing Distributed Systems with OAuth2, OIDC, and JWT Best Practices</h2>
+                        <p>Protecting microservices requires stateless authentication standard protocols. Understand PKCE authorization code flows, asymmetric RSA/Ed25519 JSON Web Token verification, and refresh token revocation strategies.</p>
+                    </div>
+                </article>
+
+                <!-- Article 7 -->
+                <article class="article-card" id="art7">
+                    <img src="https://images.unsplash.com/photo-1667372335854-7882b0454733?auto=format&fit=crop&w=1000&q=80" alt="Terraform AWS">
+                    <div class="article-card-content">
+                        <div class="article-meta">Category: DevOps | September 06, 2026</div>
+                        <h2>Introduction to Infrastructure as Code using Terraform and AWS</h2>
+                        <p>Automate AWS cloud infrastructure provisioning using HashiCorp Terraform modules. Store state files securely in S3 backends with DynamoDB state locking to ensure idempotent infrastructure deployments.</p>
+                    </div>
+                </article>
+
+                <!-- Article 8 -->
+                <article class="article-card" id="art8">
+                    <img src="https://images.unsplash.com/photo-1607799279861-4dd421887fb3?auto=format&fit=crop&w=1000&q=80" alt="Kubernetes Cluster">
+                    <div class="article-card-content">
+                        <div class="article-meta">Category: DevOps & Cloud | September 05, 2026</div>
+                        <h2>Container Orchestration with Kubernetes: Core Concepts and Yaml Declarations</h2>
+                        <p>Deploy scalable containerized applications across Kubernetes worker node clusters using declarative YAML manifests covering Pods, Deployments, Services, and automated Horizontal Pod Autoscalers.</p>
+                    </div>
+                </article>
+
+                <!-- Article 9 -->
+                <article class="article-card" id="art9">
+                    <img src="https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?auto=format&fit=crop&w=1000&q=80" alt="GraphQL vs REST">
+                    <div class="article-card-content">
+                        <div class="article-meta">Category: API Design | September 04, 2026</div>
+                        <h2>Understanding GraphQL Architecture vs REST APIs in Enterprise Systems</h2>
+                        <p>Compare declarative GraphQL schemas and resolvers against REST URL endpoints to eliminate mobile network data over-fetching and under-fetching (N+1 query problems).</p>
+                    </div>
+                </article>
+
+                <!-- Article 10 -->
+                <article class="article-card" id="art10">
+                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1000&q=80" alt="Redis Caching">
+                    <div class="article-card-content">
+                        <div class="article-meta">Category: Backend Architecture | September 03, 2026</div>
+                        <h2>Building Enterprise Redis Caching Strategies for High-Throughput Web Apps</h2>
+                        <p>Implement Cache-Aside, Write-Through, and probabilistic early expiration strategies using Redis in-memory key-value clusters to protect primary SQL databases from thundering herd traffic stampedes.</p>
+                    </div>
+                </article>
+
+                <!-- Article 11 -->
+                <article class="article-card" id="art11">
+                    <img src="https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?auto=format&fit=crop&w=1000&q=80" alt="JavaScript Event Loop">
+                    <div class="article-card-content">
+                        <div class="article-meta">Category: Programming | September 02, 2026</div>
+                        <h2>Demystifying Modern JavaScript Asynchronous Execution: Event Loop and Promises</h2>
+                        <p>Deep dive into V8 engine internals, Call Stack execution, Microtask queue priority, Macrotasks, and Promises to write non-blocking asynchronous Node.js backend services.</p>
+                    </div>
+                </article>
+
+                <!-- Article 12 -->
+                <article class="article-card" id="art12">
+                    <img src="https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=1000&q=80" alt="GitHub Actions CI CD">
+                    <div class="article-card-content">
+                        <div class="article-meta">Category: DevOps | September 01, 2026</div>
+                        <h2>Architecting Distributed CI/CD Pipelines with GitHub Actions and Docker</h2>
+                        <p>Automate static security analysis, unit test suites, Docker image compilation, and automated production cloud deployments using version-controlled GitHub Actions YAML workflows.</p>
+                    </div>
+                </article>
+
+                <!-- Article 13 -->
+                <article class="article-card" id="art13">
+                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1000&q=80" alt="Clean Code SOLID">
+                    <div class="article-card-content">
+                        <div class="article-meta">Category: Software Engineering | August 31, 2026</div>
+                        <h2>Comprehensive Guide to Clean Code, DRY, and SOLID Software Principles</h2>
+                        <p>Reduce technical debt and maintain long-term code quality by adhering to Single Responsibility, Open-Closed, Liskov Substitution, Interface Segregation, and Dependency Inversion software engineering principles.</p>
+                    </div>
+                </article>
+
+                <!-- Article 14 -->
+                <article class="article-card" id="art14">
+                    <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1000&q=80" alt="CSS Grid Flexbox">
+                    <div class="article-card-content">
+                        <div class="article-meta">Category: Frontend Development | August 30, 2026</div>
+                        <h2>Understanding CSS Grid and Flexbox for Enterprise Responsive UI Layouts</h2>
+                        <p>Master two-dimensional page layout skeletons with CSS Grid and one-dimensional component alignment using CSS Flexbox for fluid, mobile-first responsive viewports without heavy third-party CSS frameworks.</p>
+                    </div>
+                </article>
+
+                <!-- Article 15 -->
+                <article class="article-card" id="art15">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1000&q=80" alt="Cybersecurity OWASP">
+                    <div class="article-card-content">
+                        <div class="article-meta">Category: Cybersecurity | August 29, 2026</div>
+                        <h2>Introduction to Cybersecurity Fundamentals and OWASP Top 10 Web Vulnerabilities</h2>
+                        <p>Safeguard enterprise applications against SQL Injection, Cross-Site Scripting (XSS), Broken Access Control (IDOR), and CSRF vulnerabilities using backend parameterization and strict security headers.</p>
+                    </div>
+                </article>
+            </section>
+
+            <!-- Legal Pages Embedded -->
+            <hr style="margin: 3rem 0; border: none; border-top: 1px solid var(--border-color);">
+
+            <section id="about" style="margin-bottom: 3rem;">
+                <h2>About Us - PickPrime.in</h2>
+                <p>Welcome to <strong>PickPrime.in</strong>, your premier online resource for deep-dive technical engineering tutorials, cloud computing insights, database optimization strategies, and modern software design patterns.</p>
+                <p><strong>Official Contact Email:</strong> pickprimehelp@gmail.com</p>
+            </section>
+
+            <section id="privacy" style="margin-bottom: 3rem;">
+                <h2>Privacy Policy</h2>
+                <p>At PickPrime.in, accessible from https://pickprime.in, visitor privacy is a main priority. We log standard ISP web traffic metrics for analytics purposes and use Google AdSense cookies (including DoubleClick DART cookies) to serve relevant advertisements to visitors.</p>
+            </section>
+
+            <section id="terms" style="margin-bottom: 3rem;">
+                <h2>Terms and Conditions</h2>
+                <p>By accessing PickPrime.in, you agree to comply with our terms. All intellectual content and technical material published on PickPrime.in are protected by copyright laws.</p>
+            </section>
+
+            <section id="contact">
+                <h2>Contact Us</h2>
+                <p>For editorial inquiries, technical questions, or sponsorship opportunities, reach out to us at <strong>pickprimehelp@gmail.com</strong>.</p>
+            </section>
+
         </main>
 
         <aside class="sidebar">
-            <div class="ad-sidebar">
-                <!-- AdSense Responsive Sidebar Unit -->
-                <div>
-                    <p><strong>[ AdSense Responsive Widget ]</strong></p>
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                         data-ad-slot="1234567890"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-                </div>
+            <div class="widget">
+                <h3>About PickPrime</h3>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">PickPrime.in delivers expert technological tutorials, system architecture breakdowns, software engineering principles, and cloud infrastructure guides.</p>
             </div>
 
             <div class="widget">
                 <h3>Latest Articles</h3>
-                <ul class="recent-list" id="recentArticlesList">
-                    <!-- Recent links injected here -->
+                <ul class="recent-list">
+                    <li><a href="#art1">Microservices with Node.js & Docker</a></li>
+                    <li><a href="#art2">Cloudflare Workers Edge Computing</a></li>
+                    <li><a href="#art3">PostgreSQL Database Indexing</a></li>
+                    <li><a href="#art4">Apache Kafka & WebSockets Pipeline</a></li>
+                    <li><a href="#art5">Next.js Server Components</a></li>
                 </ul>
-            </div>
-
-            <div class="widget">
-                <h3>About PickPrime</h3>
-                <p style="font-size: 0.9rem; color: var(--text-muted);">PickPrime.in delivers expert technological tutorials, system architecture breakdowns, software engineering principles, and cloud infrastructure guides.</p>
             </div>
         </aside>
     </div>
@@ -459,16 +422,16 @@
             <div class="footer-col">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><a onclick="showHome()">Home</a></li>
-                    <li><a onclick="showPage('about')">About Us</a></li>
-                    <li><a onclick="showPage('contact')">Contact Us</a></li>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h4>Legal & Policy</h4>
+                <h4>Legal</h4>
                 <ul>
-                    <li><a onclick="showPage('privacy')">Privacy Policy</a></li>
-                    <li><a onclick="showPage('terms')">Terms & Conditions</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#terms">Terms & Conditions</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -482,1065 +445,5 @@
         </div>
     </footer>
 
-    <script>
-        // Data Structure for Articles and Pages
-        const articles = [
-            {
-                id: 1,
-                title: "Complete Guide to Microservices Architecture with Node.js and Docker",
-                slug: "guide-to-microservices-architecture-nodejs-docker",
-                date: "September 12, 2026",
-                category: "Backend & Cloud",
-                image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=80",
-                excerpt: "Learn how to build scalable, fault-tolerant microservices using Node.js, Express, Docker containers, and API Gateways from scratch.",
-                content: `
-                    <p>Microservices architecture has become the standard design pattern for building modern, scalable enterprise applications. Unlike traditional monolithic applications, where all components are tightly coupled into a single codebase, microservices break down applications into small, independent, and loosely coupled services that communicate over network protocols.</p>
-                    
-                    <p>In this technical breakdown, we will examine how to build, containerize, and orchestrate microservices using Node.js, Express, Docker, and NGINX as an API Gateway.</p>
-
-                    <h2>1. Understanding Monolithic vs. Microservices Architecture</h2>
-                    <p>In a monolithic architecture, the user interface, database access layer, business logic, and background processing exist within a single executable unit. While easy to build initially, monoliths present significant challenges as systems scale:</p>
-                    <ul>
-                        <li><strong>Scalability Bottlenecks:</strong> You must scale the entire application, even if only one module requires extra throughput.</li>
-                        <li><strong>Deployment Risks:</strong> A single bug in a non-critical module can crash the entire application.</li>
-                        <li><strong>Tech Stack Lock-in:</strong> Upgrading core frameworks or changing programming languages across a legacy monolith is extremely expensive.</li>
-                    </ul>
-                    <p>Microservices solve these challenges by isolating business domains into micro-domains. Each service manages its own database, exposes explicit REST or gRPC APIs, and can be scaled independently using orchestration tools like Kubernetes.</p>
-
-                    <h2>2. Designing Service Boundaries and APIs</h2>
-                    <p>Before writing code, defining clear domain boundaries is critical. Using Domain-Driven Design (DDD), we identify Bounded Contexts. For instance, in an E-Commerce system, we decouple functionality into:</p>
-                    <ul>
-                        <li><strong>User Service:</strong> Manages authentication, user profiles, and permissions.</li>
-                        <li><strong>Order Service:</strong> Handles order processing, cart state, and order lifecycle.</li>
-                        <li><strong>Payment Service:</strong> Processes financial transactions via external payment gateways.</li>
-                    </ul>
-
-                    <h2>3. Containerizing Node.js Services with Docker</h2>
-                    <p>Containerization ensures that microservices run identically across development, staging, and production environments. Below is a production-optimized multi-stage <code>Dockerfile</code> for a Node.js microservice:</p>
-
-                    <pre><code># Stage 1: Build & Dependencies
-FROM node:18-alpine AS builder
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-
-# Stage 2: Minimal Runtime
-FROM node:18-alpine
-WORKDIR /app
-COPY --from=builder /app /app
-EXPOSE 3000
-USER node
-CMD ["node", "server.js"]</code></pre>
-
-                    <h2>4. Implementing API Gateway with NGINX</h2>
-                    <p>Clients should not communicate with dozens of microservices directly. Instead, an API Gateway acts as a single reverse proxy entry point. It manages routing, rate-limiting, SSL termination, and authentication headers.</p>
-                    
-                    <p>An exemplary NGINX configuration snippet for routing incoming requests to microservices:</p>
-
-                    <pre><code>http {
-    upstream user_service {
-        server user-service:3000;
-    }
-    upstream order_service {
-        server order-service:3001;
-    }
-
-    server {
-        listen 80;
-
-        location /api/v1/users/ {
-            proxy_pass http://user_service/;
-        }
-
-        location /api/v1/orders/ {
-            proxy_pass http://order_service/;
-        }
-    }
-}</code></pre>
-
-                    <h2>5. Managing Data Consistency Across Microservices</h2>
-                    <p>Because each microservice maintains its own private database, traditional ACID transactions across multi-service workflows are impossible. Instead, microservices rely on <strong>Eventual Consistency</strong> achieved via Event-Driven Architectures utilizing Message Brokers like Apache Kafka or RabbitMQ.</p>
-                    <p>When an order is created, the Order Service persists the record and emits an <code>OrderCreated</code> event. The Payment Service consumes this event, processes the charge, and emits a <code>PaymentProcessed</code> event, ensuring complete decoupling and high availability.</p>
-                    
-                    <h2>Conclusion</h2>
-                    <p>Transitioning to microservices offers unmatched flexibility, deployment speed, and isolation. By leveraging Node.js for asynchronous lightweight I/O and Docker for containerized distribution, engineering teams can build resilient distributed systems designed for massive traffic growth.</p>
-                `
-            },
-            {
-                id: 2,
-                title: "Deep Dive into Cloudflare Workers and Edge Computing Mechanics",
-                slug: "cloudflare-workers-edge-computing-guide",
-                date: "September 11, 2026",
-                category: "Cloud & DevOps",
-                image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80",
-                excerpt: "Explore serverless compute at the edge using Cloudflare Workers, V8 isolates, KV storage, and global low-latency API handling.",
-                content: `
-                    <p>Serverless computing transformed backend development by abstracting server management. However, traditional serverless platforms like AWS Lambda still introduce cold start delays and regional latency. Edge computing solves this problem by moving computational execution directly to the network edge, millimeters away from the end user.</p>
-
-                    <p>Cloudflare Workers is at the forefront of edge computing, running JavaScript, TypeScript, and WebAssembly execution directly on Cloudflare's global CDN network across 300+ cities worldwide.</p>
-
-                    <h2>1. V8 Isolates vs Container-Based Virtualization</h2>
-                    <p>Traditional serverless platforms spin up Node.js runtimes inside Docker-like containers. Container initialization takes anywhere from 100ms to several seconds—a duration known as a cold start.</p>
-                    <p>Cloudflare Workers completely eliminates cold starts by utilizing Google Chrome’s V8 JavaScript Engine <strong>Isolates</strong>. Instead of launching a full virtual machine per request, thousands of lightweight isolates run concurrently within a single process. Isolates require less than 5MB of memory and spin up in under 5 milliseconds.</p>
-
-                    <h2>2. Writing Your First Cloudflare Edge Worker</h2>
-                    <p>Cloudflare Workers execute Web Standard APIs (fetch, Request, Response, Streams). Here is an example worker script that intercepts inbound requests, inspects geographic headers, and dynamically alters HTTP responses at the edge:</p>
-
-                    <pre><code>export default {
-  async fetch(request, env, ctx) {
-    const country = request.cf.country || "US";
-    const city = request.cf.city || "Unknown";
-
-    const responseData = {
-      message: "Hello from Cloudflare Edge!",
-      clientLocation: { country, city },
-      timestamp: new Date().toISOString()
-    };
-
-    return new Response(JSON.stringify(responseData), {
-      headers: {
-        "content-type": "application/json;charset=UTF-8",
-        "cache-control": "public, max-age=3600"
-      }
-    });
-  }
-};</code></pre>
-
-                    <h2>3. Edge State Management with KV, Durable Objects, and D1</h2>
-                    <p>Computing at the edge requires low-latency data persistence. Cloudflare offers three storage primitives customized for edge operations:</p>
-                    <ul>
-                        <li><strong>Workers KV:</strong> A globally distributed key-value store optimized for high-read workloads with eventual consistency.</li>
-                        <li><strong>Durable Objects:</strong> Provides strongly consistent state and coordination across distributed workers, ideal for real-time multiplayer apps or web sockets.</li>
-                        <li><strong>Cloudflare D1:</strong> A native serverless SQL database powered by SQLite replicated globally to match edge speeds.</li>
-                    </ul>
-
-                    <h2>4. Security and DDoS Mitigation at the Network Border</h2>
-                    <p>By executing logic directly on Cloudflare’s edge, malicious traffic, bot attacks, and SQL injection attempts can be blocked before reaching your primary origin infrastructure. Real-time rate limiting, custom WAF rules, and token validation can all be implemented with custom Workers scripts.</p>
-
-                    <h2>Conclusion</h2>
-                    <p>Edge computing represents the next iteration of Web Infrastructure. Cloudflare Workers empowers developers to build globally distributed, ultra-low-latency applications without the burden of maintaining region-bound server farms.</p>
-                `
-            },
-            {
-                id: 3,
-                title: "Mastering Database Indexing and Query Optimization in PostgreSQL",
-                slug: "database-indexing-query-optimization-postgresql",
-                date: "September 10, 2026",
-                category: "Databases",
-                image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=1000&q=80",
-                excerpt: "Master B-Trees, Hash indexes, GIN, BRIN, EXPLAIN ANALYZE execution plans, and query tuning in relational database systems.",
-                content: `
-                    <p>Database performance is the single biggest architectural determinant of application latency. As relational database tables grow into millions of rows, sequential table scans (Seq Scan) slow database response times down to a crawl. Proper indexing strategies and query execution plan analysis are vital software engineering skills.</p>
-
-                    <h2>1. How B-Tree Indexes Work Under the Hood</h2>
-                    <p>The default and most versatile index type in PostgreSQL is the <strong>B-Tree (Balanced Tree)</strong> index. A B-Tree keeps data sorted in a self-balancing hierarchical structure, reducing search operations from O(N) linear time to O(log N) logarithmic time complexity.</p>
-                    <p>When you query a column indexed by a B-Tree, the engine traverses tree nodes from top to bottom to find matching row pointers (CTIDs), completely bypassing full table scans.</p>
-
-                    <h2>2. Special Index Types in PostgreSQL</h2>
-                    <p>While B-Trees handle range and equality queries (`=`, `>`, `<`), PostgreSQL provides specialized index types for advanced data structures:</p>
-                    <ul>
-                        <li><strong>GIN (Generalized Inverted Index):</strong> Perfect for indexing composite values like JSONB, Array columns, and Full-Text Search vectors.</li>
-                        <li><strong>BRIN (Block Range Index):</strong> Designed for extremely large, naturally ordered datasets (like time-series logs). BRIN indexes require less than 1% of the disk space of standard B-Trees.</li>
-                        <li><strong>Partial Indexes:</strong> Indexes only a subset of rows using a `WHERE` clause, significantly reducing index size and write overhead.</li>
-                    </ul>
-
-                    <h2>3. Analyzing Execution Plans using EXPLAIN ANALYZE</h2>
-                    <p>To optimize a slow SQL query, you must read the execution plan generated by the PostgreSQL Query Planner. Prepending <code>EXPLAIN (ANALYZE, BUFFERS)</code> to your query reveals exact node execution costs and disk I/O operations.</p>
-
-                    <pre><code>EXPLAIN (ANALYZE, BUFFERS)
-SELECT u.id, u.email, o.total_amount
-FROM users u
-JOIN orders o ON u.id = o.user_id
-WHERE o.created_at >= '2026-01-01'
-  AND o.status = 'COMPLETED';</code></pre>
-
-                    <p>Key markers to look for in execution logs:</p>
-                    <ul>
-                        <li><code>Seq Scan</code>: Indicates a full table scan. If table size is large, create an index on search columns.</li>
-                        <li><code>Index Scan</code>: Reads data using the index and fetches corresponding heap rows.</li>
-                        <li><code>Index Only Scan</code>: The fastest scan type; all requested data resides directly inside the index structure itself.</li>
-                    </ul>
-
-                    <h2>4. Avoiding Indexing Pitfalls</h2>
-                    <p>Indexes are not free. Every index increases disk usage and penalizes write efficiency on <code>INSERT</code>, <code>UPDATE</code>, and <code>DELETE</code> statements because the database engine must recalculate index trees continuously. Ensure you remove unused indexes periodically by auditing <code>pg_stat_user_indexes</code> metrics.</p>
-
-                    <h2>Conclusion</h2>
-                    <p>Optimizing PostgreSQL performance is a continuous process of profiling queries and choosing targeted indexing strategies. Mastering EXPLAIN ANALYZE unlocks deep insights into data flow and memory consumption across enterprise relational databases.</p>
-                `
-            },
-            {
-                id: 4,
-                title: "Building Real-Time Data Pipelines using Apache Kafka and WebSockets",
-                slug: "realtime-data-pipelines-kafka-websockets",
-                date: "September 09, 2026",
-                category: "System Design",
-                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80",
-                excerpt: "Architect end-to-end event-driven stream processing systems using Apache Kafka producers, consumer groups, and WebSocket broadcasting.",
-                content: `
-                    <p>Modern internet users expect instantaneous updates—whether tracking real-time stock prices, ride-sharing locations, or collaborative document edits. Traditional polling architecture is inefficient and unsustainable under heavy user loads. Modern real-time applications rely on distributed streaming platforms combined with persistent bidirectional WebSockets.</p>
-
-                    <h2>1. The Architecture of Apache Kafka</h2>
-                    <p>Apache Kafka is a distributed event-streaming platform designed to ingest and store billions of event records per second with high durability and sub-millisecond processing latency.</p>
-                    <p>Key Kafka core concepts include:</p>
-                    <ul>
-                        <li><strong>Topics:</strong> Logical categories or feed names to which record events are published.</li>
-                        <li><strong>Partitions:</strong> Topics are split into ordered partitions across multiple broker nodes to enable horizontal scaling.</li>
-                        <li><strong>Producers & Consumers:</strong> Applications that publish records to Kafka topics, and client applications that subscribe to and process topic partitions.</li>
-                        <li><strong>Consumer Groups:</strong> Enables parallel processing of topic streams across scalable consumer instances.</li>
-                    </ul>
-
-                    <h2>2. End-to-End Real-Time Pipeline Design</h2>
-                    <p>Our goal is to push high-throughput system analytics from edge servers into client web browsers in under 50ms:</p>
-                    <ol>
-                        <li><strong>Ingestion:</strong> Web API gateways publish event telemetry to Kafka topics.</li>
-                        <li><strong>Stream Processing:</strong> Kafka Streams or Apache Flink components aggregate raw metrics over sliding window intervals.</li>
-                        <li><strong>Distribution:</strong> WebSocket gateway services consume aggregate streams and push updates down active client connections.</li>
-                    </ol>
-
-                    <h2>3. Implementing WebSockets with Node.js</h2>
-                    <p>While HTTP operates on a request-response cycle, WebSockets maintain persistent, full-duplex TCP connections over a single socket port. Below is a WebSocket push engine integrated with a Kafka consumer group:</p>
-
-                    <pre><code>const { Kafka } = require('kafkajs');
-const WebSocket = require('ws');
-
-const wss = new WebSocket.Server({ port: 8080 });
-const kafka = new Kafka({ clientId: 'pickprime-analytics', brokers: ['localhost:9092'] });
-const consumer = kafka.consumer({ groupId: 'websocket-gateway-group' });
-
-async function runStreamingGateway() {
-  await consumer.connect();
-  await consumer.subscribe({ topic: 'realtime-metrics', fromBeginning: false });
-
-  consumer.run({
-    eachMessage: async ({ message }) => {
-      const payload = message.value.toString();
-      wss.clients.forEach(client => {
-        if (client.readyState === WebSocket.OPEN) {
-          client.send(payload);
-        }
-      });
-    },
-  });
-}
-
-runStreamingGateway().catch(console.error);</code></pre>
-
-                    <h2>4. Handling Reconnection and Backpressure</h2>
-                    <p>Network connectivity on mobile devices is inherently unstable. Robust real-time pipelines must implement dynamic reconnect logic, exponential backoff timers, and backpressure management to prevent slow clients from exhausting gateway server buffers.</p>
-
-                    <h2>Conclusion</h2>
-                    <p>Combining Apache Kafka’s high-throughput event processing with WebSocket push channels provides a robust foundation for building responsive enterprise applications.</p>
-                `
-            },
-            {
-                id: 5,
-                title: "Next.js Server Components and Modern Rendering Architecture",
-                slug: "nextjs-server-components-rendering-architecture",
-                date: "September 08, 2026",
-                category: "Frontend & Web",
-                image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1000&q=80",
-                excerpt: "Analyze React Server Components (RSC), App Router mechanics, hydration performance, dynamic streaming, and hybrid SSR/SSG.",
-                content: `
-                    <p>The web development ecosystem has undergone an architectural paradigm shift. For years, Single Page Applications (SPAs) shifted all rendering and state management responsibility entirely to the user's web browser. However, massive JavaScript bundle sizes led to sluggish First Contentful Paint (FCP) and poor SEO performance. React Server Components (RSC) and Next.js App Router redefine frontend architecture.</p>
-
-                    <h2>1. Understanding React Server Components (RSC)</h2>
-                    <p>Unlike traditional client components that execute JavaScript on the browser engine, React Server Components run exclusively on the server node. They never ship their underlying JavaScript dependency libraries to the browser, leading to significantly reduced bundle footprints.</p>
-
-                    <p>Benefits of Server Components include:</p>
-                    <ul>
-                        <li><strong>Direct Database Access:</strong> Fetch data directly from databases or backend services using async/await without writing API wrapper layers.</li>
-                        <li><strong>Zero Bundle Overhead:</strong> Heavy external NPM packages used within Server Components remain entirely on the server.</li>
-                        <li><strong>Enhanced Security:</strong> Keep sensitive tokens, API keys, and database credentials safely on the server side.</li>
-                    </ul>
-
-                    <h2>2. Server Components vs Client Components in Next.js</h2>
-                    <p>In Next.js, components inside the <code>app</code> directory are Server Components by default. When interactive state management (such as <code>useState</code>, <code>useEffect</code>, or event listeners) is required, developers declare a Client Component using the <code>'use client'</code> directive at the top of the module file.</p>
-
-                    <pre><code>// App Component (Server Component by default)
-import { db } from '@/lib/db';
-import InteractiveCounter from './InteractiveCounter';
-
-export default async function UserProfilePage({ params }) {
-  // Fetch data directly inside component body
-  const user = await db.user.findUnique({ where: { id: params.id } });
-
-  return (
-    <div className="profile-card">
-      <h1>{user.name}</h1>
-      <p>Email: {user.email}</p>
-      {/* Pass data to interactive Client Component */}
-      <InteractiveCounter initialLikes={user.likeCount} />
-    </div>
-  );
-}</code></pre>
-
-                    <h2>3. Progressive Streaming and Suspense Boundaries</h2>
-                    <p>Traditional Server-Side Rendering (SSR) forces browsers to wait for all server data promises to resolve before sending HTML output. Next.js App Router utilizes HTTP Streaming and React <code>Suspense</code> to render page layouts instantly while streaming heavy data components asynchronously as they resolve.</p>
-
-                    <pre><code>import { Suspense } from 'react';
-import HeavyAnalyticsWidget from './HeavyAnalyticsWidget';
-import SkeletonLoader from './SkeletonLoader';
-
-export default function Dashboard() {
-  return (
-    <main>
-      <h1>Executive Dashboard</h1>
-      <Suspense fallback={<SkeletonLoader />}>
-        <HeavyAnalyticsWidget />
-      </Suspense>
-    </main>
-  );
-}</code></pre>
-
-                    <h2>Conclusion</h2>
-                    <p>React Server Components represent the unified future of frontend framework design. By combining server computational efficiency with client-side interactivity, Next.js enables software engineers to build performant, highly responsive web experiences.</p>
-                `
-            },
-            {
-                id: 6,
-                title: "Securing Distributed Systems with OAuth2, OIDC, and JWT Best Practices",
-                slug: "securing-distributed-systems-oauth2-oidc-jwt",
-                date: "September 07, 2026",
-                category: "Security",
-                image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1000&q=80",
-                excerpt: "In-depth guide to identity management, PKCE flows, asymmetric JWT signing key rotation, refresh token revocation, and API security.",
-                content: `
-                    <p>As monoliths break apart into distributed API services and multi-platform applications, centralizing identity and access management becomes vital. Standard user passwords should never traverse backend microservices directly. Modern systems rely on open standards: OAuth 2.0, OpenID Connect (OIDC), and JSON Web Tokens (JWT).</p>
-
-                    <h2>1. Understanding OAuth 2.0 vs. OpenID Connect (OIDC)</h2>
-                    <p>Although frequently mentioned together, OAuth 2.0 and OIDC solve distinct security objectives:</p>
-                    <ul>
-                        <li><strong>OAuth 2.0:</strong> An <em>Authorization framework</em> that issues access tokens allowing third-party applications to act on behalf of a user without seeing user credentials.</li>
-                        <li><strong>OpenID Connect (OIDC):</strong> An <em>Identity layer</em> built on top of OAuth 2.0 that authenticates users and issues structured ID Tokens containing profile claims.</li>
-                    </ul>
-
-                    <h2>2. Authorization Code Flow with PKCE</h2>
-                    <p>For Single Page Applications (SPAs) and mobile devices, traditional OAuth authorization flows are vulnerable to authorization code interception attacks. The <strong>Proof Key for Code Exchange (PKCE)</strong> standard eliminates this vulnerability by introducing dynamic cryptographic code verifiers and challenges.</p>
-
-                    <h2>3. Structuring and Validating Cryptographic JWTs</h2>
-                    <p>A JSON Web Token consists of three base64-encoded strings separated by dots: Header, Payload, and Signature.</p>
-                    <p>When an API service receives a JWT in the <code>Authorization: Bearer <token></code> header, it validates:</p>
-                    <ol>
-                        <li><strong>Cryptographic Signature:</strong> Verifies token authenticity using the identity provider's public key (retrieved via JWKS endpoints).</li>
-                        <li><strong>Expiration (exp):</strong> Ensures token lifetime has not lapsed.</li>
-                        <li><strong>Issuer (iss) & Audience (aud):</strong> Confirms the token was issued by a trusted auth server specifically for this backend service.</li>
-                    </ol>
-
-                    <pre><code>// Example asymmetric JWT verification using RSA/Ed25519 in Node.js
-const jwt = require('jsonwebtoken');
-const jwksClient = require('jwks-rsa');
-
-const client = jwksClient({
-  jwksUri: 'https://auth.pickprime.in/.well-known/jwks.json'
-});
-
-function getKey(header, callback) {
-  client.getSigningKey(header.kid, (err, key) => {
-    const signingKey = key.getPublicKey();
-    callback(null, signingKey);
-  });
-}
-
-function verifyRequestToken(token) {
-  return new Promise((resolve, reject) => {
-    jwt.verify(token, getKey, { issuer: 'https://auth.pickprime.in/', algorithms: ['RS256'] }, (err, decoded) => {
-      if (err) reject(err);
-      else resolve(decoded);
-    });
-  });
-}</code></pre>
-
-                    <h2>4. Token Storage and Revocation Strategies</h2>
-                    <p>Store short-lived access tokens (15-minute validity) strictly in memory or in <code>httpOnly, Secure, SameSite=Strict</code> web cookies to mitigate Cross-Site Scripting (XSS) risks. Maintain long-lived refresh tokens in Redis database caches to allow instant token revocation upon security breaches.</p>
-
-                    <h2>Conclusion</h2>
-                    <p>Implementing security standards based on PKCE-enabled OAuth 2.0, asymmetric token signatures, and strict storage protocols ensures resilient application defense across cloud ecosystems.</p>
-                `
-            },
-            {
-                id: 7,
-                title: "Introduction to Infrastructure as Code using Terraform and AWS",
-                slug: "infrastructure-as-code-terraform-aws-guide",
-                date: "September 06, 2026",
-                category: "DevOps",
-                image: "https://images.unsplash.com/photo-1667372335854-7882b0454733?auto=format&fit=crop&w=1000&q=80",
-                excerpt: "Automate cloud infrastructure deployments using HashiCorp Terraform modules, remote state locking, VPC creation, and AWS EC2 provisioning.",
-                content: `
-                    <p>Manual server provisioning using cloud consoles is error-prone and unrepeatable. Infrastructure as Code (IaC) allows engineering teams to define, version, review, and provision cloud resources declaratively using version-controlled code repositories.</p>
-
-                    <h2>1. Core Principles of HashiCorp Terraform</h2>
-                    <p>Terraform is an open-source, cloud-agnostic IaC tool that translates declarative HCL (HashiCorp Configuration Language) scripts into cloud provider API calls. Terraform maintains an accurate map of your real-world infrastructure using state files (<code>.tfstate</code>).</p>
-
-                    <h2>2. Writing Terraform HCL for an AWS Environment</h2>
-                    <p>Below is a working example establishing a custom AWS VPC network and an EC2 server instance:</p>
-
-                    <pre><code>terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-  }
-}
-
-provider "aws" {
-  region = "us-east-1"
-}
-
-resource "aws_vpc" "pickprime_vpc" {
-  cidr_block           = "10.0.0.0/16"
-  enable_dns_hostnames = true
-  tags = {
-    Name = "PickPrime-VPC"
-  }
-}
-
-resource "aws_subnet" "public_subnet" {
-  vpc_id                  = aws_vpc.pickprime_vpc.id
-  cidr_block              = "10.0.1.0/24"
-  map_public_ip_on_launch = true
-  tags = {
-    Name = "PickPrime-Public-Subnet"
-  }
-}
-
-resource "aws_instance" "web_server" {
-  ami           = "ami-0c7217cdde317cfec" # Ubuntu 22.04 LTS
-  instance_type = "t3.micro"
-  subnet_id     = aws_subnet.public_subnet.id
-
-  tags = {
-    Name = "PickPrime-WebServer"
-  }
-}</code></pre>
-
-                    <h2>3. State Management and Remote Backend Locking</h2>
-                    <p>In team environments, local state files risk file corruption and concurrent resource modification conflicts. Always configure remote state storage backed by Amazon S3 for state files and AWS DynamoDB tables for state locking during execution runs.</p>
-
-                    <h2>Conclusion</h2>
-                    <p>Adopting HashiCorp Terraform ensures reproducible environments, auditability, and rapid disaster recovery pipelines across software development lifecycles.</p>
-                `
-            },
-            {
-                id: 8,
-                title: "Container Orchestration with Kubernetes: Core Concepts and Yaml Declarations",
-                slug: "container-orchestration-kubernetes-concepts-yaml",
-                date: "September 05, 2026",
-                category: "DevOps & Cloud",
-                image: "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?auto=format&fit=crop&w=1000&q=80",
-                excerpt: "Understand Kubernetes Control Plane, Worker Nodes, Pods, Deployments, Services, Ingress Controllers, and automated scaling.",
-                content: `
-                    <p>Running isolated Docker containers on a single host server works well for small apps. However, managing hundreds of containerized applications across cluster server nodes requires an orchestration system: Kubernetes (K8s).</p>
-
-                    <h2>1. Kubernetes Architectural Topology</h2>
-                    <p>A Kubernetes cluster consists of two distinct components:</p>
-                    <ul>
-                        <li><strong>Control Plane:</strong> Manages cluster state, scheduling workloads, responding to node outages, and serving API endpoints. Key components include <code>kube-apiserver</code>, <code>etcd</code> storage, and <code>kube-scheduler</code>.</li>
-                        <li><strong>Worker Nodes:</strong> Servers that run containerized workloads inside Pods, managed by the <code>kubelet</code> agent daemon and network proxies.</li>
-                    </ul>
-
-                    <h2>2. Deploying Applications via YAML Declarations</h2>
-                    <p>In Kubernetes, applications are defined declaratively in YAML configuration files. Below is a production manifest declaring a 3-replica Deployment and an exposing Service:</p>
-
-                    <pre><code>apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: pickprime-api
-  labels:
-    app: pickprime-api
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: pickprime-api
-  template:
-    metadata:
-      labels:
-        app: pickprime-api
-    spec:
-      containers:
-      - name: api-container
-        image: pickprime/api:v1.2.0
-        ports:
-        - containerPort: 8080
-        resources:
-          limits:
-            cpu: "500m"
-            memory: "512Mi"
-          requests:
-            cpu: "250m"
-            memory: "256Mi"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: pickprime-api-service
-spec:
-  type: ClusterIP
-  selector:
-    app: pickprime-api
-  ports:
-  - port: 80
-    targetPort: 8080</code></pre>
-
-                    <h2>3. Health Checks and Self-Healing Runtimes</h2>
-                    <p>Kubernetes provides automated self-healing out-of-the-box using <strong>Liveness</strong> and <strong>Readiness Probes</strong>. If a containerized application crashes or suffers a deadlocked thread, Kubernetes automatically restarts the unhealthy container without manual intervention.</p>
-
-                    <h2>Conclusion</h2>
-                    <p>Kubernetes has solidified its position as the standard operating system for modern cloud deployment pipelines, automating application scaling and high availability worldwide.</p>
-                `
-            },
-            {
-                id: 9,
-                title: "Understanding GraphQL Architecture vs REST APIs in Enterprise Systems",
-                slug: "graphql-architecture-vs-rest-apis-enterprise",
-                date: "September 04, 2026",
-                category: "API Design",
-                image: "https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?auto=format&fit=crop&w=1000&q=80",
-                excerpt: "Compare GraphQL schemas, resolvers, and queries against traditional REST endpoints to optimize network payloads and eliminate over-fetching.",
-                content: `
-                    <p>For over two decades, REST (Representational State Transfer) has served as the dominant paradigm for designing web service APIs. However, as mobile clients proliferated and data query requirements became dynamic, REST's rigid URL-endpoint structures created challenges around data over-fetching and under-fetching.</p>
-
-                    <h2>1. Over-Fetching vs Under-Fetching</h2>
-                    <ul>
-                        <li><strong>Over-Fetching:</strong> A mobile application calls <code>GET /api/users/123</code> to display a simple username, but receives a massive 50KB JSON payload containing addresses, settings, and full historical logs.</li>
-                        <li><strong>Under-Fetching (N+1 Problem):</strong> Fetching a user along with their top 5 recent posts requires 1 request to <code>/api/users/123</code> followed by 5 separate requests to <code>/api/posts?userId=123</code>, creating heavy network roundtrips.</li>
-                    </ul>
-
-                    <h2>2. The GraphQL Solution</h2>
-                    <p>GraphQL exposes a single endpoint (typically <code>/graphql</code>) accepting declarative queries written in GraphQL Query Language. Clients request exactly the fields they need—no more, no less.</p>
-
-                    <pre><code># Client Query Request
-query GetUserProfile {
-  user(id: "123") {
-    name
-    email
-    posts(limit: 2) {
-      title
-      createdAt
-    }
-  }
-}</code></pre>
-
-                    <h2>3. Writing Resolvers and Managing N+1 Queries</h2>
-                    <p>On the server, GraphQL executes field resolution via functions called <strong>Resolvers</strong>. To prevent deep resolver trees from triggering massive database queries (the GraphQL N+1 problem), enterprise backends implement batching tools like Facebook's <code>DataLoader</code> library.</p>
-
-                    <h2>Conclusion</h2>
-                    <p>While GraphQL adds server-side schema complexity, its precise data fetching capabilities make it an ideal architectural choice for complex frontends and multi-platform mobile ecosystems.</p>
-                `
-            },
-            {
-                id: 10,
-                title: "Building Enterprise Redis Caching Strategies for High-Throughput Web Apps",
-                slug: "enterprise-redis-caching-strategies-high-throughput",
-                date: "September 03, 2026",
-                category: "Backend Architecture",
-                image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1000&q=80",
-                excerpt: "Learn Cache-Aside, Write-Through, Cache Stampede mitigation, TTL expiration policies, and Redis cluster pub-sub setups.",
-                content: `
-                    <p>When high-volume application traffic reaches thousands of requests per second, querying primary relational databases for identical data creates severe latency bottlenecks. Implementing an in-memory caching layer using Redis drastically reduces database load and cuts API execution times from hundreds of milliseconds to sub-millisecond ranges.</p>
-
-                    <h2>1. Common Redis Caching Patterns</h2>
-                    <p>Selecting the correct caching design pattern is essential for data freshness:</p>
-                    <ul>
-                        <li><strong>Cache-Aside (Lazy Loading):</strong> The application attempts to read data from Redis. On a cache miss, it reads from the primary database, populates Redis, and returns the result.</li>
-                        <li><strong>Write-Through Cache:</strong> Application writes directly to the cache, which synchronously updates the underlying database before returning control.</li>
-                        <li><strong>Write-Behind (Write-Back):</strong> Application writes immediately to Redis, which asynchronously batches background writes into the primary database.</li>
-                    </ul>
-
-                    <h2>2. Implementing Cache-Aside with Node.js and Redis</h2>
-                    <pre><code>const Redis = require('ioredis');
-const redis = new Redis('redis://localhost:6379');
-
-async function getProductDetails(productId) {
-  const cacheKey = `product:${productId}`;
-  
-  // 1. Check Redis Cache
-  const cachedData = await redis.get(cacheKey);
-  if (cachedData) {
-    return JSON.parse(cachedData);
-  }
-
-  // 2. Cache Miss: Query Database
-  const product = await db.products.findById(productId);
-
-  // 3. Populate Redis with Expiration (TTL = 1 hour)
-  if (product) {
-    await redis.set(cacheKey, JSON.stringify(product), 'EX', 3600);
-  }
-
-  return product;
-}</code></pre>
-
-                    <h2>3. Preventing Cache Stampedes (Thundering Herd Problem)</h2>
-                    <p>A cache stampede occurs when a high-demand cache key expires simultaneously while thousands of concurrent requests arrive. All requests bypass the cache and hit the database at once, causing server crashes. Mitigate stampedes using distributed mutex locks or probabilistic early expiration algorithms.</p>
-
-                    <h2>Conclusion</h2>
-                    <p>Strategic deployment of Redis in-memory data structures drastically enhances system resilience, handling massive client concurrency with low response times.</p>
-                `
-            },
-            {
-                id: 11,
-                title: "Demystifying Modern JavaScript Asynchronous Execution: Event Loop and Promises",
-                slug: "javascript-event-loop-promises-async-await",
-                date: "September 02, 2026",
-                category: "Programming",
-                image: "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?auto=format&fit=crop&w=1000&q=80",
-                excerpt: "Deep dive into the Node.js and V8 JavaScript Event Loop engine, Call Stack, Microtask queue, Macrotasks, and async execution mechanics.",
-                content: `
-                    <p>JavaScript is a single-threaded programming language, meaning it executes one single piece of code at a time on its main execution thread. Despite this single-threaded design, JavaScript seamlessly executes non-blocking asynchronous network requests, database queries, and timer callbacks at vast scale.</p>
-
-                    <h2>1. The V8 Engine Runtime Components</h2>
-                    <p>To understand asynchronous execution, we break down V8 engine primitives:</p>
-                    <ul>
-                        <li><strong>Call Stack:</strong> Keeps track of active function calls executing linearly in LIFO (Last In, First Out) order.</li>
-                        <li><strong>Web APIs / Node C++ Binding APIs:</strong> Background threads handling asynchronous timers, network fetches, and file I/O operations outside the main thread.</li>
-                        <li><strong>Microtask Queue:</strong> High-priority queue holding Promise callbacks (<code>.then()</code>, <code>catch()</code>, <code>await</code> continuations) and <code>process.nextTick</code>.</li>
-                        <li><strong>Macrotask Queue (Callback Queue):</strong> Holds <code>setTimeout</code>, <code>setInterval</code>, and DOM event callbacks.</li>
-                    </ul>
-
-                    <h2>2. Event Loop Execution Order Algorithm</h2>
-                    <p>The Event Loop constantly checks if the Call Stack is empty. When empty, it processes tasks using the following strict priority sequence:</p>
-                    <ol>
-                        <li>Drain ALL pending tasks inside the <strong>Microtask Queue</strong> until completely empty.</li>
-                        <li>Execute ONE task from the <strong>Macrotask Queue</strong>.</li>
-                        <li>Render DOM updates if running in a browser runtime.</li>
-                        <li>Repeat the loop continuously.</li>
-                    </ol>
-
-                    <h2>3. Predicting Execution Trajectory</h2>
-                    <pre><code>console.log('1: Sync Main Thread');
-
-setTimeout(() => {
-  console.log('2: Macrotask Timer');
-}, 0);
-
-Promise.resolve().then(() => {
-  console.log('3: Microtask Promise');
-});
-
-console.log('4: Sync Main Thread End');
-
-// Output Sequence:
-// 1: Sync Main Thread
-// 4: Sync Main Thread End
-// 3: Microtask Promise
-// 2: Macrotask Timer</code></pre>
-
-                    <h2>Conclusion</h2>
-                    <p>Mastering Event Loop mechanics and queue prioritization enables developers to write non-blocking asynchronous backend code and build highly responsive frontend interfaces.</p>
-                `
-            },
-            {
-                id: 12,
-                title: "Architecting Distributed CI/CD Pipelines with GitHub Actions and Docker",
-                slug: "github-actions-docker-cicd-pipeline-guide",
-                date: "September 01, 2026",
-                category: "DevOps",
-                image: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=1000&q=80",
-                excerpt: "Automate code quality testing, static application security testing (SAST), Docker image build pipelines, and automated cloud deployments.",
-                content: `
-                    <p>Modern agile engineering practices rely on Continuous Integration and Continuous Deployment (CI/CD) pipelines to automatically build, test, and deploy software changes to staging and production environments rapidly without manual intervention.</p>
-
-                    <h2>1. Structuring GitHub Actions Workflow Definitions</h2>
-                    <p>GitHub Actions workflows are declared in YAML files placed inside the repository's <code>.github/workflows/</code> directory. Workflows are triggered by events like code pushes, pull requests, or release tags.</p>
-
-                    <h2>2. Production Build and Test Pipeline</h2>
-                    <p>Below is an enterprise workflow that executes automated unit tests, builds a Docker image, and pushes it to Docker Hub upon pushing code to the <code>main</code> branch:</p>
-
-                    <pre><code>name: PickPrime Production CI/CD Pipeline
-
-on:
-  push:
-    branches: [ "main" ]
-
-jobs:
-  test-and-build:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout Code Repository
-      uses: actions/checkout@v3
-
-    - name: Setup Node.js Runtime
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
-        cache: 'npm'
-
-    - name: Install Dependencies & Run Tests
-      run: |
-        npm ci
-        npm test
-
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
-
-    - name: Log in to Docker Hub
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-
-    - name: Build and Push Docker Image
-      uses: docker/build-push-action@v4
-      with:
-        context: .
-        push: true
-        tags: pickprime/web-app:latest</code></pre>
-
-                    <h2>3. Managing Secrets and Security Best Practices</h2>
-                    <p>Never commit production API credentials, private SSH keys, or cloud access tokens into source code repositories. Always utilize GitHub Repository Encrypted Secrets and enforce branch protection rules preventing unreviewed code pushes to production branches.</p>
-
-                    <h2>Conclusion</h2>
-                    <p>Automating your test and delivery lifecycle via GitHub Actions builds team confidence and ensures seamless deployment velocity across high-scale applications.</p>
-                `
-            },
-            {
-                id: 13,
-                title: "Comprehensive Guide to Clean Code, DRY, and SOLID Software Principles",
-                slug: "clean-code-solid-principles-software-engineering",
-                date: "August 31, 2026",
-                category: "Software Engineering",
-                image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1000&q=80",
-                excerpt: "Write maintainable, readable, and scalable software by implementing Single Responsibility, Open-Closed, and Dependency Inversion principles.",
-                content: `
-                    <p>Writing code that machines can execute is easy; writing code that human software engineers can read, maintain, and scale over years requires discipline. Adhering to proven engineering principles like DRY (Don't Repeat Yourself) and SOLID prevents codebases from degrading into unmaintainable spaghetti code.</p>
-
-                    <h2>1. Deep Dive into SOLID Principles</h2>
-                    <ul>
-                        <li><strong>Single Responsibility Principle (SRP):</strong> A class or module should have one, and only one, reason to change. Decouple business domain logic from notification sending or persistence logging.</li>
-                        <li><strong>Open/Closed Principle (OCP):</strong> Software entities should be open for extension, but closed for modification. Extend behavior through polymorphism and interface abstractions rather than modifying existing core files.</li>
-                        <li><strong>Liskov Substitution Principle (LSP):</strong> Subtypes must be substitutable for their base types without altering system correctness.</li>
-                        <li><strong>Interface Segregation Principle (ISP):</strong> Clients should not be forced to depend on methods they do not use. Prefer small, focused interfaces.</li>
-                        <li><strong>Dependency Inversion Principle (DIP):</strong> High-level business modules should not depend on low-level utility modules. Both should depend on abstract interfaces.</li>
-                    </ul>
-
-                    <h2>2. Refactoring Violations: Dependency Inversion Example</h2>
-                    <p>In the non-inverted code below, <code>OrderService</code> is tightly coupled to a concrete MySQL database instance:</p>
-
-                    <pre><code>// Bad: Tightly Coupled
-class MySQLDatabase {
-  saveOrder(order) { /* Database Write */ }
-}
-
-class OrderService {
-  constructor() {
-    this.db = new MySQLDatabase(); // Tight Dependency
-  }
-  process(order) {
-    this.db.saveOrder(order);
-  }
-}</code></pre>
-
-                    <p>Refactoring using Dependency Inversion via Abstraction interfaces:</p>
-
-                    <pre><code>// Good: Inverted Dependency
-class OrderService {
-  constructor(databaseInterface) {
-    this.db = databaseInterface; // Depend on abstraction
-  }
-  process(order) {
-    this.db.saveOrder(order);
-  }
-}</code></pre>
-
-                    <h2>Conclusion</h2>
-                    <p>Applying clean code principles drastically reduces system technical debt, accelerates developer onboarding, and ensures long-term codebase health.</p>
-                `
-            },
-            {
-                id: 14,
-                title: "Understanding CSS Grid and Flexbox for Enterprise Responsive UI Layouts",
-                slug: "css-grid-flexbox-enterprise-responsive-layouts",
-                date: "August 30, 2026",
-                category: "Frontend Development",
-                image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1000&q=80",
-                excerpt: "Master 2D layouts using CSS Grid, 1D component positioning with Flexbox, fluid typography, and mobile-first responsive viewports.",
-                content: `
-                    <p>Building modern web user interfaces requires precise control over screen layouts across mobile, tablet, desktop, and ultra-wide displays. Modern CSS has evolved past float hacks and legacy frameworks, offering two native layout engines: <strong>CSS Flexbox</strong> and <strong>CSS Grid</strong>.</p>
-
-                    <h2>1. CSS Flexbox (1D Layout Engine)</h2>
-                    <p>Flexbox is optimized for one-dimensional layouts—arranging items strictly in a single row or single column. Flexbox excels at component-level alignment, such as centering buttons, aligning navigation bars, and dynamically distributing space among linear elements.</p>
-
-                    <pre><code>.nav-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}</code></pre>
-
-                    <h2>2. CSS Grid (2D Layout Engine)</h2>
-                    <p>CSS Grid is designed for complex two-dimensional page layouts, controlling both rows and columns simultaneously. Grid is perfect for overall page skeletons, article card galleries, and complex dashboard layouts.</p>
-
-                    <pre><code>.dashboard-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-}</code></pre>
-
-                    <h2>3. When to Combine Grid and Flexbox</h2>
-                    <p>Modern frontend engineering uses CSS Grid to construct the macro page layout grid, while embedding Flexbox containers inside individual grid card elements to align inner text, avatars, and action buttons.</p>
-
-                    <h2>Conclusion</h2>
-                    <p>Mastering native CSS Grid and Flexbox allows frontend developers to write ultra-lightweight, responsive style sheets without depending on heavy third-party CSS frameworks.</p>
-                `
-            },
-            {
-                id: 15,
-                title: "Introduction to Cybersecurity Fundamentals and OWASP Top 10 Web Vulnerabilities",
-                slug: "cybersecurity-fundamentals-owasp-top-10-guide",
-                date: "August 29, 2026",
-                category: "Cybersecurity",
-                image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1000&q=80",
-                excerpt: "Protect applications against SQL Injection, Cross-Site Scripting (XSS), CSRF, Broken Access Control, and Insecure Deserialization.",
-                content: `
-                    <p>Every web application connected to the internet is subject to constant automated cyber scanning and attack vectors. Understanding security flaws and building security-first applications is a baseline requirement for software engineers.</p>
-
-                    <h2>1. Broken Access Control (OWASP #1)</h2>
-                    <p>Broken Access Control occurs when applications fail to enforce proper permission checks. For instance, an attacker alters a URL parameter from <code>/api/invoices/1001</code> to <code>/api/invoices/1002</code> and accesses another user's private financial data (Insecure Direct Object Reference - IDOR).</p>
-                    <p><strong>Remediation:</strong> Always validate user session identity against ownership records on the backend server for every request.</p>
-
-                    <h2>2. SQL Injection (SQLi)</h2>
-                    <p>SQL Injection occurs when untrusted user inputs are concatenated directly into raw database query strings, allowing attackers to execute arbitrary SQL commands.</p>
-
-                    <pre><code>// Vulnerable Code
-const query = `SELECT * FROM users WHERE email = '${req.body.email}'`;
-
-// Secure Code using Parameterized Queries
-const query = 'SELECT * FROM users WHERE email = $1';
-await db.query(query, [req.body.email]);</code></pre>
-
-                    <h2>3. Cross-Site Scripting (XSS)</h2>
-                    <p>XSS attacks execute malicious client-side JavaScript scripts inside victim browsers due to unescaped user input rendering. Mitigate XSS by sanitizing input strings, escaping HTML output, and enforcing strict Content Security Policies (CSP).</p>
-
-                    <h2>Conclusion</h2>
-                    <p>Integrating security reviews and adopting OWASP defense patterns protects user data and ensures enterprise system compliance.</p>
-                `
-            }
-        ];
-
-        const pages = {
-            about: {
-                title: "About PickPrime",
-                content: `
-                    <h1>About PickPrime.in</h1>
-                    <p>Welcome to <strong>PickPrime.in</strong>, your premier online resource for deep-dive technical engineering tutorials, cloud computing insights, database optimization strategies, and modern software design patterns.</p>
-
-                    <h2>Our Mission</h2>
-                    <p>At PickPrime.in, our mission is to empower software developers, DevOps engineers, systems architects, and technology enthusiasts with comprehensive, actionable, and accurate knowledge. In an industry that moves at breakneck speeds, we cut through the noise by delivering 1000+ word, highly detailed technical guides that address real-world engineering challenges.</p>
-
-                    <h2>What We Cover</h2>
-                    <ul>
-                        <li><strong>Backend Architecture:</strong> Microservices, REST APIs, GraphQL, Kafka event pipelines, and high-concurrency Node.js development.</li>
-                        <li><strong>Cloud Infrastructure & DevOps:</strong> Terraform, Kubernetes container orchestration, Docker, and Cloudflare Edge computing.</li>
-                        <li><strong>Database Engineering:</strong> PostgreSQL query optimization, B-Tree indexing strategies, and enterprise Redis caching.</li>
-                        <li><strong>Frontend Development:</strong> Next.js Server Components, React App Router, and responsive CSS layout design.</li>
-                        <li><strong>Cybersecurity & Standards:</strong> OWASP vulnerability mitigation, OAuth2/OIDC implementation, and safe authentication mechanics.</li>
-                    </ul>
-
-                    <h2>Contact Information</h2>
-                    <p>If you have editorial suggestions, technical inquiries, or partnership opportunities, please contact our team directly at:</p>
-                    <p><strong>Official Email:</strong> pickprimehelp@gmail.com</p>
-                `
-            },
-            privacy: {
-                title: "Privacy Policy - PickPrime",
-                content: `
-                    <h1>Privacy Policy</h1>
-                    <p>Last updated: September 17, 2026</p>
-                    <p>At PickPrime.in, accessible from https://pickprime.in, one of our main priorities is the privacy of our visitors. This Privacy Policy document outlines the types of information that is collected and recorded by PickPrime.in and how we use it.</p>
-
-                    <h2>Log Files</h2>
-                    <p>PickPrime.in follows a standard procedure of using log files. These files log visitors when they visit websites. All hosting companies do this as a part of hosting services' analytics. The information collected by log files includes internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks. These are not linked to any information that is personally identifiable. The purpose of the information is for analyzing trends, administering the site, tracking users' movement on the website, and gathering demographic information.</p>
-
-                    <h2>Cookies and Web Beacons</h2>
-                    <p>Like any other website, PickPrime.in uses 'cookies'. These cookies are used to store information including visitors' preferences, and the pages on the website that the visitor accessed or visited. The information is used to optimize the users' experience by customizing our web page content based on visitors' browser type and/or other information.</p>
-
-                    <h2>Google DoubleClick DART Cookie</h2>
-                    <p>Google is one of a third-party vendor on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to www.website.com and other sites on the internet. However, visitors may choose to decline the use of DART cookies by visiting the Google ad and content network Privacy Policy at the following URL – <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">https://policies.google.com/technologies/ads</a></p>
-
-                    <h2>Our Advertising Partners</h2>
-                    <p>Some of advertisers on our site may use cookies and web beacons. Our advertising partners include Google AdSense. Each of our advertising partners has their own Privacy Policy for their policies on user data. For easier access, we hyperlinked to their Privacy Policies above.</p>
-
-                    <h2>Third Party Privacy Policies</h2>
-                    <p>PickPrime.in's Privacy Policy does not apply to other advertisers or websites. Thus, we are advising you to consult the respective Privacy Policies of these third-party ad servers for more detailed information. It may include their practices and instructions about how to opt-out of certain options.</p>
-
-                    <h2>Contact Us</h2>
-                    <p>If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us at <strong>pickprimehelp@gmail.com</strong>.</p>
-                `
-            },
-            terms: {
-                title: "Terms and Conditions - PickPrime",
-                content: `
-                    <h1>Terms and Conditions</h1>
-                    <p>Welcome to PickPrime.in!</p>
-                    <p>These terms and conditions outline the rules and regulations for the use of PickPrime's Website, located at PickPrime.in.</p>
-                    <p>By accessing this website we assume you accept these terms and conditions. Do not continue to use PickPrime.in if you do not agree to take all of the terms and conditions stated on this page.</p>
-
-                    <h2>Intellectual Property Rights</h2>
-                    <p>Unless otherwise stated, PickPrime.in and/or its licensors own the intellectual property rights for all material on PickPrime.in. All intellectual property rights are reserved. You may access this from PickPrime.in for your own personal use subjected to restrictions set in these terms and conditions.</p>
-
-                    <h2>You must not:</h2>
-                    <ul>
-                        <li>Republish material from PickPrime.in</li>
-                        <li>Sell, rent or sub-license material from PickPrime.in</li>
-                        <li>Reproduce, duplicate or copy material from PickPrime.in</li>
-                        <li>Redistribute content from PickPrime.in</li>
-                    </ul>
-
-                    <h2>Disclaimer</h2>
-                    <p>To the maximum extent permitted by applicable law, we exclude all representations, warranties and conditions relating to our website and the use of this website. Nothing in this disclaimer will limit or exclude our or your liability for death or personal injury resulting from negligence, or limit or exclude any of our or your liabilities in any way that is not permitted under applicable law.</p>
-
-                    <h2>Contact Information</h2>
-                    <p>If you have any queries regarding any of our terms, please contact us at <strong>pickprimehelp@gmail.com</strong>.</p>
-                `
-            },
-            contact: {
-                title: "Contact Us - PickPrime",
-                content: `
-                    <h1>Contact PickPrime Team</h1>
-                    <p>Have questions, feedback, or sponsorship inquiries? We would love to hear from you! Reach out to us using the contact details below or send us a direct message using the form.</p>
-
-                    <div style="margin: 1.5rem 0; padding: 1rem; background: #e0f2fe; border-left: 4px solid #0284c7; border-radius: 4px;">
-                        <p><strong>Direct Email:</strong> pickprimehelp@gmail.com</p>
-                        <p><strong>Domain:</strong> PickPrime.in</p>
-                        <p><strong>Response Time:</strong> Within 24-48 Business Hours</p>
-                    </div>
-
-                    <form onsubmit="handleFormSubmit(event)">
-                        <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" required placeholder="Enter your name">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Your Email Address</label>
-                            <input type="email" id="email" required placeholder="Enter your email">
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" required placeholder="Subject of your message">
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" rows="5" required placeholder="Write your message here..."></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">Send Message</button>
-                    </form>
-                `
-            }
-        };
-
-        // Router Functions
-        function showHome() {
-            window.scrollTo(0,0);
-            const app = document.getElementById('appContent');
-            let html = `
-                <div class="ad-banner">
-                    <!-- Top Homepage Banner Ad -->
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                         data-ad-slot="9876543210"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-                </div>
-                <h1 style="margin-bottom: 1.5rem; font-size: 1.8rem; color: #0f172a;">Latest Technical Articles</h1>
-                <div class="article-grid">
-            `;
-
-            articles.forEach(art => {
-                html += `
-                    <article class="article-card">
-                        <img src="${art.image}" alt="${art.title}" loading="lazy">
-                        <div class="article-card-content">
-                            <div class="article-meta">Category: <strong>${art.category}</strong> | ${art.date}</div>
-                            <h2><a onclick="showArticle(${art.id})">${art.title}</a></h2>
-                            <p>${art.excerpt}</p>
-                            <a onclick="showArticle(${art.id})" class="read-more-btn">Read Full Article →</a>
-                        </div>
-                    </article>
-                `;
-            });
-
-            html += `</div>`;
-            app.innerHTML = html;
-            closeMenu();
-        }
-
-        function showArticle(id) {
-            window.scrollTo(0,0);
-            const art = articles.find(a => a.id === id);
-            if (!art) return;
-
-            const app = document.getElementById('appContent');
-            app.innerHTML = `
-                <article class="full-article">
-                    <div class="article-meta">Category: <strong>${art.category}</strong> | Published on ${art.date}</div>
-                    <h1>${art.title}</h1>
-                    <img src="${art.image}" alt="${art.title}">
-                    
-                    <div class="ad-banner">
-                        <!-- In-Article Ad Unit -->
-                        <ins class="adsbygoogle"
-                             style="display:block; text-align:center;"
-                             data-ad-layout="in-article"
-                             data-ad-format="fluid"
-                             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                             data-ad-slot="5432167890"></ins>
-                        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-                    </div>
-
-                    ${art.content}
-
-                    <div style="margin-top: 2rem; padding: 1rem; background: #f1f5f9; border-radius: 8px;">
-                        <p><strong>Written by PickPrime Editorial Team</strong></p>
-                        <p style="font-size: 0.9rem; color: #64748b;">Questions regarding this article? Email us at pickprimehelp@gmail.com</p>
-                    </div>
-                </article>
-            `;
-            closeMenu();
-        }
-
-        function showPage(pageKey) {
-            window.scrollTo(0,0);
-            const page = pages[pageKey];
-            if (!page) return;
-
-            const app = document.getElementById('appContent');
-            app.innerHTML = `<div class="full-article">${page.content}</div>`;
-            closeMenu();
-        }
-
-        function renderRecentSidebar() {
-            const list = document.getElementById('recentArticlesList');
-            let html = '';
-            articles.slice(0, 5).forEach(art => {
-                html += `<li><a onclick="showArticle(${art.id})">${art.title}</a></li>`;
-            });
-            list.innerHTML = html;
-        }
-
-        function toggleMenu() {
-            document.getElementById('navLinks').classList.toggle('active');
-        }
-
-        function closeMenu() {
-            document.getElementById('navLinks').classList.remove('active');
-        }
-
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            alert("Thank you for contacting PickPrime! Your message has been received. We will email you back at pickprimehelp@gmail.com soon.");
-            showHome();
-        }
-
-        // Initialize Application
-        window.onload = function() {
-            showHome();
-            renderRecentSidebar();
-        };
-    </script>
 </body>
 </html>
