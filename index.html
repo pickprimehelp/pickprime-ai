@@ -163,7 +163,6 @@
             cursor: pointer;
         }
 
-        /* Full Post Styling */
         .full-article img {
             width: 100%;
             max-height: 400px;
@@ -175,6 +174,7 @@
         .full-article h1 { font-size: 2rem; margin-bottom: 0.8rem; }
         .full-article h2 { font-size: 1.4rem; margin: 1.8rem 0 0.8rem; }
         .full-article p { margin-bottom: 1.2rem; font-size: 1.05rem; color: #334155; }
+        .full-article ul, .full-article ol { margin: 1rem 0 1.5rem 2rem; }
         .full-article pre { background: #0f172a; color: #f8fafc; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1.2rem 0; }
         .full-article code { font-family: monospace; }
 
@@ -229,12 +229,9 @@
             margin-top: 2rem;
         }
 
-        /* Mobile Menu Fix */
         @media (max-width: 868px) {
             .container { grid-template-columns: 1fr; }
-            
             .hamburger { display: block; }
-
             .nav-links {
                 display: none;
                 flex-direction: column;
@@ -246,10 +243,7 @@
                 padding: 1.5rem;
                 box-shadow: 0 4px 6px rgba(0,0,0,0.2);
             }
-
-            .nav-links.active {
-                display: flex;
-            }
+            .nav-links.active { display: flex; }
         }
     </style>
 </head>
@@ -270,9 +264,7 @@
     </header>
 
     <div class="container">
-        <main class="main-content" id="appView">
-            <!-- Dynamic Content Renders Here -->
-        </main>
+        <main class="main-content" id="appView"></main>
 
         <aside class="sidebar">
             <div class="widget">
@@ -328,34 +320,7 @@
                 category: "Backend & Cloud",
                 image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=80",
                 excerpt: "Learn how to build scalable, fault-tolerant microservices using Node.js, Express, Docker containers, and API Gateways from scratch.",
-                content: `
-                    <p>Microservices architecture has become the standard design pattern for building modern, scalable enterprise applications. Unlike traditional monolithic applications, where all components are tightly coupled into a single codebase, microservices break down applications into small, independent, and loosely coupled services that communicate over network protocols.</p>
-                    
-                    <p>In this technical breakdown, we will examine how to build, containerize, and orchestrate microservices using Node.js, Express, Docker, and NGINX as an API Gateway.</p>
-
-                    <h2>1. Understanding Monolithic vs. Microservices Architecture</h2>
-                    <p>In a monolithic architecture, the user interface, database access layer, business logic, and background processing exist within a single executable unit. While easy to build initially, monoliths present significant challenges as systems scale:</p>
-                    <ul>
-                        <li><strong>Scalability Bottlenecks:</strong> You must scale the entire application, even if only one module requires extra throughput.</li>
-                        <li><strong>Deployment Risks:</strong> A single bug in a non-critical module can crash the entire application.</li>
-                        <li><strong>Tech Stack Lock-in:</strong> Upgrading core frameworks across a legacy monolith is extremely expensive.</li>
-                    </ul>
-
-                    <h2>2. Containerizing Node.js Services with Docker</h2>
-                    <p>Containerization ensures microservices run identically across development, staging, and production environments:</p>
-                    <pre><code>FROM node:18-alpine AS builder
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-CMD ["node", "server.js"]</code></pre>
-
-                    <h2>3. Implementing API Gateway with NGINX</h2>
-                    <p>An API Gateway acts as a single reverse proxy entry point, managing routing, rate-limiting, and SSL termination.</p>
-
-                    <h2>Conclusion</h2>
-                    <p>Transitioning to microservices offers unmatched flexibility, deployment speed, and isolation for enterprise systems.</p>
-                `
+                content: `<p>Microservices architecture has become the standard design pattern for building modern, scalable enterprise applications. Unlike traditional monolithic applications, where all components are tightly coupled into a single codebase, microservices break down applications into small, independent, and loosely coupled services that communicate over network protocols.</p><h2>1. Understanding Monolithic vs Microservices</h2><p>In a monolithic architecture, the user interface, database access layer, business logic, and background processing exist within a single executable unit. Microservices solve scalability bottlenecks by isolating business domains into micro-domains.</p><h2>2. Containerizing Node.js Services with Docker</h2><pre><code>FROM node:18-alpine AS builder\nWORKDIR /app\nCOPY package*.json ./\nRUN npm ci --only=production\nCOPY . .\nCMD ["node", "server.js"]</code></pre><h2>Conclusion</h2><p>Transitioning to microservices offers unmatched flexibility, deployment speed, and isolation for enterprise systems.</p>`
             },
             {
                 id: 2,
@@ -364,13 +329,7 @@ CMD ["node", "server.js"]</code></pre>
                 category: "Cloud & DevOps",
                 image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80",
                 excerpt: "Explore serverless compute at the edge using Cloudflare Workers, V8 isolates, KV storage, and global low-latency API handling.",
-                content: `
-                    <p>Serverless computing transformed backend development by abstracting server management. Cloudflare Workers is at the forefront of edge computing, running JavaScript directly on Cloudflare's global CDN network.</p>
-                    <h2>1. V8 Isolates vs Containers</h2>
-                    <p>Cloudflare Workers eliminates cold starts by utilizing Google Chrome V8 Isolates, spinning up runtimes in under 5 milliseconds.</p>
-                    <h2>Conclusion</h2>
-                    <p>Edge computing empowers developers to build low-latency globally distributed applications seamlessly.</p>
-                `
+                content: `<p>Serverless computing transformed backend development by abstracting server management. Cloudflare Workers is at the forefront of edge computing, running JavaScript directly on Cloudflare's global CDN network.</p><h2>1. V8 Isolates vs Containers</h2><p>Cloudflare Workers eliminates cold starts by utilizing Google Chrome V8 Isolates, spinning up runtimes in under 5 milliseconds.</p><h2>Conclusion</h2><p>Edge computing empowers developers to build low-latency globally distributed applications seamlessly.</p>`
             },
             {
                 id: 3,
@@ -379,11 +338,160 @@ CMD ["node", "server.js"]</code></pre>
                 category: "Databases",
                 image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=1000&q=80",
                 excerpt: "Master B-Trees, Hash indexes, GIN, BRIN, EXPLAIN ANALYZE execution plans, and query tuning in relational database systems.",
-                content: `
-                    <p>Database performance determines overall application latency. Proper indexing strategies and execution plan analysis are vital software engineering skills.</p>
-                    <h2>1. How B-Tree Indexes Work</h2>
-                    <p>B-Trees keep data sorted in a self-balancing structure, reducing query time from linear scans O(N) to logarithmic time O(log N).</p>
-                `
+                content: `<p>Database performance determines overall application latency. Proper indexing strategies and execution plan analysis are vital software engineering skills.</p><h2>1. How B-Tree Indexes Work</h2><p>B-Trees keep data sorted in a self-balancing structure, reducing query time from linear scans O(N) to logarithmic time O(log N).</p>`
+            },
+            {
+                id: 4,
+                title: "Building Real-Time Data Pipelines using Apache Kafka and WebSockets",
+                date: "September 09, 2026",
+                category: "System Design",
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80",
+                excerpt: "Architect end-to-end event-driven stream processing systems using Apache Kafka producers, consumer groups, and WebSockets.",
+                content: `<p>Modern internet users expect instantaneous updates. Apache Kafka ingest streams paired with persistent WebSocket gateway servers push analytics to clients in under 50ms.</p>`
+            },
+            {
+                id: 5,
+                title: "Next.js Server Components and Modern Rendering Architecture",
+                date: "September 08, 2026",
+                category: "Frontend & Web",
+                image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1000&q=80",
+                excerpt: "Analyze React Server Components (RSC), App Router mechanics, hydration performance, dynamic streaming, and hybrid SSR/SSG.",
+                content: `<p>React Server Components run exclusively on the server, eliminating JavaScript bundle overhead and allowing direct database access from React UI trees.</p>`
+            },
+            {
+                id: 6,
+                title: "Securing Distributed Systems with OAuth2, OIDC, and JWT Best Practices",
+                date: "September 07, 2026",
+                category: "Security",
+                image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1000&q=80",
+                excerpt: "In-depth guide to identity management, PKCE flows, asymmetric JWT signing key rotation, and API security.",
+                content: `<p>Learn standard OAuth 2.0 and OpenID Connect (OIDC) identity mechanics using PKCE security verifiers for Single Page Applications.</p>`
+            },
+            {
+                id: 7,
+                title: "Introduction to Infrastructure as Code using Terraform and AWS",
+                date: "September 06, 2026",
+                category: "DevOps",
+                image: "https://images.unsplash.com/photo-1667372335854-7882b0454733?auto=format&fit=crop&w=1000&q=80",
+                excerpt: "Automate cloud infrastructure deployments using HashiCorp Terraform modules, remote state locking, and AWS EC2 provisioning.",
+                content: `<p>Infrastructure as Code allows teams to define declarative HashiCorp HCL files to version control and automate AWS VPCs and EC2 instances.</p>`
+            },
+            {
+                id: 8,
+                title: "Container Orchestration with Kubernetes: Core Concepts and Yaml Declarations",
+                date: "September 05, 2026",
+                category: "DevOps & Cloud",
+                image: "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?auto=format&fit=crop&w=1000&q=80",
+                excerpt: "Understand Kubernetes Control Plane, Worker Nodes, Pods, Deployments, Services, Ingress Controllers, and automated scaling.",
+                content: `<p>Kubernetes automates high availability and container lifecycle management across enterprise cloud infrastructure using declarative YAML manifests.</p>`
+            },
+            {
+                id: 9,
+                title: "Understanding GraphQL Architecture vs REST APIs in Enterprise Systems",
+                date: "September 04, 2026",
+                category: "API Design",
+                image: "https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?auto=format&fit=crop&w=1000&q=80",
+                excerpt: "Compare GraphQL schemas, resolvers, and queries against traditional REST endpoints to optimize network payloads.",
+                content: `<p>GraphQL allows clients to request exact fields, eliminating over-fetching and network latency on mobile client endpoints.</p>`
+            },
+            {
+                id: 10,
+                title: "Building Enterprise Redis Caching Strategies for High-Throughput Web Apps",
+                date: "September 03, 2026",
+                category: "Backend Architecture",
+                image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1000&q=80",
+                excerpt: "Learn Cache-Aside, Write-Through, Cache Stampede mitigation, and TTL expiration policies in Redis.",
+                content: `<p>Deploying Redis in-memory datastores dramatically cuts API latencies to sub-millisecond speeds while shielding primary SQL databases.</p>`
+            },
+            {
+                id: 11,
+                title: "Demystifying Modern JavaScript Asynchronous Execution: Event Loop and Promises",
+                date: "September 02, 2026",
+                category: "Programming",
+                image: "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?auto=format&fit=crop&w=1000&q=80",
+                excerpt: "Deep dive into Node.js and V8 Event Loop engines, Call Stack, Microtask queue, Macrotasks, and async mechanics.",
+                content: `<p>Master how V8 Call Stacks, Microtask Queues, and Macrotasks prioritize asynchronous Promise executions in single-threaded JavaScript runtimes.</p>`
+            },
+            {
+                id: 12,
+                title: "Architecting Distributed CI/CD Pipelines with GitHub Actions and Docker",
+                date: "September 01, 2026",
+                category: "DevOps",
+                image: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=1000&q=80",
+                excerpt: "Automate code testing, static security analysis, Docker image compilation, and automated cloud deployments.",
+                content: `<p>Build automated continuous integration workflows in GitHub Actions to test, package, and deploy container images securely.</p>`
+            },
+            {
+                id: 13,
+                title: "Comprehensive Guide to Clean Code, DRY, and SOLID Software Principles",
+                date: "August 31, 2026",
+                category: "Software Engineering",
+                image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1000&q=80",
+                excerpt: "Write maintainable and scalable software by implementing Single Responsibility, Open-Closed, and Dependency Inversion principles.",
+                content: `<p>Adhering to DRY and SOLID software patterns prevents technical debt degradation and keeps large enterprise codebases readable.</p>`
+            },
+            {
+                id: 14,
+                title: "Understanding CSS Grid and Flexbox for Enterprise Responsive UI Layouts",
+                date: "August 30, 2026",
+                category: "Frontend Development",
+                image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1000&q=80",
+                excerpt: "Master 2D layouts using CSS Grid, 1D component positioning with Flexbox, and mobile-first viewports.",
+                content: `<p>Build responsive layout structures using native CSS Grid macro-layouts combined with Flexbox micro-component alignments.</p>`
+            },
+            {
+                id: 15,
+                title: "Introduction to Cybersecurity Fundamentals and OWASP Top 10 Web Vulnerabilities",
+                date: "August 29, 2026",
+                category: "Cybersecurity",
+                image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1000&q=80",
+                excerpt: "Protect applications against SQL Injection, Cross-Site Scripting (XSS), CSRF, and Broken Access Control.",
+                content: `<p>Learn how to secure web applications against SQL injection, XSS attack vectors, and insecure direct object reference flaws.</p>`
+            },
+            {
+                id: 16,
+                title: "Mastering TypeScript Generics and Advanced Type System Utilities",
+                date: "August 28, 2026",
+                category: "Programming",
+                image: "https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?auto=format&fit=crop&w=1000&q=80",
+                excerpt: "Learn conditional types, keyof mapped types, template literal types, and generic constraints for robust frontend development.",
+                content: `<p>TypeScript generics allow developers to write reusable, type-safe components without resorting to unsafe <code>any</code> types.</p>`
+            },
+            {
+                id: 17,
+                title: "Building Distributed Event-Driven Architecture with RabbitMQ",
+                date: "August 27, 2026",
+                category: "System Design",
+                image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=80",
+                excerpt: "Understand AMQP protocols, direct/topic exchanges, dead-letter queues, and message acknowledgment patterns in RabbitMQ.",
+                content: `<p>RabbitMQ provides high-reliability message queuing between asynchronous microservices with explicit publisher confirmations.</p>`
+            },
+            {
+                id: 18,
+                title: "Optimizing Web Performance: Core Web Vitals, LCP, CLS, and INP",
+                date: "August 26, 2026",
+                category: "Frontend Development",
+                image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1000&q=80",
+                excerpt: "Improve Google Core Web Vitals metrics, optimize Largest Contentful Paint, prevent Cumulative Layout Shift, and lower Interaction to Next Paint.",
+                content: `<p>Optimizing web performance improves user retention and search engine indexing scores across desktop and mobile devices.</p>`
+            },
+            {
+                id: 19,
+                title: "Comprehensive Guide to MongoDB Sharding and Replica Sets",
+                date: "August 25, 2026",
+                category: "Databases",
+                image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=1000&q=80",
+                excerpt: "Scale NoSQL databases horizontally with Mongo shard keys, mongos routers, and high availability primary-secondary failovers.",
+                content: `<p>MongoDB sharding distributes large document collections across multiple cluster nodes to maintain fast query throughput.</p>`
+            },
+            {
+                id: 20,
+                title: "Implementing Serverless GraphQL APIs with AWS Lambda and DynamoDB",
+                date: "August 24, 2026",
+                category: "Cloud Architecture",
+                image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80",
+                excerpt: "Build fully serverless backend APIs using AWS AppSync/Lambda resolvers connected to Single-Table Design DynamoDB instances.",
+                content: `<p>Combining serverless compute with DynamoDB single-table design provides infinite scaling and zero server management overhead.</p>`
             }
         ];
 
@@ -437,7 +545,7 @@ CMD ["node", "server.js"]</code></pre>
 
         function renderSidebar() {
             let html = '';
-            posts.forEach(p => {
+            posts.slice(0, 7).forEach(p => {
                 html += `<li><a onclick="showPost(${p.id})">${p.title}</a></li>`;
             });
             document.getElementById('recentSideList').innerHTML = html;
@@ -451,7 +559,6 @@ CMD ["node", "server.js"]</code></pre>
             document.getElementById('menuList').classList.remove('active');
         }
 
-        // Init
         window.onload = function() {
             showHome();
             renderSidebar();
