@@ -28,6 +28,11 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
@@ -41,6 +46,7 @@
             top: 0;
             z-index: 1000;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            width: 100%;
         }
 
         .nav-container {
@@ -95,6 +101,7 @@
             display: grid;
             grid-template-columns: 2fr 1fr;
             gap: 2rem;
+            width: 100%;
         }
 
         .main-content {
@@ -102,6 +109,8 @@
             padding: 2rem;
             border-radius: 12px;
             border: 1px solid var(--border-color);
+            width: 100%;
+            overflow-x: hidden;
         }
 
         .article-card {
@@ -111,6 +120,7 @@
             overflow: hidden;
             background: white;
             transition: transform 0.2s;
+            width: 100%;
         }
 
         .article-card:hover { transform: translateY(-3px); }
@@ -126,6 +136,7 @@
         .article-card-content h2 {
             font-size: 1.4rem;
             margin-bottom: 0.8rem;
+            word-wrap: break-word;
         }
 
         .article-card-content h2 a {
@@ -149,6 +160,14 @@
             cursor: pointer;
         }
 
+        /* Full Article Responsive Fix */
+        .full-article {
+            width: 100%;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-word;
+        }
+
         .full-article img {
             width: 100%;
             max-height: 420px;
@@ -157,18 +176,59 @@
             margin: 1.5rem 0;
         }
 
-        .full-article h1 { font-size: 2.2rem; margin-bottom: 0.8rem; line-height: 1.3; }
-        .full-article h2 { font-size: 1.5rem; margin: 2rem 0 0.8rem; color: #0f172a; border-bottom: 1px solid var(--border-color); padding-bottom: 0.3rem; }
-        .full-article p { margin-bottom: 1.4rem; font-size: 1.05rem; color: #334155; }
-        .full-article ul, .full-article ol { margin: 1rem 0 1.5rem 2rem; }
-        .full-article li { margin-bottom: 0.5rem; }
-        .full-article pre { background: #0f172a; color: #f8fafc; padding: 1.2rem; border-radius: 8px; overflow-x: auto; margin: 1.5rem 0; }
-        .full-article code { font-family: monospace; }
+        .full-article h1 { 
+            font-size: 2rem; 
+            margin-bottom: 0.8rem; 
+            line-height: 1.3;
+            overflow-wrap: break-word;
+        }
+
+        .full-article h2 { 
+            font-size: 1.4rem; 
+            margin: 2rem 0 0.8rem; 
+            color: #0f172a; 
+            border-bottom: 1px solid var(--border-color); 
+            padding-bottom: 0.3rem;
+            overflow-wrap: break-word;
+        }
+
+        .full-article p { 
+            margin-bottom: 1.4rem; 
+            font-size: 1.05rem; 
+            color: #334155; 
+        }
+
+        .full-article ul, .full-article ol { 
+            margin: 1rem 0 1.5rem 1.5rem; 
+        }
+
+        .full-article li { 
+            margin-bottom: 0.5rem; 
+        }
+
+        /* Code Block Responsiveness */
+        .full-article pre { 
+            background: #0f172a; 
+            color: #f8fafc; 
+            padding: 1.2rem; 
+            border-radius: 8px; 
+            overflow-x: auto; 
+            max-width: 100%;
+            margin: 1.5rem 0; 
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .full-article code { 
+            font-family: monospace; 
+            font-size: 0.9rem;
+        }
 
         .sidebar {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
+            width: 100%;
         }
 
         .widget {
@@ -176,6 +236,8 @@
             padding: 1.5rem;
             border-radius: 12px;
             border: 1px solid var(--border-color);
+            width: 100%;
+            overflow-wrap: break-word;
         }
 
         .widget h3 {
@@ -194,6 +256,7 @@
             color: #94a3b8;
             padding: 3rem 1.5rem 1.5rem;
             margin-top: 4rem;
+            width: 100%;
         }
 
         .footer-container {
@@ -216,9 +279,20 @@
             margin-top: 2rem;
         }
 
+        /* Mobile Adjustments */
         @media (max-width: 868px) {
-            .container { grid-template-columns: 1fr; }
+            .container { 
+                grid-template-columns: 1fr; 
+                padding: 0 1rem;
+                margin: 1rem auto;
+            }
+
+            .main-content {
+                padding: 1.2rem;
+            }
+
             .hamburger { display: block !important; }
+
             .nav-links {
                 display: none !important;
                 flex-direction: column;
@@ -230,7 +304,12 @@
                 padding: 1.5rem;
                 box-shadow: 0 4px 6px rgba(0,0,0,0.2);
             }
+
             .nav-links.active { display: flex !important; }
+
+            .full-article h1 { font-size: 1.6rem; }
+            .full-article h2 { font-size: 1.2rem; }
+            .full-article p { font-size: 1rem; }
         }
     </style>
 </head>
@@ -299,7 +378,6 @@
     </footer>
 
     <script>
-        // Generator to create detailed 1000+ words per article dynamically
         function generateLongText(title, topic) {
             return `
                 <p>In modern software engineering and enterprise cloud development, mastering ${topic} is an essential competency for developers, DevOps engineers, and system architects. As digital platforms scale to serve millions of concurrent global users, building resilient, performant, and secure software requires strict adherence to architectural standards and systematic design principles.</p>
@@ -330,7 +408,6 @@ async function executeServiceTask(payload) {
         if (!payload || !payload.id) {
             throw new Error('Invalid request payload');
         }
-        // Simulated asynchronous computation and database access
         const result = await Promise.resolve({ status: 200, data: payload });
         return result;
     } catch (err) {
