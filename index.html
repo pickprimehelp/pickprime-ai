@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
+    <script>(function(s){s.dataset.zone='11882131',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🔮 Divya Bhavishya Vani - Magic Future Predictor</title>
@@ -26,7 +27,6 @@
             position: relative;
         }
 
-        /* Background Animated Particles/Stars */
         body::before {
             content: '';
             position: absolute;
@@ -44,21 +44,19 @@
             100% { background-position: 500px 500px, 525px 525px; }
         }
 
-        /* Card Container */
         .card-container {
             position: relative;
             width: 100%;
             max-width: 480px;
             background: rgba(15, 5, 30, 0.95);
             border-radius: 25px;
-            padding: 30px 20px;
+            padding: 25px 20px;
             text-align: center;
             box-shadow: 0 0 50px rgba(255, 215, 0, 0.3), inset 0 0 20px rgba(255, 0, 128, 0.2);
             z-index: 1;
             border: 2px solid rgba(255, 215, 0, 0.3);
         }
 
-        /* Top & Bottom Om Border Header */
         .om-border-top, .om-border-bottom {
             display: flex;
             justify-content: space-around;
@@ -76,64 +74,44 @@
         }
 
         @keyframes omGlow {
-            0% { text-shadow: 0 0 5px #ffd700, 0 0 10px #ff8c00; transform: scale(1); }
+            0% { text-shadow: 0 0 5px #ffd700; transform: scale(1); }
             100% { text-shadow: 0 0 15px #ffd700, 0 0 30px #ff007f; transform: scale(1.1); }
         }
 
         h1 {
             font-family: 'Yatra One', cursive, sans-serif;
             color: #ffd700;
-            font-size: 28px;
+            font-size: 26px;
             text-shadow: 0 0 15px #ff4500;
-            letter-spacing: 1px;
             margin-bottom: 5px;
         }
 
         p.subtitle {
             font-size: 13px;
             color: #e0c3fc;
-            margin-bottom: 25px;
-            text-shadow: 0 0 5px rgba(224, 195, 252, 0.5);
+            margin-bottom: 20px;
         }
 
-        /* Magical Jyotish Chakra Outer Frame */
         .chakra-wrapper {
             position: relative;
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 25px;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 20px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* Outer Glow Ring */
-        .chakra-glow {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(255, 215, 0, 0.2) 0%, transparent 70%);
-            animation: pulseGlow 2s infinite alternate;
-        }
-
-        @keyframes pulseGlow {
-            from { transform: scale(0.95); opacity: 0.6; }
-            to { transform: scale(1.1); opacity: 1; }
-        }
-
-        /* Main Rotating Jyotish Chakra Wheel */
         .jyotish-wheel {
             position: absolute;
-            width: 180px;
-            height: 180px;
+            width: 170px;
+            height: 170px;
             border-radius: 50%;
             border: 3px solid #ffd700;
             box-shadow: 0 0 20px #ffd700, inset 0 0 20px #ff007f;
             animation: spinClockwise 15s linear infinite;
         }
 
-        /* Zodiac Signs around the Chakra Wheel */
         .zodiac-sign {
             position: absolute;
             width: 30px;
@@ -142,111 +120,87 @@
             left: 50%;
             margin-top: -15px;
             margin-left: -15px;
-            font-size: 18px;
+            font-size: 16px;
             color: #fff;
             text-shadow: 0 0 8px #ffd700;
         }
 
-        /* Positioning 12 Zodiacs around wheel */
-        .z1  { transform: rotate(0deg) translate(72px) rotate(-0deg); }
-        .z2  { transform: rotate(30deg) translate(72px) rotate(-30deg); }
-        .z3  { transform: rotate(60deg) translate(72px) rotate(-60deg); }
-        .z4  { transform: rotate(90deg) translate(72px) rotate(-90deg); }
-        .z5  { transform: rotate(120deg) translate(72px) rotate(-120deg); }
-        .z6  { transform: rotate(150deg) translate(72px) rotate(-150deg); }
-        .z7  { transform: rotate(180deg) translate(72px) rotate(-180deg); }
-        .z8  { transform: rotate(210deg) translate(72px) rotate(-210deg); }
-        .z9  { transform: rotate(240deg) translate(72px) rotate(-240deg); }
-        .z10 { transform: rotate(270deg) translate(72px) rotate(-270deg); }
-        .z11 { transform: rotate(300deg) translate(72px) rotate(-300deg); }
-        .z12 { transform: rotate(330deg) translate(72px) rotate(-330deg); }
+        .z1  { transform: rotate(0deg) translate(68px) rotate(-0deg); }
+        .z2  { transform: rotate(30deg) translate(68px) rotate(-30deg); }
+        .z3  { transform: rotate(60deg) translate(68px) rotate(-60deg); }
+        .z4  { transform: rotate(90deg) translate(68px) rotate(-90deg); }
+        .z5  { transform: rotate(120deg) translate(68px) rotate(-120deg); }
+        .z6  { transform: rotate(150deg) translate(68px) rotate(-150deg); }
+        .z7  { transform: rotate(180deg) translate(68px) rotate(-180deg); }
+        .z8  { transform: rotate(210deg) translate(68px) rotate(-210deg); }
+        .z9  { transform: rotate(240deg) translate(68px) rotate(-240deg); }
+        .z10 { transform: rotate(270deg) translate(68px) rotate(-270deg); }
+        .z11 { transform: rotate(300deg) translate(68px) rotate(-300deg); }
+        .z12 { transform: rotate(330deg) translate(68px) rotate(-330deg); }
 
-        /* Inner Ring Rotating Anti-Clockwise */
         .inner-ring {
             position: absolute;
-            width: 110px;
-            height: 110px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             border: 2px dashed #00ffff;
-            box-shadow: 0 0 15px #00ffff;
             animation: spinCounterClockwise 10s linear infinite;
         }
 
-        /* Center Glowing Om Symbol */
         .center-om {
             position: absolute;
-            font-size: 42px;
+            font-size: 38px;
             color: #ffd700;
-            text-shadow: 0 0 20px #ff0000, 0 0 40px #ffd700;
+            text-shadow: 0 0 20px #ff0000;
             animation: pulseOm 1.5s ease-in-out infinite alternate;
             z-index: 2;
         }
 
-        @keyframes spinClockwise {
-            100% { transform: rotate(360deg); }
-        }
-
-        @keyframes spinCounterClockwise {
-            100% { transform: rotate(-360deg); }
-        }
-
+        @keyframes spinClockwise { 100% { transform: rotate(360deg); } }
+        @keyframes spinCounterClockwise { 100% { transform: rotate(-360deg); } }
         @keyframes pulseOm {
-            0% { transform: scale(0.9); text-shadow: 0 0 15px #ff4500; }
-            100% { transform: scale(1.15); text-shadow: 0 0 35px #ffd700, 0 0 50px #ff007f; }
+            0% { transform: scale(0.9); }
+            100% { transform: scale(1.15); }
         }
 
-        /* Input Form */
         .input-group {
-            margin-bottom: 18px;
+            margin-bottom: 15px;
             text-align: left;
         }
 
         label {
             display: block;
-            font-size: 14px;
+            font-size: 13px;
             color: #ffe57f;
-            margin-bottom: 6px;
+            margin-bottom: 5px;
             font-weight: 600;
         }
 
         input {
             width: 100%;
-            padding: 14px;
+            padding: 12px;
             border-radius: 12px;
             border: 2px solid #9c27b0;
             background: rgba(255, 255, 255, 0.08);
             color: #fff;
-            font-size: 16px;
+            font-size: 15px;
             outline: none;
-            transition: all 0.3s ease;
         }
 
-        input:focus {
-            border-color: #ffd700;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        /* Magic Button */
         .btn-magic {
             width: 100%;
-            padding: 16px;
+            padding: 15px;
             background: linear-gradient(45deg, #ff007f, #7928ca, #00dfd8, #ff8c00);
             background-size: 300% 300%;
             animation: magicGradient 4s ease infinite;
             border: none;
-            border-radius: 14px;
+            border-radius: 12px;
             color: white;
-            font-size: 18px;
+            font-size: 17px;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 0 25px rgba(255, 0, 127, 0.6);
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.6);
             margin-top: 10px;
-            transition: transform 0.2s;
-        }
-
-        .btn-magic:active {
-            transform: scale(0.98);
         }
 
         @keyframes magicGradient {
@@ -255,31 +209,24 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Animated Magic Loader */
         .loader {
             display: none;
-            margin: 25px 0;
-            font-size: 16px;
+            margin: 20px 0;
+            font-size: 15px;
             color: #00ffe1;
-            text-shadow: 0 0 10px #00ffe1;
             animation: blinkText 1s infinite alternate;
         }
 
-        @keyframes blinkText {
-            0% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
+        @keyframes blinkText { 0% { opacity: 0.5; } 100% { opacity: 1; } }
 
-        /* Result Display Box */
         .result-box {
             display: none;
-            margin-top: 25px;
+            margin-top: 20px;
             background: rgba(255, 255, 255, 0.06);
             border: 2px solid #ffd700;
             border-radius: 16px;
-            padding: 20px;
+            padding: 18px;
             text-align: left;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
             animation: zoomIn 0.8s ease-out;
         }
 
@@ -292,80 +239,58 @@
             font-family: 'Yatra One', cursive;
             color: #ffd700;
             text-align: center;
-            margin-bottom: 15px;
-            font-size: 22px;
-            text-shadow: 0 0 10px #ff7300;
+            margin-bottom: 12px;
+            font-size: 20px;
             border-bottom: 1px dashed rgba(255, 215, 0, 0.4);
-            padding-bottom: 10px;
+            padding-bottom: 8px;
         }
 
         .result-item {
-            font-size: 14px;
-            margin-bottom: 12px;
-            line-height: 1.6;
+            font-size: 13.5px;
+            margin-bottom: 10px;
+            line-height: 1.5;
             color: #f0f0f0;
         }
 
-        .highlight {
-            color: #00ffe1;
-            font-weight: bold;
-            text-shadow: 0 0 5px #00ffe1;
-        }
+        .highlight { color: #00ffe1; font-weight: bold; }
+        .highlight-gold { color: #ffd700; font-weight: bold; }
 
-        .highlight-gold {
-            color: #ffd700;
-            font-weight: bold;
-            text-shadow: 0 0 5px #ffd700;
-        }
-
-        /* WhatsApp Share Button */
         .btn-whatsapp {
             display: none;
             width: 100%;
-            padding: 15px;
+            padding: 14px;
             background: linear-gradient(45deg, #25D366, #128C7E);
             color: white;
             border: none;
-            border-radius: 14px;
-            font-size: 17px;
+            border-radius: 12px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 20px;
+            margin-top: 15px;
             text-decoration: none;
             text-align: center;
             box-shadow: 0 0 20px rgba(37, 211, 102, 0.6);
-            animation: pulseShare 1.5s infinite;
-        }
-
-        @keyframes pulseShare {
-            0% { transform: scale(1); box-shadow: 0 0 15px rgba(37, 211, 102, 0.5); }
-            50% { transform: scale(1.03); box-shadow: 0 0 25px rgba(37, 211, 102, 0.9); }
-            100% { transform: scale(1); box-shadow: 0 0 15px rgba(37, 211, 102, 0.5); }
         }
     </style>
 </head>
 <body>
 
+    <!-- Background Relaxing Flute/Temple Music -->
+    <audio id="bgMusic" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
+    </audio>
+
     <div class="card-container">
-        <!-- Om Border Top -->
         <div class="om-border-top">
-            <span>ॐ</span> <span>ॐ</span> <span>ॐ</span> <span>ॐ</span> <span>ॐ</span> <span>ॐ</span>
+            <span>ॐ</span> <span>ॐ</span> <span>ॐ</span> <span>ॐ</span> <span>ॐ</span>
         </div>
 
         <h1>✨ Divya Bhavishya Vani ✨</h1>
-        <p class="subtitle">🔮 Apne Naam Aur Janm Tithi Se Jane Apna Sahi Bhavishya 🔮</p>
+        <p class="subtitle">🔮 Apne Naam Aur Birth Date Se Jane Sahi Future 🔮</p>
 
-        <!-- Dynamic Animated Jyotish Chakra with Om & Zodiac Signs -->
         <div class="chakra-wrapper">
-            <div class="chakra-glow"></div>
-            
-            <!-- Center Om -->
             <div class="center-om">ॐ</div>
-
-            <!-- Inner Reverse Rotating Ring -->
             <div class="inner-ring"></div>
-
-            <!-- Outer Rotating Wheel with 12 Rashi Symbols -->
             <div class="jyotish-wheel">
                 <div class="zodiac-sign z1">♈</div>
                 <div class="zodiac-sign z2">♉</div>
@@ -382,7 +307,6 @@
             </div>
         </div>
 
-        <!-- Input Form -->
         <div id="inputForm">
             <div class="input-group">
                 <label for="userName">👤 Aapka Poora Naam (Full Name):</label>
@@ -397,44 +321,38 @@
             <button class="btn-magic" onclick="predictFuture()">✨ Dekhiye Magic Future ✨</button>
         </div>
 
-        <!-- Loading Text -->
         <div class="loader" id="loader">
             💫 Grah-Nakshatra Ki Ganana Ho Rahi Hai... <br> 🔮 Aapka Bhavishya Khul Raha Hai...
         </div>
 
-        <!-- Prediction Result Display -->
         <div class="result-box" id="resultBox">
             <h3 id="resTitle"></h3>
             <div class="result-item">👤 <b>Naam:</b> <span id="resName" class="highlight"></span></div>
-            <div class="result-item">♈ <b>Rashi (Zodiac):</b> <span id="resRashi" class="highlight-gold"></span></div>
-            <div class="result-item">⭐ <b>Bhagyashali Ank (Lucky Number):</b> <span id="resLuckyNum" class="highlight"></span></div>
-            <div class="result-item">🎨 <b>Shubh Rang (Lucky Color):</b> <span id="resLuckyColor" class="highlight-gold"></span></div>
-            <div class="result-item">💼 <b>Dhan & Career (Money & Job):</b> <br><span id="resCareer"></span></div>
-            <div class="result-item">❤️ <b>Prem & Pariwar (Love & Family):</b> <br><span id="resLove"></span></div>
-            <div class="result-item">⚠️ <b>Savdhani (Special Warning):</b> <br><span id="resWarning" style="color: #ff8a80;"></span></div>
+            <div class="result-item">♈ <b>Sahi Rashi:</b> <span id="resRashi" class="highlight-gold"></span></div>
+            <div class="result-item">⭐ <b>Lucky Number:</b> <span id="resLuckyNum" class="highlight"></span></div>
+            <div class="result-item">🎨 <b>Lucky Color:</b> <span id="resLuckyColor" class="highlight-gold"></span></div>
+            <div class="result-item">💼 <b>Dhan & Career:</b> <br><span id="resCareer"></span></div>
+            <div class="result-item">❤️ <b>Prem & Pariwar:</b> <br><span id="resLove"></span></div>
+            <div class="result-item">⚠️ <b>Savdhani:</b> <br><span id="resWarning" style="color: #ff8a80;"></span></div>
         </div>
 
-        <!-- WhatsApp Share Button -->
         <a id="whatsappBtn" class="btn-whatsapp" target="_blank">
-            📲 WhatsApp Par Dost Ko Share Karein 🚀
+            📲 WhatsApp Par Share Karein 🚀
         </a>
 
-        <!-- Om Border Bottom -->
         <div class="om-border-bottom">
-            <span>ॐ</span> <span>ॐ</span> <span>ॐ</span> <span>ॐ</span> <span>ॐ</span> <span>ॐ</span>
+            <span>ॐ</span> <span>ॐ</span> <span>ॐ</span> <span>ॐ</span> <span>ॐ</span>
         </div>
     </div>
 
-    <!-- Magic Sound & Confetti Effect Script -->
+    <!-- Confetti JS -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script>
-        const rashis = ["Mesh (Aries)", "Vrishabh (Taurus)", "Mithun (Gemini)", "Kark (Cancer)", "Sinh (Leo)", "Kanya (Virgo)", "Tula (Libra)", "Vrishchik (Scorpio)", "Dhanu (Sagittarius)", "Makar (Capricorn)", "Kumbh (Aquarius)", "Meen (Pisces)"];
-        
         const predictions = [
             {
-                career: "🚀 Aagami kuch dino me aapke career me ek bada chamatkaar hone wala hai! Paiso ki aavak me tez vridhi hogi.",
-                love: "❤️ Dil ke mamlo me khushkhabri milegi. Koi khas vyakti aapke jeevan me khushiyan lekar aayega.",
-                warning: "⚠️ Safed ya Lal kapde pehnne wale kisi unknown vyakti par aankh band karke bharosa na karein."
+                career: "🚀 Aagami kuch dino me aapke career me ek bada chamatkaar hone wala hai! Dhan ki aavak tez hogi.",
+                love: "❤️ Dil ke mamlo me khushkhabri milegi. Koi khas vyakti aapke jeevan me khushiyan layega.",
+                warning: "⚠️ Kisi bhi unknown vyakti par turant aankh band karke bharosa na karein."
             },
             {
                 career: "💰 Aapki mehnath ka fal jald hi promotion ya naye business opportunity ke roop me samne aayega.",
@@ -443,7 +361,7 @@
             },
             {
                 career: "🌟 Videsh ya door ke shahar se aapko bada labh milne ka shubh yog ban raha hai.",
-                love: "✨ Aapka jeevansathi aapke prati bohot imaandar rahega aur aapko ek pyara surprise milega.",
+                love: "✨ Aapka jeevansathi aapke prati bohot imaandar rahega aur aapko surprise milega.",
                 warning: "⚠️ Krodh (Gusse) par kabu rakhein, bani banayi baat bigad sakti hai."
             },
             {
@@ -453,7 +371,35 @@
             }
         ];
 
-        const colors = ["Golden Yellow (Sunehra)", "Royal Blue", "Emerald Green (Hara)", "Bright Red (Lal)", "Mystic Purple"];
+        const colors = ["Sunehra Yellow", "Royal Blue", "Emerald Green", "Bright Red", "Mystic Purple"];
+
+        // Exact Sun Sign Rashi Calculation
+        function getAccurateRashi(day, month) {
+            if ((month == 3 && day >= 21) || (month == 4 && day <= 19)) return "Mesh (Aries)";
+            if ((month == 4 && day >= 20) || (month == 5 && day <= 20)) return "Vrishabh (Taurus)";
+            if ((month == 5 && day >= 21) || (month == 6 && day <= 20)) return "Mithun (Gemini)";
+            if ((month == 6 && day >= 21) || (month == 7 && day <= 22)) return "Kark (Cancer)";
+            if ((month == 7 && day >= 23) || (month == 8 && day <= 22)) return "Sinh (Leo)";
+            if ((month == 8 && day >= 23) || (month == 9 && day <= 22)) return "Kanya (Virgo)";
+            if ((month == 9 && day >= 23) || (month == 10 && day <= 22)) return "Tula (Libra)";
+            if ((month == 10 && day >= 23) || (month == 11 && day <= 21)) return "Vrishchik (Scorpio)";
+            if ((month == 11 && day >= 22) || (month == 12 && day <= 21)) return "Dhanu (Sagittarius)";
+            if ((month == 12 && day >= 22) || (month == 1 && day <= 19)) return "Makar (Capricorn)";
+            if ((month == 1 && day >= 20) || (month == 2 && day <= 18)) return "Kumbh (Aquarius)";
+            if ((month == 2 && day >= 19) || (month == 3 && day <= 20)) return "Meen (Pisces)";
+            return "Mesh (Aries)";
+        }
+
+        // AI Voice Speaking Function
+        function speakFuture(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'hi-IN'; // Hindi Accent
+                utterance.pitch = 1;
+                utterance.rate = 0.9; // Slightly slow magical tone
+                window.speechSynthesis.speak(utterance);
+            }
+        }
 
         function predictFuture() {
             const name = document.getElementById('userName').value.trim();
@@ -464,46 +410,52 @@
                 return;
             }
 
-            // Hide Form & Show Loader
+            // Play Relaxing Music on Click
+            const music = document.getElementById('bgMusic');
+            music.volume = 0.3; // Low soft volume
+            music.play().catch(e => console.log("Audio play allowed on user click"));
+
             document.getElementById('inputForm').style.display = 'none';
             document.getElementById('loader').style.display = 'block';
 
-            // Calculations based on Name & Date
             const dobDate = new Date(dob);
-            const numIndex = (name.length + dobDate.getDate()) % predictions.length;
-            const luckyNum = (dobDate.getDate() + dobDate.getMonth() + 1) % 9 + 1;
+            const day = dobDate.getDate();
+            const month = dobDate.getMonth() + 1;
+
+            const accurateRashi = getAccurateRashi(day, month);
+
+            const numIndex = (name.length + day) % predictions.length;
+            const luckyNum = (day + month) % 9 + 1;
             const colorIndex = (name.length + luckyNum) % colors.length;
-            const rashiIndex = (dobDate.getMonth() + dobDate.getDate()) % rashis.length;
 
             const selectedPred = predictions[numIndex];
 
-            // Magical Delay Simulation
             setTimeout(() => {
                 document.getElementById('loader').style.display = 'none';
 
-                // Fill Results
                 document.getElementById('resTitle').innerText = "🔮 " + name + " Ka Magic Future 🔮";
                 document.getElementById('resName').innerText = name;
-                document.getElementById('resRashi').innerText = rashis[rashiIndex];
+                document.getElementById('resRashi').innerText = accurateRashi;
                 document.getElementById('resLuckyNum').innerText = luckyNum;
                 document.getElementById('resLuckyColor').innerText = colors[colorIndex];
                 document.getElementById('resCareer').innerText = selectedPred.career;
                 document.getElementById('resLove').innerText = selectedPred.love;
                 document.getElementById('resWarning').innerText = selectedPred.warning;
 
-                // Display Result Card
                 document.getElementById('resultBox').style.display = 'block';
 
-                // Confetti Flower Blast Effect
                 confetti({
                     particleCount: 120,
                     spread: 80,
                     origin: { y: 0.6 }
                 });
 
-                // WhatsApp Message Generation
+                // Trigger AI Voice Announcement
+                const voiceMsg = `Pranam ${name}. Aapki rashi ${accurateRashi} hai. Aapka lucky number ${luckyNum} hai. ${selectedPred.career}`;
+                speakFuture(voiceMsg);
+
                 const currentUrl = window.location.href;
-                const whatsappMsg = `✨ *${name}* ne apna *Divya Bhavishya* dekha! ✨%0A%0A♈ Rashi: ${rashis[rashiIndex]}%0A⭐ Lucky Number: ${luckyNum}%0A🎨 Lucky Color: ${colors[colorIndex]}%0A%0A🔥 *Dhan & Career:* ${selectedPred.career}%0A%0AAap bhi apna Naam aur Birthdate daal kar apna Future dekhein 👇%0A${currentUrl}`;
+                const whatsappMsg = `✨ *${name}* ne apna *Divya Bhavishya* dekha! ✨%0A%0A♈ Rashi: ${accurateRashi}%0A⭐ Lucky Number: ${luckyNum}%0A🎨 Lucky Color: ${colors[colorIndex]}%0A%0A🔥 *Dhan & Career:* ${selectedPred.career}%0A%0AAap bhi apna Naam aur Birthdate daal kar apna Future dekhein 👇%0A${currentUrl}`;
 
                 const waBtn = document.getElementById('whatsappBtn');
                 waBtn.href = `https://api.whatsapp.com/send?text=${whatsappMsg}`;
