@@ -275,7 +275,7 @@
 </head>
 <body>
 
-    <!-- Background Relaxing Flute/Temple Music -->
+    <!-- Background Relaxing Music -->
     <audio id="bgMusic" loop>
         <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
     </audio>
@@ -394,9 +394,9 @@
         function speakFuture(text) {
             if ('speechSynthesis' in window) {
                 const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'hi-IN'; // Hindi Accent
+                utterance.lang = 'hi-IN';
                 utterance.pitch = 1;
-                utterance.rate = 0.9; // Slightly slow magical tone
+                utterance.rate = 0.9;
                 window.speechSynthesis.speak(utterance);
             }
         }
@@ -410,10 +410,10 @@
                 return;
             }
 
-            // Play Relaxing Music on Click
+            // Play Background Music
             const music = document.getElementById('bgMusic');
-            music.volume = 0.3; // Low soft volume
-            music.play().catch(e => console.log("Audio play allowed on user click"));
+            music.volume = 0.3;
+            music.play().catch(e => console.log("Audio play allowed on user interaction"));
 
             document.getElementById('inputForm').style.display = 'none';
             document.getElementById('loader').style.display = 'block';
@@ -450,12 +450,20 @@
                     origin: { y: 0.6 }
                 });
 
-                // Trigger AI Voice Announcement
+                // Voice Announcement
                 const voiceMsg = `Pranam ${name}. Aapki rashi ${accurateRashi} hai. Aapka lucky number ${luckyNum} hai. ${selectedPred.career}`;
                 speakFuture(voiceMsg);
 
-                const currentUrl = window.location.href;
-                const whatsappMsg = `✨ *${name}* ne apna *Divya Bhavishya* dekha! ✨%0A%0A♈ Rashi: ${accurateRashi}%0A⭐ Lucky Number: ${luckyNum}%0A🎨 Lucky Color: ${colors[colorIndex]}%0A%0A🔥 *Dhan & Career:* ${selectedPred.career}%0A%0AAap bhi apna Naam aur Birthdate daal kar apna Future dekhein 👇%0A${currentUrl}`;
+                // WhatsApp Sharing Text & URL Fix
+                const rawMsg = `✨ *${name}* ne apna *Divya Bhavishya* dekha! ✨\n\n` +
+                               `♈ Rashi: ${accurateRashi}\n` +
+                               `⭐ Lucky Number: ${luckyNum}\n` +
+                               `🎨 Lucky Color: ${colors[colorIndex]}\n\n` +
+                               `🔥 *Dhan & Career:* ${selectedPred.career}\n\n` +
+                               `Aap bhi apna Naam aur Birthdate daal kar apna Future dekhein 👇\n` +
+                               `${window.location.href}`;
+
+                const whatsappMsg = encodeURIComponent(rawMsg);
 
                 const waBtn = document.getElementById('whatsappBtn');
                 waBtn.href = `https://api.whatsapp.com/send?text=${whatsappMsg}`;
