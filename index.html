@@ -1,596 +1,516 @@
 <!DOCTYPE html>
-<html lang="en">
-    <script src="https://quge5.com/88/tag.min.js" data-zone="286006" async data-cfasync="false"></script>
+<html lang="hi">
 <head>
-    <script src="https://quge5.com/88/tag.min.js" data-zone="286006" async data-cfasync="false"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7584087725069099"
-     crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PickPrime - Premier Tech Insights & Guides</title>
-    <meta name="description" content="PickPrime provides deep-dive technical articles, programming guides, cloud computing tutorials, and modern tech news.">
-    <link rel="canonical" href="https://pickprime.in">
-    
-    <!-- Google AdSense Script Placeholder -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
-
+    <title>🔮 Divya Bhavishya Vani - Magic Future Predictor</title>
     <style>
-        :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #475569;
-            --border-color: #e2e8f0;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Yatra+One&family=Poppins:wght@400;600;700&display=swap');
 
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
-        html, body {
-            width: 100%;
+        body {
+            background: #060112;
+            color: #fff;
             min-height: 100vh;
-            overflow-x: hidden;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.8;
-        }
-
-        /* Fixed Header */
-        header {
-            background: #1e293b;
-            color: white;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            width: 100%;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            padding: 1rem 1.5rem;
+            padding: 15px;
+            overflow-x: hidden;
             position: relative;
         }
 
-        .logo {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: #38bdf8;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .logo span { color: #ffffff; }
-
-        .hamburger {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.8rem;
-            cursor: pointer;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-        }
-
-        .nav-links a {
-            color: #cbd5e1;
-            text-decoration: none;
-            font-weight: 500;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover { color: #38bdf8; }
-
-        /* Main Container Grid Fix */
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
-            display: grid;
-            grid-template-columns: 2.5fr 1fr;
-            gap: 2rem;
+        /* Background Animated Particles/Stars */
+        body::before {
+            content: '';
+            position: absolute;
             width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 1%, transparent 20%),
+                        radial-gradient(circle, rgba(255, 0, 128, 0.1) 1%, transparent 20%);
+            background-size: 50px 50px;
+            animation: moveStars 20s linear infinite;
+            z-index: 0;
         }
 
-        .main-content {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
+        @keyframes moveStars {
+            0% { background-position: 0 0, 25px 25px; }
+            100% { background-position: 500px 500px, 525px 525px; }
+        }
+
+        /* Card Container */
+        .card-container {
+            position: relative;
             width: 100%;
-            overflow: hidden;
-        }
-
-        .article-card {
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            margin-bottom: 2rem;
-            overflow: hidden;
-            background: white;
-            transition: transform 0.2s;
-            width: 100%;
-        }
-
-        .article-card:hover { transform: translateY(-3px); }
-
-        .article-card img {
-            width: 100%;
-            height: 260px;
-            object-fit: cover;
-        }
-
-        .article-card-content { padding: 1.5rem; }
-
-        .article-card-content h2 {
-            font-size: 1.4rem;
-            margin-bottom: 0.8rem;
-            word-break: break-word;
-        }
-
-        .article-card-content h2 a {
-            color: var(--text-main);
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .article-meta {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 0.8rem;
-        }
-
-        .read-more-btn {
-            display: inline-block;
-            margin-top: 1rem;
-            color: var(--primary);
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        /* Full Article & Interlinking Styling */
-        .full-article {
-            width: 100%;
-            overflow-wrap: break-word;
-            word-break: break-word;
-        }
-
-        .full-article img {
-            width: 100%;
-            max-height: 400px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin: 1.5rem 0;
-        }
-
-        .full-article h1 { font-size: 2rem; margin-bottom: 0.8rem; line-height: 1.3; }
-        .full-article h2 { font-size: 1.4rem; margin: 2rem 0 0.8rem; color: #0f172a; border-bottom: 1px solid var(--border-color); padding-bottom: 0.3rem; }
-        .full-article p { margin-bottom: 1.4rem; font-size: 1.05rem; color: #334155; }
-        .full-article ul, .full-article ol { margin: 1rem 0 1.5rem 1.5rem; }
-        .full-article li { margin-bottom: 0.5rem; }
-
-        /* Article Interlinking Box */
-        .interlink-box {
-            background: #eff6ff;
-            border-left: 4px solid var(--primary);
-            padding: 1.2rem;
-            margin: 1.5rem 0;
-            border-radius: 4px;
-        }
-
-        .interlink-box h4 {
-            font-size: 1rem;
-            color: var(--primary-dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .interlink-box a {
-            color: var(--primary);
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .interlink-box a:hover {
-            text-decoration: underline;
-        }
-
-        .full-article pre { 
-            background: #0f172a; 
-            color: #f8fafc; 
-            padding: 1.2rem; 
-            border-radius: 8px; 
-            overflow-x: auto; 
-            max-width: 100%;
-            margin: 1.5rem 0; 
-            white-space: pre-wrap;
-            word-break: break-all;
-        }
-
-        .full-article code { font-family: monospace; font-size: 0.9rem; }
-
-        /* Sidebar Styling Fix */
-        .sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            width: 100%;
-        }
-
-        .widget {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            width: 100%;
-            overflow-wrap: break-word;
-        }
-
-        .widget h3 {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            border-bottom: 2px solid var(--primary);
-            padding-bottom: 0.4rem;
-        }
-
-        .recent-list { 
-            list-style: none; 
-            max-height: 500px;
-            overflow-y: auto;
-        }
-
-        .recent-list li { margin-bottom: 0.8rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; }
-        .recent-list a { color: var(--text-main); text-decoration: none; font-weight: 500; cursor: pointer; font-size: 0.9rem; }
-
-        /* Full Width Footer Fix */
-        footer {
-            background: #0f172a;
-            color: #94a3b8;
-            padding: 3rem 1.5rem 1.5rem;
-            margin-top: 4rem;
-            width: 100%;
-            clear: both;
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 2rem;
-            width: 100%;
-        }
-
-        .footer-col h4 { color: white; margin-bottom: 1rem; }
-        .footer-col ul { list-style: none; }
-        .footer-col ul li { margin-bottom: 0.5rem; }
-        .footer-col a { color: #94a3b8; text-decoration: none; cursor: pointer; }
-
-        .footer-bottom {
+            max-width: 480px;
+            background: rgba(15, 5, 30, 0.95);
+            border-radius: 25px;
+            padding: 30px 20px;
             text-align: center;
-            border-top: 1px solid #334155;
-            padding-top: 1.5rem;
-            margin-top: 2rem;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.3), inset 0 0 20px rgba(255, 0, 128, 0.2);
+            z-index: 1;
+            border: 2px solid rgba(255, 215, 0, 0.3);
         }
 
-        /* Mobile Viewport Breakpoint */
-        @media (max-width: 868px) {
-            .container { 
-                grid-template-columns: 1fr !important; 
-                padding: 0 1rem;
-                margin: 1rem auto;
-            }
+        /* Top & Bottom Om Border Header */
+        .om-border-top, .om-border-bottom {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            font-size: 22px;
+            color: #ffd700;
+            text-shadow: 0 0 10px #ff8c00, 0 0 20px #ff0000;
+            margin-bottom: 15px;
+            animation: omGlow 2s infinite alternate;
+        }
 
-            .main-content {
-                padding: 1.2rem;
-            }
+        .om-border-bottom {
+            margin-top: 20px;
+            margin-bottom: 0;
+        }
 
-            .hamburger { display: block !important; }
+        @keyframes omGlow {
+            0% { text-shadow: 0 0 5px #ffd700, 0 0 10px #ff8c00; transform: scale(1); }
+            100% { text-shadow: 0 0 15px #ffd700, 0 0 30px #ff007f; transform: scale(1.1); }
+        }
 
-            .nav-links {
-                display: none !important;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: #1e293b;
-                padding: 1.5rem;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-            }
+        h1 {
+            font-family: 'Yatra One', cursive, sans-serif;
+            color: #ffd700;
+            font-size: 28px;
+            text-shadow: 0 0 15px #ff4500;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
 
-            .nav-links.active { display: flex !important; }
+        p.subtitle {
+            font-size: 13px;
+            color: #e0c3fc;
+            margin-bottom: 25px;
+            text-shadow: 0 0 5px rgba(224, 195, 252, 0.5);
+        }
 
-            .full-article h1 { font-size: 1.6rem; }
-            .full-article h2 { font-size: 1.2rem; }
-            .full-article p { font-size: 1rem; }
+        /* Magical Jyotish Chakra Outer Frame */
+        .chakra-wrapper {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Outer Glow Ring */
+        .chakra-glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.2) 0%, transparent 70%);
+            animation: pulseGlow 2s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            from { transform: scale(0.95); opacity: 0.6; }
+            to { transform: scale(1.1); opacity: 1; }
+        }
+
+        /* Main Rotating Jyotish Chakra Wheel */
+        .jyotish-wheel {
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 3px solid #ffd700;
+            box-shadow: 0 0 20px #ffd700, inset 0 0 20px #ff007f;
+            animation: spinClockwise 15s linear infinite;
+        }
+
+        /* Zodiac Signs around the Chakra Wheel */
+        .zodiac-sign {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            top: 50%;
+            left: 50%;
+            margin-top: -15px;
+            margin-left: -15px;
+            font-size: 18px;
+            color: #fff;
+            text-shadow: 0 0 8px #ffd700;
+        }
+
+        /* Positioning 12 Zodiacs around wheel */
+        .z1  { transform: rotate(0deg) translate(72px) rotate(-0deg); }
+        .z2  { transform: rotate(30deg) translate(72px) rotate(-30deg); }
+        .z3  { transform: rotate(60deg) translate(72px) rotate(-60deg); }
+        .z4  { transform: rotate(90deg) translate(72px) rotate(-90deg); }
+        .z5  { transform: rotate(120deg) translate(72px) rotate(-120deg); }
+        .z6  { transform: rotate(150deg) translate(72px) rotate(-150deg); }
+        .z7  { transform: rotate(180deg) translate(72px) rotate(-180deg); }
+        .z8  { transform: rotate(210deg) translate(72px) rotate(-210deg); }
+        .z9  { transform: rotate(240deg) translate(72px) rotate(-240deg); }
+        .z10 { transform: rotate(270deg) translate(72px) rotate(-270deg); }
+        .z11 { transform: rotate(300deg) translate(72px) rotate(-300deg); }
+        .z12 { transform: rotate(330deg) translate(72px) rotate(-330deg); }
+
+        /* Inner Ring Rotating Anti-Clockwise */
+        .inner-ring {
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 2px dashed #00ffff;
+            box-shadow: 0 0 15px #00ffff;
+            animation: spinCounterClockwise 10s linear infinite;
+        }
+
+        /* Center Glowing Om Symbol */
+        .center-om {
+            position: absolute;
+            font-size: 42px;
+            color: #ffd700;
+            text-shadow: 0 0 20px #ff0000, 0 0 40px #ffd700;
+            animation: pulseOm 1.5s ease-in-out infinite alternate;
+            z-index: 2;
+        }
+
+        @keyframes spinClockwise {
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes spinCounterClockwise {
+            100% { transform: rotate(-360deg); }
+        }
+
+        @keyframes pulseOm {
+            0% { transform: scale(0.9); text-shadow: 0 0 15px #ff4500; }
+            100% { transform: scale(1.15); text-shadow: 0 0 35px #ffd700, 0 0 50px #ff007f; }
+        }
+
+        /* Input Form */
+        .input-group {
+            margin-bottom: 18px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            color: #ffe57f;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: 2px solid #9c27b0;
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #ffd700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Magic Button */
+        .btn-magic {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(45deg, #ff007f, #7928ca, #00dfd8, #ff8c00);
+            background-size: 300% 300%;
+            animation: magicGradient 4s ease infinite;
+            border: none;
+            border-radius: 14px;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(255, 0, 127, 0.6);
+            margin-top: 10px;
+            transition: transform 0.2s;
+        }
+
+        .btn-magic:active {
+            transform: scale(0.98);
+        }
+
+        @keyframes magicGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Animated Magic Loader */
+        .loader {
+            display: none;
+            margin: 25px 0;
+            font-size: 16px;
+            color: #00ffe1;
+            text-shadow: 0 0 10px #00ffe1;
+            animation: blinkText 1s infinite alternate;
+        }
+
+        @keyframes blinkText {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        /* Result Display Box */
+        .result-box {
+            display: none;
+            margin-top: 25px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 2px solid #ffd700;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: left;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            animation: zoomIn 0.8s ease-out;
+        }
+
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .result-box h3 {
+            font-family: 'Yatra One', cursive;
+            color: #ffd700;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 22px;
+            text-shadow: 0 0 10px #ff7300;
+            border-bottom: 1px dashed rgba(255, 215, 0, 0.4);
+            padding-bottom: 10px;
+        }
+
+        .result-item {
+            font-size: 14px;
+            margin-bottom: 12px;
+            line-height: 1.6;
+            color: #f0f0f0;
+        }
+
+        .highlight {
+            color: #00ffe1;
+            font-weight: bold;
+            text-shadow: 0 0 5px #00ffe1;
+        }
+
+        .highlight-gold {
+            color: #ffd700;
+            font-weight: bold;
+            text-shadow: 0 0 5px #ffd700;
+        }
+
+        /* WhatsApp Share Button */
+        .btn-whatsapp {
+            display: none;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            text-decoration: none;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.6);
+            animation: pulseShare 1.5s infinite;
+        }
+
+        @keyframes pulseShare {
+            0% { transform: scale(1); box-shadow: 0 0 15px rgba(37, 211, 102, 0.5); }
+            50% { transform: scale(1.03); box-shadow: 0 0 25px rgba(37, 211, 102, 0.9); }
+            100% { transform: scale(1); box-shadow: 0 0 15px rgba(37, 211, 102, 0.5); }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="nav-container">
-            <a onclick="showHome()" class="logo">Pick<span>Prime</span></a>
-            <button class="hamburger" onclick="toggleMenu()">☰</button>
-            <ul class="nav-links" id="menuList">
-                <li><a onclick="showHome()">Home</a></li>
-                <li><a onclick="showPage('about')">About Us</a></li>
-                <li><a onclick="showPage('privacy')">Privacy Policy</a></li>
-                <li><a onclick="showPage('terms')">Terms & Conditions</a></li>
-                <li><a onclick="showPage('contact')">Contact Us</a></li>
-            </ul>
+    <div class="card-container">
+        <!-- Om Border Top -->
+        <div class="om-border-top">
+            <span>ॐ</span> <span>ॐ</span> <span>ॐ</span> <span>ॐ</span> <span>ॐ</span> <span>ॐ</span>
         </div>
-    </header>
 
-    <div class="container">
-        <main class="main-content" id="appView"></main>
+        <h1>✨ Divya Bhavishya Vani ✨</h1>
+        <p class="subtitle">🔮 Apne Naam Aur Janm Tithi Se Jane Apna Sahi Bhavishya 🔮</p>
 
-        <aside class="sidebar">
-            <div class="widget">
-                <h3>About PickPrime</h3>
-                <p style="font-size: 0.9rem; color: var(--text-muted);">PickPrime.in delivers expert technological tutorials, system architecture breakdowns, software engineering principles, and cloud infrastructure guides.</p>
+        <!-- Dynamic Animated Jyotish Chakra with Om & Zodiac Signs -->
+        <div class="chakra-wrapper">
+            <div class="chakra-glow"></div>
+            
+            <!-- Center Om -->
+            <div class="center-om">ॐ</div>
+
+            <!-- Inner Reverse Rotating Ring -->
+            <div class="inner-ring"></div>
+
+            <!-- Outer Rotating Wheel with 12 Rashi Symbols -->
+            <div class="jyotish-wheel">
+                <div class="zodiac-sign z1">♈</div>
+                <div class="zodiac-sign z2">♉</div>
+                <div class="zodiac-sign z3">♊</div>
+                <div class="zodiac-sign z4">♋</div>
+                <div class="zodiac-sign z5">♌</div>
+                <div class="zodiac-sign z6">♍</div>
+                <div class="zodiac-sign z7">♎</div>
+                <div class="zodiac-sign z8">♏</div>
+                <div class="zodiac-sign z9">♐</div>
+                <div class="zodiac-sign z10">♑</div>
+                <div class="zodiac-sign z11">♒</div>
+                <div class="zodiac-sign z12">♓</div>
+            </div>
+        </div>
+
+        <!-- Input Form -->
+        <div id="inputForm">
+            <div class="input-group">
+                <label for="userName">👤 Aapka Poora Naam (Full Name):</label>
+                <input type="text" id="userName" placeholder="Apna naam yahan likhein..." required>
             </div>
 
-            <div class="widget">
-                <h3>50 Tech Guides</h3>
-                <ul class="recent-list" id="recentSideList"></ul>
+            <div class="input-group">
+                <label for="dob">📅 Janm Tithi (Date of Birth):</label>
+                <input type="date" id="dob" required>
             </div>
-        </aside>
+
+            <button class="btn-magic" onclick="predictFuture()">✨ Dekhiye Magic Future ✨</button>
+        </div>
+
+        <!-- Loading Text -->
+        <div class="loader" id="loader">
+            💫 Grah-Nakshatra Ki Ganana Ho Rahi Hai... <br> 🔮 Aapka Bhavishya Khul Raha Hai...
+        </div>
+
+        <!-- Prediction Result Display -->
+        <div class="result-box" id="resultBox">
+            <h3 id="resTitle"></h3>
+            <div class="result-item">👤 <b>Naam:</b> <span id="resName" class="highlight"></span></div>
+            <div class="result-item">♈ <b>Rashi (Zodiac):</b> <span id="resRashi" class="highlight-gold"></span></div>
+            <div class="result-item">⭐ <b>Bhagyashali Ank (Lucky Number):</b> <span id="resLuckyNum" class="highlight"></span></div>
+            <div class="result-item">🎨 <b>Shubh Rang (Lucky Color):</b> <span id="resLuckyColor" class="highlight-gold"></span></div>
+            <div class="result-item">💼 <b>Dhan & Career (Money & Job):</b> <br><span id="resCareer"></span></div>
+            <div class="result-item">❤️ <b>Prem & Pariwar (Love & Family):</b> <br><span id="resLove"></span></div>
+            <div class="result-item">⚠️ <b>Savdhani (Special Warning):</b> <br><span id="resWarning" style="color: #ff8a80;"></span></div>
+        </div>
+
+        <!-- WhatsApp Share Button -->
+        <a id="whatsappBtn" class="btn-whatsapp" target="_blank">
+            📲 WhatsApp Par Dost Ko Share Karein 🚀
+        </a>
+
+        <!-- Om Border Bottom -->
+        <div class="om-border-bottom">
+            <span>ॐ</span> <span>ॐ</span> <span>ॐ</span> <span>ॐ</span> <span>ॐ</span> <span>ॐ</span>
+        </div>
     </div>
 
-    <footer>
-        <div class="footer-container">
-            <div class="footer-col">
-                <h4>PickPrime.in</h4>
-                <p>Your premier destination for high-quality tech guides, software development tutorials, and modern system design articles.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a onclick="showHome()">Home</a></li>
-                    <li><a onclick="showPage('about')">About Us</a></li>
-                    <li><a onclick="showPage('contact')">Contact Us</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Legal</h4>
-                <ul>
-                    <li><a onclick="showPage('privacy')">Privacy Policy</a></li>
-                    <li><a onclick="showPage('terms')">Terms & Conditions</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Contact Info</h4>
-                <p>Email: pickprimehelp@gmail.com</p>
-                <p>Website: PickPrime.in</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 PickPrime.in | All Rights Reserved.</p>
-        </div>
-    </footer>
-
+    <!-- Magic Sound & Confetti Effect Script -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script>
-        // 50 High-Quality Technical Topics List
-        const rawTopics = [
-            "Microservices Architecture with Node.js & Docker", "Cloudflare Workers & Edge Computing Mechanics", 
-            "Database Indexing & Query Optimization in PostgreSQL", "Real-Time Data Pipelines via Apache Kafka & WebSockets",
-            "Next.js Server Components & Rendering Architecture", "Securing Distributed Systems with OAuth2, OIDC & JWT",
-            "Infrastructure as Code using Terraform & AWS", "Container Orchestration with Kubernetes & YAML Declarations",
-            "GraphQL Architecture vs REST APIs in Enterprise Systems", "Enterprise Redis Caching Strategies for High-Throughput Apps",
-            "JavaScript Asynchronous Event Loop & V8 Mechanics", "Distributed CI/CD Pipelines with GitHub Actions & Docker",
-            "Clean Code, DRY & SOLID Software Principles Guide", "CSS Grid & Flexbox for Responsive Enterprise UIs",
-            "Cybersecurity Fundamentals & OWASP Top 10 Vulnerabilities", "TypeScript Generics & Advanced Type System Utilities",
-            "Distributed Event-Driven Architecture with RabbitMQ", "Optimizing Core Web Vitals: LCP, CLS, and INP Performance",
-            "MongoDB Sharding & High Availability Replica Sets", "Serverless GraphQL APIs with AWS Lambda & DynamoDB",
-            "WebAssembly (Wasm) Systems Programming in Rust", "Building Enterprise Search Engines with Elasticsearch",
-            "gRPC Microservice Communication via Protocol Buffers", "Docker Swarm vs Kubernetes Cluster Orchestration",
-            "Zero Trust Network Security & Service Mesh Architecture", "Linux Kernel System Call Optimization & Memory Management",
-            "Python Asyncio Concurrency & High Performance Event Loops", "Golang Goroutines & Channel Concurrency Design Patterns",
-            "Building Distributed Rate Limiters with Redis & Token Bucket", "CI/CD Deployment Strategies: Blue-Green vs Canary Deployments",
-            "Designing Multi-Tenant SaaS Database Systems", "Deep Learning Model Inference Optimization with TensorRT",
-            "GraphQL Federation & Subgraph Schema Stitching", "Event Sourcing & CQRS Pattern Implementation in C#",
-            "Distributed Consensus Algorithms: Raft vs Paxos Breakdown", "Modern Frontend State Management: Zustand vs Redux Toolkit",
-            "API Gateway Security Protocols & Rate Limiting Mechanics", "Serverless Edge Storage using Cloudflare D1 & Workers KV",
-            "Apache Cassandra Distributed NoSQL Data Modeling", "OpenTelemetry Distributed Tracing & Cloud Monitoring",
-            "Building Real-Time Video Streaming Platforms via WebRTC", "Continuous Integration SAST Code Vulnerability Scanning",
-            "High Performance Memory Caching with Memcached", "Prometheus & Grafana Enterprise Observability Dashboards",
-            "Building Machine Learning Feature Stores with Feast", "Vector Databases for AI Semantic Search: Pinecone & Milvus",
-            "Micro Frontend Architecture: Module Federation in Webpack", "WebSockets vs Server-Sent Events (SSE) Deep Comparison",
-            "Serverless Aurora PostgreSQL Database Auto-Scaling", "Building Secure Single Sign-On (SSO) with SAML 2.0"
+        const rashis = ["Mesh (Aries)", "Vrishabh (Taurus)", "Mithun (Gemini)", "Kark (Cancer)", "Sinh (Leo)", "Kanya (Virgo)", "Tula (Libra)", "Vrishchik (Scorpio)", "Dhanu (Sagittarius)", "Makar (Capricorn)", "Kumbh (Aquarius)", "Meen (Pisces)"];
+        
+        const predictions = [
+            {
+                career: "🚀 Aagami kuch dino me aapke career me ek bada chamatkaar hone wala hai! Paiso ki aavak me tez vridhi hogi.",
+                love: "❤️ Dil ke mamlo me khushkhabri milegi. Koi khas vyakti aapke jeevan me khushiyan lekar aayega.",
+                warning: "⚠️ Safed ya Lal kapde pehnne wale kisi unknown vyakti par aankh band karke bharosa na karein."
+            },
+            {
+                career: "💰 Aapki mehnath ka fal jald hi promotion ya naye business opportunity ke roop me samne aayega.",
+                love: "💞 Rishton me mistas badhegi, purani galatfahamiyan poori tarah khatam ho jayengi.",
+                warning: "⚠️ Kisi ko bhi uddhar dene se bachein, aarthik nuksan ho sakta hai."
+            },
+            {
+                career: "🌟 Videsh ya door ke shahar se aapko bada labh milne ka shubh yog ban raha hai.",
+                love: "✨ Aapka jeevansathi aapke prati bohot imaandar rahega aur aapko ek pyara surprise milega.",
+                warning: "⚠️ Krodh (Gusse) par kabu rakhein, bani banayi baat bigad sakti hai."
+            },
+            {
+                career: "🔮 Aapki kismat ka darwaja khulne wala hai, naye raste milenge aur har karya me safalta milegi.",
+                love: "💖 Aapka aakarshan logon ko aapki taraf khinchega, prem sambandho me madhurta aayegi.",
+                warning: "⚠️ Rat me der tak jagna aapki health aur luck dono ko prabhavit kar sakta hai."
+            }
         ];
 
-        const images = [
-            "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=80",
-            "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80",
-            "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=1000&q=80",
-            "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80",
-            "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1000&q=80",
-            "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1000&q=80",
-            "https://images.unsplash.com/photo-1667372335854-7882b0454733?auto=format&fit=crop&w=1000&q=80",
-            "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?auto=format&fit=crop&w=1000&q=80"
-        ];
+        const colors = ["Golden Yellow (Sunehra)", "Royal Blue", "Emerald Green (Hara)", "Bright Red (Lal)", "Mystic Purple"];
 
-        const categories = ["Backend & Cloud", "Cloud & DevOps", "Databases", "System Design", "Frontend & Web", "Security", "Software Engineering"];
+        function predictFuture() {
+            const name = document.getElementById('userName').value.trim();
+            const dob = document.getElementById('dob').value;
 
-        // Article Content Generator with Automatic Article Interlinking
-        function generateLongArticle(id, title) {
-            const nextLink1 = (id % 50) + 1;
-            const nextLink2 = ((id + 4) % 50) + 1;
+            if (!name || !dob) {
+                alert("Kripya apna Naam aur Janm Tithi dono bharein!");
+                return;
+            }
 
-            return `
-                <p>In modern software engineering and enterprise cloud deployment, mastering <strong>${title}</strong> is a vital capability for developers, system architects, and DevOps professionals. As global digital applications scale to serve millions of simultaneous client requests, building resilient, secure, and low-latency systems requires strict adherence to architectural standards.</p>
-                
-                <p>In this comprehensive guide, we examine the structural mechanics of ${title}, covering fundamental execution models, production deployment patterns, state consistency management, and system security protocols.</p>
+            // Hide Form & Show Loader
+            document.getElementById('inputForm').style.display = 'none';
+            document.getElementById('loader').style.display = 'block';
 
-                <h2>1. Core Architectural Fundamentals of ${title}</h2>
-                <p>To understand the execution pipeline of ${title}, we must analyze its core architectural topology. Modern systems decouple execution logic into distinct, fault-tolerant execution modules rather than relying on legacy monolithic setups:</p>
-                <ul>
-                    <li><strong>Fault Isolation:</strong> Isolated execution layers ensure that runtime exceptions in one sub-module do not cascade into catastrophic full-system service outages.</li>
-                    <li><strong>Dynamic Scalability:</strong> Computationally demanding workloads can be horizontally scaled across container clusters based on real-time memory and CPU thresholds.</li>
-                    <li><strong>Optimized CI/CD Delivery Cycles:</strong> Engineering teams can build, test, and release minor software patches independently without recompiling primary core codebases.</li>
-                </ul>
+            // Calculations based on Name & Date
+            const dobDate = new Date(dob);
+            const numIndex = (name.length + dobDate.getDate()) % predictions.length;
+            const luckyNum = (dobDate.getDate() + dobDate.getMonth() + 1) % 9 + 1;
+            const colorIndex = (name.length + luckyNum) % colors.length;
+            const rashiIndex = (dobDate.getMonth() + dobDate.getDate()) % rashis.length;
 
-                <div class="interlink-box">
-                    <h4>Recommended Related Guide:</h4>
-                    <p>Interested in system optimization? Read our in-depth guide on <a onclick="showPost(${nextLink1})">Article #${nextLink1}: ${rawTopics[nextLink1 - 1]}</a>.</p>
-                </div>
+            const selectedPred = predictions[numIndex];
 
-                <h2>2. Implementation Mechanics & Code Configuration</h2>
-                <p>Developing enterprise-grade solutions utilizing ${title} requires clean, maintainable software design principles (DRY and SOLID). Below is an architectural code configuration demonstrating standard execution mechanics:</p>
+            // Magical Delay Simulation
+            setTimeout(() => {
+                document.getElementById('loader').style.display = 'none';
 
-                <pre><code>// Production System Configuration for ${title}
-const systemConfig = {
-    environment: 'production',
-    maxConcurrentConnections: 10000,
-    requestTimeoutMs: 3000,
-    securityTLS: true
-};
+                // Fill Results
+                document.getElementById('resTitle').innerText = "🔮 " + name + " Ka Magic Future 🔮";
+                document.getElementById('resName').innerText = name;
+                document.getElementById('resRashi').innerText = rashis[rashiIndex];
+                document.getElementById('resLuckyNum').innerText = luckyNum;
+                document.getElementById('resLuckyColor').innerText = colors[colorIndex];
+                document.getElementById('resCareer').innerText = selectedPred.career;
+                document.getElementById('resLove').innerText = selectedPred.love;
+                document.getElementById('resWarning').innerText = selectedPred.warning;
 
-async function executeServicePipeline(payload) {
-    try {
-        console.log('Initializing operational workflow...');
-        if (!payload || !payload.id) {
-            throw new Error('Invalid request payload received');
+                // Display Result Card
+                document.getElementById('resultBox').style.display = 'block';
+
+                // Confetti Flower Blast Effect
+                confetti({
+                    particleCount: 120,
+                    spread: 80,
+                    origin: { y: 0.6 }
+                });
+
+                // WhatsApp Message Generation
+                const currentUrl = window.location.href;
+                const whatsappMsg = `✨ *${name}* ne apna *Divya Bhavishya* dekha! ✨%0A%0A♈ Rashi: ${rashis[rashiIndex]}%0A⭐ Lucky Number: ${luckyNum}%0A🎨 Lucky Color: ${colors[colorIndex]}%0A%0A🔥 *Dhan & Career:* ${selectedPred.career}%0A%0AAap bhi apna Naam aur Birthdate daal kar apna Future dekhein 👇%0A${currentUrl}`;
+
+                const waBtn = document.getElementById('whatsappBtn');
+                waBtn.href = `https://api.whatsapp.com/send?text=${whatsappMsg}`;
+                waBtn.style.display = 'block';
+
+            }, 2800);
         }
-        // Asynchronous computation & database execution
-        const response = await Promise.resolve({ status: 200, data: payload });
-        return response;
-    } catch (error) {
-        console.error('Pipeline execution failure:', error.message);
-        throw error;
-    }
-}</code></pre>
-
-                <p>This implementation ensures asynchronous operations handle runtime errors gracefully, preventing unhandled promise rejections and maintaining high uptime under heavy traffic bursts.</p>
-
-                <h2>3. Performance Optimization, Caching & Database Indexing</h2>
-                <p>High-throughput web applications utilizing ${title} must systematically eliminate I/O bottlenecks. Querying primary relational databases on every incoming request introduces severe operational latency. Engineering teams deploy multi-layer caching architectures:</p>
-                <ol>
-                    <li><strong>In-Memory Caching (Redis):</strong> Store frequently accessed records in in-memory caches with explicit TTL expiration policies.</li>
-                    <li><strong>Edge Content Delivery (CDN):</strong> Cache static assets and dynamic API responses directly on edge network nodes located near end-users.</li>
-                    <li><strong>Database Index Optimization:</strong> Structure B-Tree and GIN indexes based on query execution plans analyzed via profile logs.</li>
-                </ol>
-
-                <div class="interlink-box">
-                    <h4>Deep Dive Interlinking:</h4>
-                    <p>To learn more about related software engineering practices, check out <a onclick="showPost(${nextLink2})">Article #${nextLink2}: ${rawTopics[nextLink2 - 1]}</a>.</p>
-                </div>
-
-                <h2>4. Cybersecurity Governance & Best Practices</h2>
-                <p>Securing systems that deploy ${title} is critical. Security teams must enforce Defense-in-Depth protocols across every infrastructure layer:</p>
-                <ul>
-                    <li>Enforce TLS 1.3 encryption across all internal and external network transmissions.</li>
-                    <li>Sanitize all user inputs to eliminate SQL Injection (SQLi) and Cross-Site Scripting (XSS) attack vectors.</li>
-                    <li>Utilize stateless OAuth 2.0 / JWT tokens with short expiration windows and automated key rotation mechanisms.</li>
-                </ul>
-
-                <h2>Conclusion</h2>
-                <p>Mastering <strong>${title}</strong> empowers technology organizations to build highly available, scalable, and secure applications designed for modern internet loads. Combining clean architecture, caching, and security governance delivers superior software reliability.</p>
-            `;
-        }
-
-        // Generate 50 Complete Articles
-        const posts = rawTopics.map((titleText, idx) => {
-            const id = idx + 1;
-            return {
-                id: id,
-                title: `${id}. Complete Technical Guide to ${titleText}`,
-                date: "September 17, 2026",
-                category: categories[idx % categories.length],
-                image: images[idx % images.length],
-                excerpt: `Comprehensive 1000+ words technical guide covering architectural principles, implementation mechanics, performance tuning, and security for ${titleText}.`,
-                content: generateLongArticle(id, titleText)
-            };
-        });
-
-        const pages = {
-            about: `<h1>About PickPrime.in</h1><br><p>Welcome to <strong>PickPrime.in</strong>, your premier online resource for deep-dive technical engineering tutorials, cloud computing insights, database optimization strategies, and modern software design patterns.</p><br><p><strong>Official Contact Email:</strong> pickprimehelp@gmail.com</p>`,
-            privacy: `<h1>Privacy Policy</h1><br><p>At PickPrime.in, accessible from https://pickprime.in, visitor privacy is a main priority. We log standard ISP web traffic metrics for analytics purposes and use Google AdSense cookies (including DoubleClick DART cookies) to serve relevant advertisements to visitors.</p>`,
-            terms: `<h1>Terms and Conditions</h1><br><p>By accessing PickPrime.in, you agree to comply with our terms. All intellectual content and technical material published on PickPrime.in are protected by copyright laws.</p>`,
-            contact: `<h1>Contact Us</h1><br><p>For editorial inquiries, technical questions, or sponsorship opportunities, reach out to us at <strong>pickprimehelp@gmail.com</strong>.</p>`
-        };
-
-        function showHome() {
-            window.scrollTo(0, 0);
-            let html = `<h1>Latest Technical Guides (50 Comprehensive Articles)</h1><br>`;
-            posts.forEach(post => {
-                html += `
-                    <article class="article-card">
-                        <img src="${post.image}" alt="${post.title}">
-                        <div class="article-card-content">
-                            <div class="article-meta">Category: ${post.category} | ${post.date}</div>
-                            <h2><a onclick="showPost(${post.id})">${post.title}</a></h2>
-                            <p>${post.excerpt}</p>
-                            <a onclick="showPost(${post.id})" class="read-more-btn">Read Full 1000+ Words Guide →</a>
-                        </div>
-                    </article>
-                `;
-            });
-            document.getElementById('appView').innerHTML = html;
-            closeMenu();
-        }
-
-        function showPost(id) {
-            window.scrollTo(0, 0);
-            const post = posts.find(p => p.id === id);
-            if (!post) return;
-            document.getElementById('appView').innerHTML = `
-                <div class="full-article">
-                    <div class="article-meta">Category: ${post.category} | Published ${post.date}</div>
-                    <h1>${post.title}</h1>
-                    <img src="${post.image}" alt="${post.title}">
-                    ${post.content}
-                </div>
-            `;
-            closeMenu();
-        }
-
-        function showPage(key) {
-            window.scrollTo(0, 0);
-            document.getElementById('appView').innerHTML = `<div class="full-article">${pages[key]}</div>`;
-            closeMenu();
-        }
-
-        function renderSidebar() {
-            let html = '';
-            posts.forEach(p => {
-                html += `<li><a onclick="showPost(${p.id})">${p.title}</a></li>`;
-            });
-            document.getElementById('recentSideList').innerHTML = html;
-        }
-
-        function toggleMenu() {
-            const menu = document.getElementById('menuList');
-            menu.classList.toggle('active');
-        }
-
-        function closeMenu() {
-            const menu = document.getElementById('menuList');
-            if(menu) menu.classList.remove('active');
-        }
-
-        window.onload = function() {
-            showHome();
-            renderSidebar();
-        };
     </script>
 </body>
 </html>
